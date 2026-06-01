@@ -12,6 +12,8 @@ This checkpoint is the first usable v0 of the derived Codex knowledge wiki. It i
 - `raw/understand-graph-summary.json`: compressed summary of the existing code graph.
 - `raw/source-file-map.json`: source evidence map for orientation, architecture, long-horizon work, memory, security, prompt-security, tools/MCP, and OWASP/TC260 mapping.
 - `wiki/`: 28 first-pass article pages covering repository orientation, architecture, long-horizon agent design, memory integrity, security controls, prompt injection, and selected OWASP/TC260 risks.
+- `.understand-anything/`: generated graph artifacts are included in git tracking for this checkpoint by user request.
+- `derived-knowledge/.understand-anything/intermediate/scan-manifest.json`: parser scan manifest is included so the checkpoint records the exact `understand-knowledge` detection result.
 
 ## Verification Status
 
@@ -39,3 +41,4 @@ The unresolved wikilinks are expected for this checkpoint because `index.md` int
 - Some security guarantees remain marked as `待验证` where local source code exposes the request path, policy template, or event shape but not the full remote scoring behavior.
 - Platform-specific sandbox behavior needs separate verification on macOS, Linux, and Windows.
 - The remaining planned pages in `index.md` still need follow-up generation.
+- `derived-knowledge/.understand-anything/intermediate/` is an intermediate parser output. It is tracked in this checkpoint because the user requested the generated `.understand-anything` directories in the PR.
