@@ -1,0 +1,5563 @@
+{
+  "generatedAt": "2026-06-01T05:45:12.902Z",
+  "generatorRole": "Agent 1 Evidence Compiler",
+  "projectMetadata": {
+    "repositoryRoot": "D:\\Project\\codexx-wiki\\sss-codex",
+    "graphPath": ".understand-anything/knowledge-graph.json",
+    "metaPath": ".understand-anything/meta.json",
+    "indexPath": "derived-knowledge/index.md",
+    "graphVersion": "1.0.0",
+    "graphProject": {
+      "name": "codex-monorepo",
+      "languages": [
+        "rust",
+        "typescript",
+        "python",
+        "markdown",
+        "json",
+        "toml",
+        "yaml",
+        "bazel",
+        "shell",
+        "sql"
+      ],
+      "frameworks": [
+        "Cargo workspace",
+        "Tokio",
+        "Ratatui",
+        "Axum",
+        "Bazel",
+        "pnpm",
+        "Node.js",
+        "GitHub Actions"
+      ],
+      "description": "OpenAI Codex CLI monorepo: Rust agent/runtime crates, TypeScript CLI packaging, SDKs, tooling, documentation, CI, and local wiki materials.",
+      "analyzedAt": "2026-05-31T10:32:54.022Z",
+      "gitCommitHash": "b14f11d3d2ca048bdae1872ef66087a2ce3f6b0c"
+    },
+    "meta": {
+      "lastAnalyzedAt": "2026-05-31T10:47:10.352Z",
+      "gitCommitHash": "b14f11d3d2ca048bdae1872ef66087a2ce3f6b0c",
+      "version": "1.0.0",
+      "analyzedFiles": 4582
+    },
+    "sourceBaseline": "Existing Understand Anything code graph plus derived-knowledge/index.md."
+  },
+  "graphStats": {
+    "nodes": 39902,
+    "edges": 39927,
+    "layers": 21,
+    "tour": 10,
+    "analyzedFiles": 4582
+  },
+  "nodeTypes": {
+    "file": 3423,
+    "config": 459,
+    "document": 636,
+    "service": 3,
+    "pipeline": 31,
+    "schema": 54,
+    "concept": 3466,
+    "function": 26140,
+    "class": 5644,
+    "endpoint": 1,
+    "table": 45
+  },
+  "edgeTypes": {
+    "contains": 35320,
+    "imports": 4588,
+    "documents": 5,
+    "configures": 2,
+    "related": 2,
+    "triggers": 4,
+    "defines_schema": 1,
+    "calls": 2,
+    "depends_on": 3
+  },
+  "layers": [
+    {
+      "id": "layer:tests-fixtures-and-snapshots",
+      "name": "Tests, Fixtures, and Snapshots",
+      "description": "Regression tests, integration suites, fixtures, snapshots, and test support data.",
+      "nodeCount": 937,
+      "sampleNodeIds": [
+        "file:codex-rs/app-server-protocol/tests/schema_fixtures.rs",
+        "file:codex-rs/app-server/tests/all.rs",
+        "file:codex-rs/app-server/tests/common/analytics_server.rs",
+        "file:codex-rs/app-server/tests/common/auth_fixtures.rs",
+        "file:codex-rs/app-server/tests/common/BUILD.bazel",
+        "config:codex-rs/app-server/tests/common/Cargo.toml",
+        "file:codex-rs/app-server/tests/common/config.rs",
+        "file:codex-rs/app-server/tests/common/lib.rs",
+        "file:codex-rs/app-server/tests/common/mcp_process.rs",
+        "file:codex-rs/app-server/tests/common/mock_model_server.rs",
+        "file:codex-rs/app-server/tests/common/models_cache.rs",
+        "file:codex-rs/app-server/tests/common/responses.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/app-server-protocol/tests/schema_fixtures.rs",
+          "type": "file",
+          "name": "schema_fixtures.rs",
+          "filePath": "codex-rs/app-server-protocol/tests/schema_fixtures.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server-protocol",
+            "test"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/app-server/tests/all.rs",
+          "type": "file",
+          "name": "all.rs",
+          "filePath": "codex-rs/app-server/tests/all.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server",
+            "test"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/app-server/tests/common/analytics_server.rs",
+          "type": "file",
+          "name": "analytics_server.rs",
+          "filePath": "codex-rs/app-server/tests/common/analytics_server.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server",
+            "test"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/app-server/tests/common/auth_fixtures.rs",
+          "type": "file",
+          "name": "auth_fixtures.rs",
+          "filePath": "codex-rs/app-server/tests/common/auth_fixtures.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server",
+            "test"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/app-server/tests/common/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/app-server/tests/common/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:app-server",
+            "test"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:codex-rs/app-server/tests/common/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/app-server/tests/common/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:app-server",
+            "test"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/app-server/tests/common/config.rs",
+          "type": "file",
+          "name": "config.rs",
+          "filePath": "codex-rs/app-server/tests/common/config.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server",
+            "test"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/app-server/tests/common/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/app-server/tests/common/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server",
+            "test"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:repository-orientation",
+      "name": "Repository Orientation",
+      "description": "Top-level entry points that explain what the repository is, how it is governed, and how tooling is invoked.",
+      "nodeCount": 13,
+      "sampleNodeIds": [
+        "file:.bazelignore",
+        "file:.bazelrc",
+        "file:.bazelversion",
+        "document:AGENTS.md",
+        "file:BUILD.bazel",
+        "document:CHANGELOG.md",
+        "file:justfile",
+        "file:MODULE.bazel",
+        "file:NOTICE",
+        "config:package.json",
+        "config:pnpm-workspace.yaml",
+        "document:README.md"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:.bazelignore",
+          "type": "file",
+          "name": ".bazelignore",
+          "filePath": ".bazelignore",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.bazelrc",
+          "type": "file",
+          "name": ".bazelrc",
+          "filePath": ".bazelrc",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:.bazelversion",
+          "type": "file",
+          "name": ".bazelversion",
+          "filePath": ".bazelversion",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:AGENTS.md",
+          "type": "document",
+          "name": "AGENTS.md",
+          "filePath": "AGENTS.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:CHANGELOG.md",
+          "type": "document",
+          "name": "CHANGELOG.md",
+          "filePath": "CHANGELOG.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:justfile",
+          "type": "file",
+          "name": "justfile",
+          "filePath": "justfile",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:MODULE.bazel",
+          "type": "file",
+          "name": "MODULE.bazel",
+          "filePath": "MODULE.bazel",
+          "tags": [
+            "bazel",
+            "code"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "id": "layer:agent-ops-and-local-runbooks",
+      "name": "Agent Ops and Local Runbooks",
+      "description": "Codex-local skills, environment recipes, and agent automation guidance used to operate this checkout.",
+      "nodeCount": 27,
+      "sampleNodeIds": [
+        "config:.codex/environments/environment.toml",
+        "config:.codex/skills/babysit-pr/agents/openai.yaml",
+        "document:.codex/skills/babysit-pr/references/github-api-notes.md",
+        "document:.codex/skills/babysit-pr/references/heuristics.md",
+        "file:.codex/skills/babysit-pr/scripts/gh_pr_watch.py",
+        "file:.codex/skills/babysit-pr/scripts/test_gh_pr_watch.py",
+        "document:.codex/skills/babysit-pr/SKILL.md",
+        "document:.codex/skills/code-review-breaking-changes/SKILL.md",
+        "document:.codex/skills/code-review-change-size/SKILL.md",
+        "document:.codex/skills/code-review-context/SKILL.md",
+        "document:.codex/skills/code-review-testing/SKILL.md",
+        "document:.codex/skills/code-review/SKILL.md"
+      ],
+      "sampleNodes": [
+        {
+          "id": "config:.codex/environments/environment.toml",
+          "type": "config",
+          "name": "environment.toml",
+          "filePath": ".codex/environments/environment.toml",
+          "tags": [
+            "toml",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.codex/skills/babysit-pr/agents/openai.yaml",
+          "type": "config",
+          "name": "openai.yaml",
+          "filePath": ".codex/skills/babysit-pr/agents/openai.yaml",
+          "tags": [
+            "yaml",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:.codex/skills/babysit-pr/references/github-api-notes.md",
+          "type": "document",
+          "name": "github-api-notes.md",
+          "filePath": ".codex/skills/babysit-pr/references/github-api-notes.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:.codex/skills/babysit-pr/references/heuristics.md",
+          "type": "document",
+          "name": "heuristics.md",
+          "filePath": ".codex/skills/babysit-pr/references/heuristics.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.codex/skills/babysit-pr/scripts/gh_pr_watch.py",
+          "type": "file",
+          "name": "gh_pr_watch.py",
+          "filePath": ".codex/skills/babysit-pr/scripts/gh_pr_watch.py",
+          "tags": [
+            "python",
+            "code"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:.codex/skills/babysit-pr/scripts/test_gh_pr_watch.py",
+          "type": "file",
+          "name": "test_gh_pr_watch.py",
+          "filePath": ".codex/skills/babysit-pr/scripts/test_gh_pr_watch.py",
+          "tags": [
+            "python",
+            "code"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:.codex/skills/babysit-pr/SKILL.md",
+          "type": "document",
+          "name": "SKILL.md",
+          "filePath": ".codex/skills/babysit-pr/SKILL.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:.codex/skills/code-review-breaking-changes/SKILL.md",
+          "type": "document",
+          "name": "SKILL.md",
+          "filePath": ".codex/skills/code-review-breaking-changes/SKILL.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:rust-core-agent-runtime",
+      "name": "Rust Core Agent Runtime",
+      "description": "Core agent loop, configuration, protocol, model/provider plumbing, backend clients, state, rollout, and common runtime crates.",
+      "nodeCount": 776,
+      "sampleNodeIds": [
+        "file:codex-rs/analytics/BUILD.bazel",
+        "config:codex-rs/analytics/Cargo.toml",
+        "file:codex-rs/analytics/src/accepted_lines.rs",
+        "file:codex-rs/analytics/src/analytics_client_tests.rs",
+        "file:codex-rs/analytics/src/client_tests.rs",
+        "file:codex-rs/analytics/src/client.rs",
+        "file:codex-rs/analytics/src/events.rs",
+        "file:codex-rs/analytics/src/facts.rs",
+        "file:codex-rs/analytics/src/lib.rs",
+        "file:codex-rs/analytics/src/reducer.rs",
+        "file:codex-rs/async-utils/BUILD.bazel",
+        "config:codex-rs/async-utils/Cargo.toml"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/analytics/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/analytics/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:codex-rs/analytics/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/analytics/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/analytics/src/accepted_lines.rs",
+          "type": "file",
+          "name": "accepted_lines.rs",
+          "filePath": "codex-rs/analytics/src/accepted_lines.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/analytics/src/analytics_client_tests.rs",
+          "type": "file",
+          "name": "analytics_client_tests.rs",
+          "filePath": "codex-rs/analytics/src/analytics_client_tests.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/analytics/src/client_tests.rs",
+          "type": "file",
+          "name": "client_tests.rs",
+          "filePath": "codex-rs/analytics/src/client_tests.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/analytics/src/client.rs",
+          "type": "file",
+          "name": "client.rs",
+          "filePath": "codex-rs/analytics/src/client.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/analytics/src/events.rs",
+          "type": "file",
+          "name": "events.rs",
+          "filePath": "codex-rs/analytics/src/events.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/analytics/src/facts.rs",
+          "type": "file",
+          "name": "facts.rs",
+          "filePath": "codex-rs/analytics/src/facts.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:analytics"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "id": "layer:rust-cli-tui-and-terminal",
+      "name": "Rust CLI, TUI, and Terminal UX",
+      "description": "Native command entry points, terminal UI, terminal detection, PTY support, update checks, and user-facing interaction surfaces.",
+      "nodeCount": 754,
+      "sampleNodeIds": [
+        "document:codex-rs/apply-patch/apply_patch_tool_instructions.md",
+        "file:codex-rs/apply-patch/BUILD.bazel",
+        "config:codex-rs/apply-patch/Cargo.toml",
+        "file:codex-rs/apply-patch/src/invocation.rs",
+        "file:codex-rs/apply-patch/src/lib.rs",
+        "file:codex-rs/apply-patch/src/main.rs",
+        "file:codex-rs/apply-patch/src/parser.rs",
+        "file:codex-rs/apply-patch/src/seek_sequence.rs",
+        "file:codex-rs/apply-patch/src/standalone_executable.rs",
+        "file:codex-rs/apply-patch/src/streaming_parser.rs",
+        "file:codex-rs/cli/BUILD.bazel",
+        "file:codex-rs/cli/build.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "document:codex-rs/apply-patch/apply_patch_tool_instructions.md",
+          "type": "document",
+          "name": "apply_patch_tool_instructions.md",
+          "filePath": "codex-rs/apply-patch/apply_patch_tool_instructions.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/apply-patch/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/apply-patch/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:codex-rs/apply-patch/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/apply-patch/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/apply-patch/src/invocation.rs",
+          "type": "file",
+          "name": "invocation.rs",
+          "filePath": "codex-rs/apply-patch/src/invocation.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/apply-patch/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/apply-patch/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/apply-patch/src/main.rs",
+          "type": "file",
+          "name": "main.rs",
+          "filePath": "codex-rs/apply-patch/src/main.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/apply-patch/src/parser.rs",
+          "type": "file",
+          "name": "parser.rs",
+          "filePath": "codex-rs/apply-patch/src/parser.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/apply-patch/src/seek_sequence.rs",
+          "type": "file",
+          "name": "seek_sequence.rs",
+          "filePath": "codex-rs/apply-patch/src/seek_sequence.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:apply-patch"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "id": "layer:app-server-and-desktop-api",
+      "name": "App Server and Desktop API",
+      "description": "App-server daemon, transport, protocol v2 surface, thread storage, and desktop-facing extension APIs.",
+      "nodeCount": 1037,
+      "sampleNodeIds": [
+        "file:codex-rs/app-server-client/BUILD.bazel",
+        "config:codex-rs/app-server-client/Cargo.toml",
+        "document:codex-rs/app-server-client/README.md",
+        "file:codex-rs/app-server-client/src/lib.rs",
+        "file:codex-rs/app-server-client/src/remote.rs",
+        "file:codex-rs/app-server-daemon/BUILD.bazel",
+        "config:codex-rs/app-server-daemon/Cargo.toml",
+        "document:codex-rs/app-server-daemon/README.md",
+        "file:codex-rs/app-server-daemon/src/backend/mod.rs",
+        "file:codex-rs/app-server-daemon/src/backend/pid_tests.rs",
+        "file:codex-rs/app-server-daemon/src/backend/pid.rs",
+        "file:codex-rs/app-server-daemon/src/client.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/app-server-client/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/app-server-client/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:app-server-client"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:codex-rs/app-server-client/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/app-server-client/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:app-server-client"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:codex-rs/app-server-client/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/app-server-client/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:app-server-client"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/app-server-client/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/app-server-client/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server-client"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/app-server-client/src/remote.rs",
+          "type": "file",
+          "name": "remote.rs",
+          "filePath": "codex-rs/app-server-client/src/remote.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server-client"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/app-server-daemon/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/app-server-daemon/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:app-server-daemon"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:codex-rs/app-server-daemon/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/app-server-daemon/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:app-server-daemon"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:codex-rs/app-server-daemon/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/app-server-daemon/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:app-server-daemon"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "id": "layer:mcp-tools-skills-and-connectors",
+      "name": "MCP, Tools, Skills, and Connectors",
+      "description": "Tool-call mediation, MCP clients/servers, plugins, skills, connectors, file search, and hosted tool abstractions.",
+      "nodeCount": 236,
+      "sampleNodeIds": [
+        "file:codex-rs/codex-mcp/BUILD.bazel",
+        "config:codex-rs/codex-mcp/Cargo.toml",
+        "file:codex-rs/codex-mcp/src/auth_elicitation.rs",
+        "file:codex-rs/codex-mcp/src/codex_apps.rs",
+        "file:codex-rs/codex-mcp/src/connection_manager_tests.rs",
+        "file:codex-rs/codex-mcp/src/connection_manager.rs",
+        "file:codex-rs/codex-mcp/src/elicitation.rs",
+        "file:codex-rs/codex-mcp/src/lib.rs",
+        "file:codex-rs/codex-mcp/src/mcp/auth.rs",
+        "file:codex-rs/codex-mcp/src/mcp/mod_tests.rs",
+        "file:codex-rs/codex-mcp/src/mcp/mod.rs",
+        "file:codex-rs/codex-mcp/src/rmcp_client.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/codex-mcp/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/codex-mcp/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:codex-rs/codex-mcp/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/codex-mcp/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/codex-mcp/src/auth_elicitation.rs",
+          "type": "file",
+          "name": "auth_elicitation.rs",
+          "filePath": "codex-rs/codex-mcp/src/auth_elicitation.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/codex-mcp/src/codex_apps.rs",
+          "type": "file",
+          "name": "codex_apps.rs",
+          "filePath": "codex-rs/codex-mcp/src/codex_apps.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/codex-mcp/src/connection_manager_tests.rs",
+          "type": "file",
+          "name": "connection_manager_tests.rs",
+          "filePath": "codex-rs/codex-mcp/src/connection_manager_tests.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/codex-mcp/src/connection_manager.rs",
+          "type": "file",
+          "name": "connection_manager.rs",
+          "filePath": "codex-rs/codex-mcp/src/connection_manager.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/codex-mcp/src/elicitation.rs",
+          "type": "file",
+          "name": "elicitation.rs",
+          "filePath": "codex-rs/codex-mcp/src/elicitation.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/codex-mcp/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/codex-mcp/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:sandbox-exec-security-and-host-integration",
+      "name": "Sandbox, Exec Policy, Security, and Host Integration",
+      "description": "Shell execution, sandboxing, approval/escalation policy, host hardening, secrets, keyrings, auth, networking, and platform integration.",
+      "nodeCount": 207,
+      "sampleNodeIds": [
+        "file:codex-rs/aws-auth/BUILD.bazel",
+        "config:codex-rs/aws-auth/Cargo.toml",
+        "file:codex-rs/aws-auth/src/config.rs",
+        "file:codex-rs/aws-auth/src/lib.rs",
+        "file:codex-rs/aws-auth/src/signing.rs",
+        "file:codex-rs/bwrap/BUILD.bazel",
+        "file:codex-rs/bwrap/build.rs",
+        "config:codex-rs/bwrap/Cargo.toml",
+        "file:codex-rs/bwrap/config.h",
+        "file:codex-rs/bwrap/src/main.rs",
+        "file:codex-rs/cloud-requirements/BUILD.bazel",
+        "config:codex-rs/cloud-requirements/Cargo.toml"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/aws-auth/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/aws-auth/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:aws-auth"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:codex-rs/aws-auth/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/aws-auth/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:aws-auth"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/aws-auth/src/config.rs",
+          "type": "file",
+          "name": "config.rs",
+          "filePath": "codex-rs/aws-auth/src/config.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:aws-auth"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/aws-auth/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/aws-auth/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:aws-auth"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/aws-auth/src/signing.rs",
+          "type": "file",
+          "name": "signing.rs",
+          "filePath": "codex-rs/aws-auth/src/signing.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:aws-auth"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/bwrap/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "codex-rs/bwrap/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code",
+            "rust-workspace",
+            "crate:bwrap"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/bwrap/build.rs",
+          "type": "file",
+          "name": "build.rs",
+          "filePath": "codex-rs/bwrap/build.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:bwrap"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "config:codex-rs/bwrap/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/bwrap/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:bwrap"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:npm-distribution-and-release-packaging",
+      "name": "NPM Distribution and Release Packaging",
+      "description": "JavaScript npm facade, native package layout, release staging scripts, and artifact publication workflows.",
+      "nodeCount": 26,
+      "sampleNodeIds": [
+        "file:.github/scripts/build-codex-package-archive.sh",
+        "pipeline:.github/workflows/rust-release-argument-comment-lint.yml",
+        "pipeline:.github/workflows/rust-release-prepare.yml",
+        "pipeline:.github/workflows/rust-release-windows.yml",
+        "pipeline:.github/workflows/rust-release-zsh.yml",
+        "pipeline:.github/workflows/rust-release.yml",
+        "file:codex-cli/bin/codex.js",
+        "config:codex-cli/package.json",
+        "file:codex-cli/scripts/build_npm_package.py",
+        "file:codex-cli/scripts/init_firewall.sh",
+        "document:codex-cli/scripts/README.md",
+        "file:codex-cli/scripts/run_in_container.sh"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:.github/scripts/build-codex-package-archive.sh",
+          "type": "file",
+          "name": "build-codex-package-archive.sh",
+          "filePath": ".github/scripts/build-codex-package-archive.sh",
+          "tags": [
+            "shell",
+            "script",
+            "ci"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "pipeline:.github/workflows/rust-release-argument-comment-lint.yml",
+          "type": "pipeline",
+          "name": "rust-release-argument-comment-lint.yml",
+          "filePath": ".github/workflows/rust-release-argument-comment-lint.yml",
+          "tags": [
+            "yaml",
+            "infra",
+            "ci"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "pipeline:.github/workflows/rust-release-prepare.yml",
+          "type": "pipeline",
+          "name": "rust-release-prepare.yml",
+          "filePath": ".github/workflows/rust-release-prepare.yml",
+          "tags": [
+            "yaml",
+            "infra",
+            "ci"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "pipeline:.github/workflows/rust-release-windows.yml",
+          "type": "pipeline",
+          "name": "rust-release-windows.yml",
+          "filePath": ".github/workflows/rust-release-windows.yml",
+          "tags": [
+            "yaml",
+            "infra",
+            "ci"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "pipeline:.github/workflows/rust-release-zsh.yml",
+          "type": "pipeline",
+          "name": "rust-release-zsh.yml",
+          "filePath": ".github/workflows/rust-release-zsh.yml",
+          "tags": [
+            "yaml",
+            "infra",
+            "ci"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "pipeline:.github/workflows/rust-release.yml",
+          "type": "pipeline",
+          "name": "rust-release.yml",
+          "filePath": ".github/workflows/rust-release.yml",
+          "tags": [
+            "yaml",
+            "infra",
+            "ci"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-cli/bin/codex.js",
+          "type": "file",
+          "name": "codex.js",
+          "filePath": "codex-cli/bin/codex.js",
+          "tags": [
+            "javascript",
+            "code",
+            "npm-cli"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "config:codex-cli/package.json",
+          "type": "config",
+          "name": "package.json",
+          "filePath": "codex-cli/package.json",
+          "tags": [
+            "json",
+            "config",
+            "npm-cli"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "id": "layer:sdk-runtime-and-schema-generation",
+      "name": "SDK Runtime and Schema Generation",
+      "description": "Generated SDK protocol models, Python runtime wheel payloads, and schema/codegen maintenance scripts.",
+      "nodeCount": 8,
+      "sampleNodeIds": [
+        "file:sdk/python-runtime/hatch_build.py",
+        "config:sdk/python-runtime/pyproject.toml",
+        "document:sdk/python-runtime/README.md",
+        "file:sdk/python-runtime/src/codex_cli_bin/__init__.py",
+        "file:sdk/python/scripts/update_sdk_artifacts.py",
+        "file:sdk/python/src/openai_codex/generated/__init__.py",
+        "file:sdk/python/src/openai_codex/generated/notification_registry.py",
+        "file:sdk/python/src/openai_codex/generated/v2_all.py"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:sdk/python-runtime/hatch_build.py",
+          "type": "file",
+          "name": "hatch_build.py",
+          "filePath": "sdk/python-runtime/hatch_build.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:sdk/python-runtime/pyproject.toml",
+          "type": "config",
+          "name": "pyproject.toml",
+          "filePath": "sdk/python-runtime/pyproject.toml",
+          "tags": [
+            "toml",
+            "config",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:sdk/python-runtime/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "sdk/python-runtime/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/python-runtime/src/codex_cli_bin/__init__.py",
+          "type": "file",
+          "name": "__init__.py",
+          "filePath": "sdk/python-runtime/src/codex_cli_bin/__init__.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/python/scripts/update_sdk_artifacts.py",
+          "type": "file",
+          "name": "update_sdk_artifacts.py",
+          "filePath": "sdk/python/scripts/update_sdk_artifacts.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:sdk/python/src/openai_codex/generated/__init__.py",
+          "type": "file",
+          "name": "__init__.py",
+          "filePath": "sdk/python/src/openai_codex/generated/__init__.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/python/src/openai_codex/generated/notification_registry.py",
+          "type": "file",
+          "name": "notification_registry.py",
+          "filePath": "sdk/python/src/openai_codex/generated/notification_registry.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:sdk/python/src/openai_codex/generated/v2_all.py",
+          "type": "file",
+          "name": "v2_all.py",
+          "filePath": "sdk/python/src/openai_codex/generated/v2_all.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "id": "layer:sdk-python-app-server",
+      "name": "Python SDK App-Server Client",
+      "description": "Python high-level API, stdio JSON-RPC transport, notification router, examples, and tests for app-server integration.",
+      "nodeCount": 54,
+      "sampleNodeIds": [
+        "file:sdk/python/_runtime_setup.py",
+        "document:sdk/python/docs/api-reference.md",
+        "document:sdk/python/docs/faq.md",
+        "document:sdk/python/docs/getting-started.md",
+        "file:sdk/python/examples/_bootstrap.py",
+        "file:sdk/python/examples/01_quickstart_constructor/async.py",
+        "file:sdk/python/examples/01_quickstart_constructor/sync.py",
+        "file:sdk/python/examples/02_turn_run/async.py",
+        "file:sdk/python/examples/02_turn_run/sync.py",
+        "file:sdk/python/examples/03_turn_stream_events/async.py",
+        "file:sdk/python/examples/03_turn_stream_events/sync.py",
+        "file:sdk/python/examples/04_models_and_metadata/async.py"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:sdk/python/_runtime_setup.py",
+          "type": "file",
+          "name": "_runtime_setup.py",
+          "filePath": "sdk/python/_runtime_setup.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "document:sdk/python/docs/api-reference.md",
+          "type": "document",
+          "name": "api-reference.md",
+          "filePath": "sdk/python/docs/api-reference.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:sdk/python/docs/faq.md",
+          "type": "document",
+          "name": "faq.md",
+          "filePath": "sdk/python/docs/faq.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:sdk/python/docs/getting-started.md",
+          "type": "document",
+          "name": "getting-started.md",
+          "filePath": "sdk/python/docs/getting-started.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:sdk/python/examples/_bootstrap.py",
+          "type": "file",
+          "name": "_bootstrap.py",
+          "filePath": "sdk/python/examples/_bootstrap.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:sdk/python/examples/01_quickstart_constructor/async.py",
+          "type": "file",
+          "name": "async.py",
+          "filePath": "sdk/python/examples/01_quickstart_constructor/async.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/python/examples/01_quickstart_constructor/sync.py",
+          "type": "file",
+          "name": "sync.py",
+          "filePath": "sdk/python/examples/01_quickstart_constructor/sync.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/python/examples/02_turn_run/async.py",
+          "type": "file",
+          "name": "async.py",
+          "filePath": "sdk/python/examples/02_turn_run/async.py",
+          "tags": [
+            "python",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:sdk-typescript-exec",
+      "name": "TypeScript SDK Exec Client",
+      "description": "TypeScript API, thread helpers, exec bridge, JSONL event contract, samples, and tests.",
+      "nodeCount": 21,
+      "sampleNodeIds": [
+        "file:sdk/typescript/.prettierignore",
+        "file:sdk/typescript/eslint.config.js",
+        "file:sdk/typescript/jest.config.cjs",
+        "config:sdk/typescript/package.json",
+        "document:sdk/typescript/README.md",
+        "file:sdk/typescript/samples/basic_streaming.ts",
+        "file:sdk/typescript/samples/helpers.ts",
+        "file:sdk/typescript/samples/structured_output_zod.ts",
+        "file:sdk/typescript/samples/structured_output.ts",
+        "file:sdk/typescript/src/codex.ts",
+        "file:sdk/typescript/src/codexOptions.ts",
+        "file:sdk/typescript/src/events.ts"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:sdk/typescript/.prettierignore",
+          "type": "file",
+          "name": ".prettierignore",
+          "filePath": "sdk/typescript/.prettierignore",
+          "tags": [
+            "unknown",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/typescript/eslint.config.js",
+          "type": "file",
+          "name": "eslint.config.js",
+          "filePath": "sdk/typescript/eslint.config.js",
+          "tags": [
+            "javascript",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/typescript/jest.config.cjs",
+          "type": "file",
+          "name": "jest.config.cjs",
+          "filePath": "sdk/typescript/jest.config.cjs",
+          "tags": [
+            "javascript",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:sdk/typescript/package.json",
+          "type": "config",
+          "name": "package.json",
+          "filePath": "sdk/typescript/package.json",
+          "tags": [
+            "json",
+            "config",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:sdk/typescript/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "sdk/typescript/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "sdk"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:sdk/typescript/samples/basic_streaming.ts",
+          "type": "file",
+          "name": "basic_streaming.ts",
+          "filePath": "sdk/typescript/samples/basic_streaming.ts",
+          "tags": [
+            "typescript",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/typescript/samples/helpers.ts",
+          "type": "file",
+          "name": "helpers.ts",
+          "filePath": "sdk/typescript/samples/helpers.ts",
+          "tags": [
+            "typescript",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:sdk/typescript/samples/structured_output_zod.ts",
+          "type": "file",
+          "name": "structured_output_zod.ts",
+          "filePath": "sdk/typescript/samples/structured_output_zod.ts",
+          "tags": [
+            "typescript",
+            "code",
+            "sdk"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:install-and-distribution",
+      "name": "Install and Distribution Scripts",
+      "description": "Shell and PowerShell installers plus release asset resolution and checksum plumbing.",
+      "nodeCount": 2,
+      "sampleNodeIds": [
+        "file:scripts/install/install.ps1",
+        "file:scripts/install/install.sh"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:scripts/install/install.ps1",
+          "type": "file",
+          "name": "install.ps1",
+          "filePath": "scripts/install/install.ps1",
+          "tags": [
+            "powershell",
+            "script"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:scripts/install/install.sh",
+          "type": "file",
+          "name": "install.sh",
+          "filePath": "scripts/install/install.sh",
+          "tags": [
+            "shell",
+            "script"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "id": "layer:rust-quality-tooling",
+      "name": "Rust Quality Tooling",
+      "description": "Argument-comment lint, Dylint/Bazel integration, and Rust-specific repository quality gates.",
+      "nodeCount": 25,
+      "sampleNodeIds": [
+        "config:tools/argument-comment-lint/.cargo/config.toml",
+        "file:tools/argument-comment-lint/argument-comment-lint",
+        "file:tools/argument-comment-lint/BUILD.bazel",
+        "config:tools/argument-comment-lint/Cargo.toml",
+        "file:tools/argument-comment-lint/driver.rs",
+        "file:tools/argument-comment-lint/lint_aspect.bzl",
+        "file:tools/argument-comment-lint/list-bazel-targets.sh",
+        "document:tools/argument-comment-lint/README.md",
+        "file:tools/argument-comment-lint/run-prebuilt-linter.py",
+        "file:tools/argument-comment-lint/run.py",
+        "file:tools/argument-comment-lint/rust-toolchain",
+        "file:tools/argument-comment-lint/src/bin/argument-comment-lint.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "config:tools/argument-comment-lint/.cargo/config.toml",
+          "type": "config",
+          "name": "config.toml",
+          "filePath": "tools/argument-comment-lint/.cargo/config.toml",
+          "tags": [
+            "toml",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:tools/argument-comment-lint/argument-comment-lint",
+          "type": "file",
+          "name": "argument-comment-lint",
+          "filePath": "tools/argument-comment-lint/argument-comment-lint",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:tools/argument-comment-lint/BUILD.bazel",
+          "type": "file",
+          "name": "BUILD.bazel",
+          "filePath": "tools/argument-comment-lint/BUILD.bazel",
+          "tags": [
+            "bazel",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:tools/argument-comment-lint/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "tools/argument-comment-lint/Cargo.toml",
+          "tags": [
+            "toml",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:tools/argument-comment-lint/driver.rs",
+          "type": "file",
+          "name": "driver.rs",
+          "filePath": "tools/argument-comment-lint/driver.rs",
+          "tags": [
+            "rust",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:tools/argument-comment-lint/lint_aspect.bzl",
+          "type": "file",
+          "name": "lint_aspect.bzl",
+          "filePath": "tools/argument-comment-lint/lint_aspect.bzl",
+          "tags": [
+            "bzl",
+            "code"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:tools/argument-comment-lint/list-bazel-targets.sh",
+          "type": "file",
+          "name": "list-bazel-targets.sh",
+          "filePath": "tools/argument-comment-lint/list-bazel-targets.sh",
+          "tags": [
+            "shell",
+            "script"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:tools/argument-comment-lint/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "tools/argument-comment-lint/README.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "id": "layer:sdks-and-external-consumers",
+      "name": "Other SDKs and External Consumers",
+      "description": "Remaining external client and sample code that launches, embeds, or talks to Codex.",
+      "nodeCount": 8,
+      "sampleNodeIds": [
+        "config:codex-rs/debug-client/Cargo.toml",
+        "document:codex-rs/debug-client/README.md",
+        "file:codex-rs/debug-client/src/client.rs",
+        "file:codex-rs/debug-client/src/commands.rs",
+        "file:codex-rs/debug-client/src/main.rs",
+        "file:codex-rs/debug-client/src/output.rs",
+        "file:codex-rs/debug-client/src/reader.rs",
+        "file:codex-rs/debug-client/src/state.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "config:codex-rs/debug-client/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/debug-client/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:codex-rs/debug-client/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/debug-client/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/debug-client/src/client.rs",
+          "type": "file",
+          "name": "client.rs",
+          "filePath": "codex-rs/debug-client/src/client.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/debug-client/src/commands.rs",
+          "type": "file",
+          "name": "commands.rs",
+          "filePath": "codex-rs/debug-client/src/commands.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/debug-client/src/main.rs",
+          "type": "file",
+          "name": "main.rs",
+          "filePath": "codex-rs/debug-client/src/main.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/debug-client/src/output.rs",
+          "type": "file",
+          "name": "output.rs",
+          "filePath": "codex-rs/debug-client/src/output.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/debug-client/src/reader.rs",
+          "type": "file",
+          "name": "reader.rs",
+          "filePath": "codex-rs/debug-client/src/reader.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/debug-client/src/state.rs",
+          "type": "file",
+          "name": "state.rs",
+          "filePath": "codex-rs/debug-client/src/state.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:debug-client"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:ci-quality-gates",
+      "name": "CI and Quality Gates",
+      "description": "GitHub workflows, reusable actions, code-signing actions, CODEOWNERS, and PR governance.",
+      "nodeCount": 55,
+      "sampleNodeIds": [
+        "config:.github/actions/linux-code-sign/action.yml",
+        "config:.github/actions/macos-code-sign/action.yml",
+        "config:.github/actions/macos-code-sign/codex.entitlements.plist",
+        "file:.github/actions/macos-code-sign/notary_helpers.sh",
+        "config:.github/actions/prepare-bazel-ci/action.yml",
+        "config:.github/actions/run-argument-comment-lint/action.yml",
+        "config:.github/actions/setup-bazel-ci/action.yml",
+        "config:.github/actions/setup-msvc-env/action.yml",
+        "file:.github/actions/setup-msvc-env/setup-msvc-env.ps1",
+        "config:.github/actions/setup-rusty-v8-musl/action.yml",
+        "config:.github/actions/windows-code-sign/action.yml",
+        "document:.github/blob-size-allowlist.txt"
+      ],
+      "sampleNodes": [
+        {
+          "id": "config:.github/actions/linux-code-sign/action.yml",
+          "type": "config",
+          "name": "action.yml",
+          "filePath": ".github/actions/linux-code-sign/action.yml",
+          "tags": [
+            "yaml",
+            "config",
+            "ci"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.github/actions/macos-code-sign/action.yml",
+          "type": "config",
+          "name": "action.yml",
+          "filePath": ".github/actions/macos-code-sign/action.yml",
+          "tags": [
+            "yaml",
+            "config",
+            "ci"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "config:.github/actions/macos-code-sign/codex.entitlements.plist",
+          "type": "config",
+          "name": "codex.entitlements.plist",
+          "filePath": ".github/actions/macos-code-sign/codex.entitlements.plist",
+          "tags": [
+            "xml",
+            "config",
+            "ci"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.github/actions/macos-code-sign/notary_helpers.sh",
+          "type": "file",
+          "name": "notary_helpers.sh",
+          "filePath": ".github/actions/macos-code-sign/notary_helpers.sh",
+          "tags": [
+            "shell",
+            "script",
+            "ci"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.github/actions/prepare-bazel-ci/action.yml",
+          "type": "config",
+          "name": "action.yml",
+          "filePath": ".github/actions/prepare-bazel-ci/action.yml",
+          "tags": [
+            "yaml",
+            "config",
+            "ci"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.github/actions/run-argument-comment-lint/action.yml",
+          "type": "config",
+          "name": "action.yml",
+          "filePath": ".github/actions/run-argument-comment-lint/action.yml",
+          "tags": [
+            "yaml",
+            "config",
+            "ci"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.github/actions/setup-bazel-ci/action.yml",
+          "type": "config",
+          "name": "action.yml",
+          "filePath": ".github/actions/setup-bazel-ci/action.yml",
+          "tags": [
+            "yaml",
+            "config",
+            "ci"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "config:.github/actions/setup-msvc-env/action.yml",
+          "type": "config",
+          "name": "action.yml",
+          "filePath": ".github/actions/setup-msvc-env/action.yml",
+          "tags": [
+            "yaml",
+            "config",
+            "ci"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:build-ci-and-repository-tooling",
+      "name": "Build, CI, and Repository Tooling",
+      "description": "Bazel, GitHub automation, devcontainers, repository scripts, third-party support, and maintenance tooling.",
+      "nodeCount": 108,
+      "sampleNodeIds": [
+        "config:.devcontainer/codex-install/package.json",
+        "config:.devcontainer/codex-install/pnpm-workspace.yaml",
+        "config:.devcontainer/devcontainer.json",
+        "config:.devcontainer/devcontainer.secure.json",
+        "service:.devcontainer/Dockerfile",
+        "service:.devcontainer/Dockerfile.secure",
+        "file:.devcontainer/init-firewall.sh",
+        "file:.devcontainer/post_install.py",
+        "file:.devcontainer/post-start.sh",
+        "document:.devcontainer/README.md",
+        "file:codex-rs/agent-graph-store/BUILD.bazel",
+        "file:codex-rs/agent-identity/BUILD.bazel"
+      ],
+      "sampleNodes": [
+        {
+          "id": "config:.devcontainer/codex-install/package.json",
+          "type": "config",
+          "name": "package.json",
+          "filePath": ".devcontainer/codex-install/package.json",
+          "tags": [
+            "json",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.devcontainer/codex-install/pnpm-workspace.yaml",
+          "type": "config",
+          "name": "pnpm-workspace.yaml",
+          "filePath": ".devcontainer/codex-install/pnpm-workspace.yaml",
+          "tags": [
+            "yaml",
+            "config"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "config:.devcontainer/devcontainer.json",
+          "type": "config",
+          "name": "devcontainer.json",
+          "filePath": ".devcontainer/devcontainer.json",
+          "tags": [
+            "json",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.devcontainer/devcontainer.secure.json",
+          "type": "config",
+          "name": "devcontainer.secure.json",
+          "filePath": ".devcontainer/devcontainer.secure.json",
+          "tags": [
+            "json",
+            "config"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "service:.devcontainer/Dockerfile",
+          "type": "service",
+          "name": "Dockerfile",
+          "filePath": ".devcontainer/Dockerfile",
+          "tags": [
+            "dockerfile",
+            "infra"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "service:.devcontainer/Dockerfile.secure",
+          "type": "service",
+          "name": "Dockerfile.secure",
+          "filePath": ".devcontainer/Dockerfile.secure",
+          "tags": [
+            "dockerfile",
+            "infra"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.devcontainer/init-firewall.sh",
+          "type": "file",
+          "name": "init-firewall.sh",
+          "filePath": ".devcontainer/init-firewall.sh",
+          "tags": [
+            "shell",
+            "script"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:.devcontainer/post_install.py",
+          "type": "file",
+          "name": "post_install.py",
+          "filePath": ".devcontainer/post_install.py",
+          "tags": [
+            "python",
+            "code"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "id": "layer:public-docs",
+      "name": "Public Docs",
+      "description": "Repository documentation pages that point contributors toward official docs, installation, contribution, and security workflows.",
+      "nodeCount": 15,
+      "sampleNodeIds": [
+        "document:docs/agents_md.md",
+        "document:docs/authentication.md",
+        "document:docs/CLA.md",
+        "document:docs/config.md",
+        "document:docs/contributing.md",
+        "document:docs/example-config.md",
+        "document:docs/exec.md",
+        "document:docs/execpolicy.md",
+        "document:docs/getting-started.md",
+        "document:docs/install.md",
+        "document:docs/license.md",
+        "document:docs/open-source-fund.md"
+      ],
+      "sampleNodes": [
+        {
+          "id": "document:docs/agents_md.md",
+          "type": "document",
+          "name": "agents_md.md",
+          "filePath": "docs/agents_md.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:docs/authentication.md",
+          "type": "document",
+          "name": "authentication.md",
+          "filePath": "docs/authentication.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:docs/CLA.md",
+          "type": "document",
+          "name": "CLA.md",
+          "filePath": "docs/CLA.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:docs/config.md",
+          "type": "document",
+          "name": "config.md",
+          "filePath": "docs/config.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:docs/contributing.md",
+          "type": "document",
+          "name": "contributing.md",
+          "filePath": "docs/contributing.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:docs/example-config.md",
+          "type": "document",
+          "name": "example-config.md",
+          "filePath": "docs/example-config.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:docs/exec.md",
+          "type": "document",
+          "name": "exec.md",
+          "filePath": "docs/exec.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:docs/execpolicy.md",
+          "type": "document",
+          "name": "execpolicy.md",
+          "filePath": "docs/execpolicy.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:local-knowledge-overlay",
+      "name": "Local Knowledge Overlay",
+      "description": "Local wiki raw materials and structured pages. These are user knowledge-base artifacts layered over the upstream Codex source tree.",
+      "nodeCount": 32,
+      "sampleNodeIds": [
+        "document:wiki/wiki/concepts/agent-state-memory.md",
+        "document:wiki/wiki/concepts/agentic-c2.md"
+      ],
+      "sampleNodes": [
+        {
+          "id": "document:wiki/wiki/concepts/agent-state-memory.md",
+          "type": "document",
+          "name": "agent-state-memory.md",
+          "filePath": "wiki/wiki/concepts/agent-state-memory.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "wiki"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:wiki/wiki/concepts/agentic-c2.md",
+          "type": "document",
+          "name": "agentic-c2.md",
+          "filePath": "wiki/wiki/concepts/agentic-c2.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "wiki"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "id": "layer:documentation-and-markdown",
+      "name": "Documentation and Markdown",
+      "description": "Remaining markdown and explanatory text that is not already part of public docs or the local wiki.",
+      "nodeCount": 12,
+      "sampleNodeIds": [
+        "document:codex-rs/ansi-escape/README.md",
+        "document:codex-rs/chatgpt/README.md",
+        "document:codex-rs/config.md",
+        "document:codex-rs/docs/codex_mcp_interface.md",
+        "document:codex-rs/docs/protocol_v1.md",
+        "document:codex-rs/exec-server/README.md",
+        "document:codex-rs/git-utils/README.md",
+        "document:codex-rs/memories/README.md",
+        "document:codex-rs/README.md",
+        "document:codex-rs/utils/cargo-bin/README.md",
+        "document:codex-rs/utils/stream-parser/README.md",
+        "document:codex-rs/utils/template/README.md"
+      ],
+      "sampleNodes": [
+        {
+          "id": "document:codex-rs/ansi-escape/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/ansi-escape/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:ansi-escape"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:codex-rs/chatgpt/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/chatgpt/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:chatgpt"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:codex-rs/config.md",
+          "type": "document",
+          "name": "config.md",
+          "filePath": "codex-rs/config.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:config.md"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:codex-rs/docs/codex_mcp_interface.md",
+          "type": "document",
+          "name": "codex_mcp_interface.md",
+          "filePath": "codex-rs/docs/codex_mcp_interface.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:codex-rs/docs/protocol_v1.md",
+          "type": "document",
+          "name": "protocol_v1.md",
+          "filePath": "codex-rs/docs/protocol_v1.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:codex-rs/exec-server/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/exec-server/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:exec-server"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "document:codex-rs/git-utils/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/git-utils/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:git-utils"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:codex-rs/memories/README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "codex-rs/memories/README.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "rust-workspace",
+            "crate:memories"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "id": "layer:remaining-source-components",
+      "name": "Remaining Source Components",
+      "description": "Source files and configuration that do not fit the higher-level architectural groupings above.",
+      "nodeCount": 299,
+      "sampleNodeIds": [
+        "file:.codespellignore",
+        "file:.codespellrc",
+        "file:.gitattributes",
+        "config:.markdownlint-cli2.yaml",
+        "file:.npmrc",
+        "file:.prettierignore",
+        "config:.prettierrc.toml",
+        "file:.understand-anything/.understandignore",
+        "config:announcement_tip.toml",
+        "config:cliff.toml",
+        "config:codex-rs/.cargo/audit.toml",
+        "config:codex-rs/.cargo/config.toml"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:.codespellignore",
+          "type": "file",
+          "name": ".codespellignore",
+          "filePath": ".codespellignore",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.codespellrc",
+          "type": "file",
+          "name": ".codespellrc",
+          "filePath": ".codespellrc",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.gitattributes",
+          "type": "file",
+          "name": ".gitattributes",
+          "filePath": ".gitattributes",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.markdownlint-cli2.yaml",
+          "type": "config",
+          "name": ".markdownlint-cli2.yaml",
+          "filePath": ".markdownlint-cli2.yaml",
+          "tags": [
+            "yaml",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.npmrc",
+          "type": "file",
+          "name": ".npmrc",
+          "filePath": ".npmrc",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.prettierignore",
+          "type": "file",
+          "name": ".prettierignore",
+          "filePath": ".prettierignore",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "config:.prettierrc.toml",
+          "type": "config",
+          "name": ".prettierrc.toml",
+          "filePath": ".prettierrc.toml",
+          "tags": [
+            "toml",
+            "config"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:.understand-anything/.understandignore",
+          "type": "file",
+          "name": ".understandignore",
+          "filePath": ".understand-anything/.understandignore",
+          "tags": [
+            "unknown",
+            "code"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Repository Orientation",
+      "description": "Start with the user-facing README, agent instructions, root package metadata, and Rust workspace manifest to understand the repository contract.",
+      "nodeIds": [
+        "document:README.md",
+        "document:AGENTS.md",
+        "config:package.json",
+        "config:codex-rs/Cargo.toml"
+      ],
+      "sampleNodes": [
+        {
+          "id": "document:README.md",
+          "type": "document",
+          "name": "README.md",
+          "filePath": "README.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:AGENTS.md",
+          "type": "document",
+          "name": "AGENTS.md",
+          "filePath": "AGENTS.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "config:package.json",
+          "type": "config",
+          "name": "package.json",
+          "filePath": "package.json",
+          "tags": [
+            "json",
+            "config"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "config:codex-rs/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:Cargo.toml"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Rust Workspace Shape",
+      "description": "Inspect how the Cargo workspace fans out into core runtime, protocol, CLI, TUI, app server, tool, and sandbox crates.",
+      "nodeIds": [
+        "config:codex-rs/Cargo.toml",
+        "file:codex-rs/core/src/lib.rs",
+        "file:codex-rs/protocol/src/lib.rs",
+        "file:codex-rs/config/src/lib.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "config:codex-rs/Cargo.toml",
+          "type": "config",
+          "name": "Cargo.toml",
+          "filePath": "codex-rs/Cargo.toml",
+          "tags": [
+            "toml",
+            "config",
+            "rust-workspace",
+            "crate:Cargo.toml"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/core/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/core/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:core"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/protocol/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/protocol/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:protocol"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/config/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/config/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:config"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Agent Core Loop",
+      "description": "Follow the core session and turn-context files to see how user turns, tools, model providers, and response events are coordinated.",
+      "nodeIds": [
+        "file:codex-rs/core/src/lib.rs",
+        "file:codex-rs/core/src/session/mod.rs",
+        "file:codex-rs/core/src/session/turn_context.rs",
+        "file:codex-rs/core/src/tools/context.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/core/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/core/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:core"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/core/src/session/mod.rs",
+          "type": "file",
+          "name": "mod.rs",
+          "filePath": "codex-rs/core/src/session/mod.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:core"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/core/src/session/turn_context.rs",
+          "type": "file",
+          "name": "turn_context.rs",
+          "filePath": "codex-rs/core/src/session/turn_context.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:core"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/core/src/tools/context.rs",
+          "type": "file",
+          "name": "context.rs",
+          "filePath": "codex-rs/core/src/tools/context.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:core"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Native CLI and TUI",
+      "description": "Move from the Rust CLI entry point into the terminal UI orchestration and high-touch chat surfaces.",
+      "nodeIds": [
+        "file:codex-rs/cli/src/main.rs",
+        "file:codex-rs/tui/src/lib.rs",
+        "file:codex-rs/tui/src/chatwidget.rs",
+        "file:codex-rs/tui/src/bottom_pane/mod.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/cli/src/main.rs",
+          "type": "file",
+          "name": "main.rs",
+          "filePath": "codex-rs/cli/src/main.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:cli"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/tui/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/tui/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:tui"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/tui/src/chatwidget.rs",
+          "type": "file",
+          "name": "chatwidget.rs",
+          "filePath": "codex-rs/tui/src/chatwidget.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:tui"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/tui/src/bottom_pane/mod.rs",
+          "type": "file",
+          "name": "mod.rs",
+          "filePath": "codex-rs/tui/src/bottom_pane/mod.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:tui"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "title": "NPM Facade and Native Package Layout",
+      "description": "Understand how the npm package resolves platform-specific native binaries and how release scripts stage that layout.",
+      "nodeIds": [
+        "config:codex-cli/package.json",
+        "file:codex-cli/bin/codex.js",
+        "file:codex-cli/scripts/build_npm_package.py",
+        "file:scripts/codex_package/layout.py",
+        "file:codex-rs/install-context/src/lib.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "config:codex-cli/package.json",
+          "type": "config",
+          "name": "package.json",
+          "filePath": "codex-cli/package.json",
+          "tags": [
+            "json",
+            "config",
+            "npm-cli"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-cli/bin/codex.js",
+          "type": "file",
+          "name": "codex.js",
+          "filePath": "codex-cli/bin/codex.js",
+          "tags": [
+            "javascript",
+            "code",
+            "npm-cli"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-cli/scripts/build_npm_package.py",
+          "type": "file",
+          "name": "build_npm_package.py",
+          "filePath": "codex-cli/scripts/build_npm_package.py",
+          "tags": [
+            "python",
+            "code",
+            "npm-cli"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:scripts/codex_package/layout.py",
+          "type": "file",
+          "name": "layout.py",
+          "filePath": "scripts/codex_package/layout.py",
+          "tags": [
+            "python",
+            "code"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/install-context/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/install-context/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:install-context"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "title": "App Server API",
+      "description": "Read the app-server protocol and daemon/client crates to understand the desktop-facing RPC surface.",
+      "nodeIds": [
+        "file:codex-rs/app-server-protocol/src/protocol/v2/mod.rs",
+        "file:codex-rs/app-server/src/lib.rs",
+        "file:codex-rs/thread-store/src/lib.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/app-server-protocol/src/protocol/v2/mod.rs",
+          "type": "file",
+          "name": "mod.rs",
+          "filePath": "codex-rs/app-server-protocol/src/protocol/v2/mod.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server-protocol"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/app-server/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/app-server/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:app-server"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/thread-store/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/thread-store/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:thread-store"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "title": "Tools, MCP, Plugins, and Skills",
+      "description": "Trace how MCP connections, hosted tools, skills, plugins, and connector abstractions feed the agent tool surface.",
+      "nodeIds": [
+        "file:codex-rs/codex-mcp/src/connection_manager.rs",
+        "file:codex-rs/core/src/tools/mod.rs",
+        "file:codex-rs/core-skills/src/lib.rs",
+        "file:codex-rs/plugin/src/lib.rs",
+        "file:codex-rs/connectors/src/lib.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/codex-mcp/src/connection_manager.rs",
+          "type": "file",
+          "name": "connection_manager.rs",
+          "filePath": "codex-rs/codex-mcp/src/connection_manager.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:codex-mcp"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:codex-rs/core/src/tools/mod.rs",
+          "type": "file",
+          "name": "mod.rs",
+          "filePath": "codex-rs/core/src/tools/mod.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:core"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "file:codex-rs/core-skills/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/core-skills/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:core-skills"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/plugin/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/plugin/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:plugin"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/connectors/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/connectors/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:connectors"
+          ],
+          "complexity": "complex"
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "title": "Sandbox and Execution Policy",
+      "description": "Inspect command execution, approval/escalation, sandboxing, guardian checks, and host hardening as one policy pipeline.",
+      "nodeIds": [
+        "file:codex-rs/shell-command/src/lib.rs",
+        "file:codex-rs/shell-escalation/src/lib.rs",
+        "file:codex-rs/sandboxing/src/lib.rs",
+        "file:codex-rs/execpolicy/src/lib.rs",
+        "file:codex-rs/ext/guardian/src/lib.rs"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:codex-rs/shell-command/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/shell-command/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:shell-command"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/shell-escalation/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/shell-escalation/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:shell-escalation"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/sandboxing/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/sandboxing/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:sandboxing"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/execpolicy/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/execpolicy/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:execpolicy"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "file:codex-rs/ext/guardian/src/lib.rs",
+          "type": "file",
+          "name": "lib.rs",
+          "filePath": "codex-rs/ext/guardian/src/lib.rs",
+          "tags": [
+            "rust",
+            "code",
+            "rust-workspace",
+            "crate:ext"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "title": "SDKs and Release Automation",
+      "description": "Connect external SDK execution paths with npm release staging and CI artifact workflows.",
+      "nodeIds": [
+        "file:sdk/typescript/src/exec.ts",
+        "file:scripts/stage_npm_packages.py",
+        "pipeline:.github/workflows/rust-release.yml",
+        "file:.github/scripts/build-codex-package-archive.sh"
+      ],
+      "sampleNodes": [
+        {
+          "id": "file:sdk/typescript/src/exec.ts",
+          "type": "file",
+          "name": "exec.ts",
+          "filePath": "sdk/typescript/src/exec.ts",
+          "tags": [
+            "typescript",
+            "code",
+            "sdk"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:scripts/stage_npm_packages.py",
+          "type": "file",
+          "name": "stage_npm_packages.py",
+          "filePath": "scripts/stage_npm_packages.py",
+          "tags": [
+            "python",
+            "code"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "pipeline:.github/workflows/rust-release.yml",
+          "type": "pipeline",
+          "name": "rust-release.yml",
+          "filePath": ".github/workflows/rust-release.yml",
+          "tags": [
+            "yaml",
+            "infra",
+            "ci"
+          ],
+          "complexity": "complex"
+        },
+        {
+          "id": "file:.github/scripts/build-codex-package-archive.sh",
+          "type": "file",
+          "name": "build-codex-package-archive.sh",
+          "filePath": ".github/scripts/build-codex-package-archive.sh",
+          "tags": [
+            "shell",
+            "script",
+            "ci"
+          ],
+          "complexity": "moderate"
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "title": "Documentation and Local Wiki",
+      "description": "Finish with docs and local wiki material that record operator guidance, architecture notes, and repository learning artifacts.",
+      "nodeIds": [
+        "document:docs/contributing.md",
+        "document:docs/install.md",
+        "document:wiki/wiki/overview.md",
+        "document:wiki/wiki/conventions.md"
+      ],
+      "sampleNodes": [
+        {
+          "id": "document:docs/contributing.md",
+          "type": "document",
+          "name": "contributing.md",
+          "filePath": "docs/contributing.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "moderate"
+        },
+        {
+          "id": "document:docs/install.md",
+          "type": "document",
+          "name": "install.md",
+          "filePath": "docs/install.md",
+          "tags": [
+            "markdown",
+            "docs"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:wiki/wiki/overview.md",
+          "type": "document",
+          "name": "overview.md",
+          "filePath": "wiki/wiki/overview.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "wiki"
+          ],
+          "complexity": "simple"
+        },
+        {
+          "id": "document:wiki/wiki/conventions.md",
+          "type": "document",
+          "name": "conventions.md",
+          "filePath": "wiki/wiki/conventions.md",
+          "tags": [
+            "markdown",
+            "docs",
+            "wiki"
+          ],
+          "complexity": "simple"
+        }
+      ]
+    }
+  ],
+  "targetWikiBatches": {
+    "indexPath": "derived-knowledge/index.md",
+    "totalSections": 11,
+    "totalWikilinks": 93,
+    "firstBatchCount": 28,
+    "firstBatchPages": [
+      {
+        "page": "orientation/repository-map",
+        "assignedAgent": "Agent 2",
+        "theme": "orientation"
+      },
+      {
+        "page": "orientation/understand-graph-baseline",
+        "assignedAgent": "Agent 2",
+        "theme": "orientation"
+      },
+      {
+        "page": "orientation/onboarding-tour",
+        "assignedAgent": "Agent 2",
+        "theme": "orientation"
+      },
+      {
+        "page": "orientation/key-files-to-read-first",
+        "assignedAgent": "Agent 2",
+        "theme": "orientation"
+      },
+      {
+        "page": "architecture/core-agent-runtime",
+        "assignedAgent": "Agent 2",
+        "theme": "architecture"
+      },
+      {
+        "page": "architecture/mcp-tools-skills-connectors",
+        "assignedAgent": "Agent 2",
+        "theme": "architecture"
+      },
+      {
+        "page": "architecture/sandbox-exec-security-host-integration",
+        "assignedAgent": "Agent 2",
+        "theme": "architecture"
+      },
+      {
+        "page": "long-horizon/thread-session-turn-model",
+        "assignedAgent": "Agent 3",
+        "theme": "long_horizon"
+      },
+      {
+        "page": "long-horizon/turn-context-and-runtime-metadata",
+        "assignedAgent": "Agent 3",
+        "theme": "long_horizon"
+      },
+      {
+        "page": "long-horizon/context-compaction-flow",
+        "assignedAgent": "Agent 3",
+        "theme": "long_horizon"
+      },
+      {
+        "page": "long-horizon/precompact-postcompact-hooks",
+        "assignedAgent": "Agent 3",
+        "theme": "long_horizon"
+      },
+      {
+        "page": "long-horizon/memory-read-write-consolidation",
+        "assignedAgent": "Agent 3",
+        "theme": "long_horizon"
+      },
+      {
+        "page": "long-horizon/rollout-trace-and-resume",
+        "assignedAgent": "Agent 3",
+        "theme": "long_horizon"
+      },
+      {
+        "page": "memory/memory-threat-model",
+        "assignedAgent": "Agent 3",
+        "theme": "memory"
+      },
+      {
+        "page": "security/security-control-map",
+        "assignedAgent": "Agent 4",
+        "theme": "security"
+      },
+      {
+        "page": "security/approval-policy-and-guardian",
+        "assignedAgent": "Agent 4",
+        "theme": "security"
+      },
+      {
+        "page": "security/sandbox-policy-model",
+        "assignedAgent": "Agent 4",
+        "theme": "security"
+      },
+      {
+        "page": "security/dangerous-command-intent-detection",
+        "assignedAgent": "Agent 4",
+        "theme": "security"
+      },
+      {
+        "page": "security/exec-policy-and-amendments",
+        "assignedAgent": "Agent 4",
+        "theme": "security"
+      },
+      {
+        "page": "prompt-security/indirect-prompt-injection-surfaces",
+        "assignedAgent": "Agent 4",
+        "theme": "prompt_security"
+      },
+      {
+        "page": "owasp/t1-memory-poisoning",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      },
+      {
+        "page": "owasp/t2-tool-misuse",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      },
+      {
+        "page": "owasp/t11-remote-code-execution",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      },
+      {
+        "page": "tc260/aia01-agent-hijack",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      },
+      {
+        "page": "tc260/aia08-runtime-environment-risk",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      },
+      {
+        "page": "tc260/aia09-human-oversight-traceability-failure",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      },
+      {
+        "page": "tc260/aia10-memory-hallucination-and-manipulation",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      },
+      {
+        "page": "tc260/aia11-tool-misuse",
+        "assignedAgent": "Agent 4",
+        "theme": "owasp_tc260"
+      }
+    ],
+    "sections": [
+      {
+        "section": "Reading Spine",
+        "wikilinkCount": 6,
+        "firstBatchCount": 4,
+        "firstBatchLinks": [
+          "orientation/repository-map",
+          "orientation/understand-graph-baseline",
+          "orientation/onboarding-tour",
+          "orientation/key-files-to-read-first"
+        ],
+        "links": [
+          {
+            "page": "orientation/repository-map",
+            "firstBatch": true
+          },
+          {
+            "page": "orientation/understand-graph-baseline",
+            "firstBatch": true
+          },
+          {
+            "page": "orientation/onboarding-tour",
+            "firstBatch": true
+          },
+          {
+            "page": "orientation/concepts-glossary",
+            "firstBatch": false
+          },
+          {
+            "page": "orientation/key-files-to-read-first",
+            "firstBatch": true
+          },
+          {
+            "page": "orientation/research-questions",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "Codebase Architecture",
+        "wikilinkCount": 9,
+        "firstBatchCount": 3,
+        "firstBatchLinks": [
+          "architecture/core-agent-runtime",
+          "architecture/mcp-tools-skills-connectors",
+          "architecture/sandbox-exec-security-host-integration"
+        ],
+        "links": [
+          {
+            "page": "architecture/rust-workspace-shape",
+            "firstBatch": false
+          },
+          {
+            "page": "architecture/core-agent-runtime",
+            "firstBatch": true
+          },
+          {
+            "page": "architecture/cli-tui-terminal-ux",
+            "firstBatch": false
+          },
+          {
+            "page": "architecture/app-server-desktop-api",
+            "firstBatch": false
+          },
+          {
+            "page": "architecture/mcp-tools-skills-connectors",
+            "firstBatch": true
+          },
+          {
+            "page": "architecture/sandbox-exec-security-host-integration",
+            "firstBatch": true
+          },
+          {
+            "page": "architecture/sdk-and-release-surfaces",
+            "firstBatch": false
+          },
+          {
+            "page": "architecture/tests-fixtures-snapshots",
+            "firstBatch": false
+          },
+          {
+            "page": "architecture/local-knowledge-overlay",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "Long-Horizon Agent Design",
+        "wikilinkCount": 10,
+        "firstBatchCount": 6,
+        "firstBatchLinks": [
+          "long-horizon/thread-session-turn-model",
+          "long-horizon/turn-context-and-runtime-metadata",
+          "long-horizon/context-compaction-flow",
+          "long-horizon/precompact-postcompact-hooks",
+          "long-horizon/memory-read-write-consolidation",
+          "long-horizon/rollout-trace-and-resume"
+        ],
+        "links": [
+          {
+            "page": "long-horizon/thread-session-turn-model",
+            "firstBatch": true
+          },
+          {
+            "page": "long-horizon/turn-context-and-runtime-metadata",
+            "firstBatch": true
+          },
+          {
+            "page": "long-horizon/planning-and-goal-state",
+            "firstBatch": false
+          },
+          {
+            "page": "long-horizon/context-compaction-flow",
+            "firstBatch": true
+          },
+          {
+            "page": "long-horizon/precompact-postcompact-hooks",
+            "firstBatch": true
+          },
+          {
+            "page": "long-horizon/memory-read-write-consolidation",
+            "firstBatch": true
+          },
+          {
+            "page": "long-horizon/rollout-trace-and-resume",
+            "firstBatch": true
+          },
+          {
+            "page": "long-horizon/subagent-and-parallel-work",
+            "firstBatch": false
+          },
+          {
+            "page": "long-horizon/tool-feedback-loop",
+            "firstBatch": false
+          },
+          {
+            "page": "long-horizon/failure-recovery-patterns",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "Agent Security Model",
+        "wikilinkCount": 10,
+        "firstBatchCount": 5,
+        "firstBatchLinks": [
+          "security/security-control-map",
+          "security/approval-policy-and-guardian",
+          "security/sandbox-policy-model",
+          "security/dangerous-command-intent-detection",
+          "security/exec-policy-and-amendments"
+        ],
+        "links": [
+          {
+            "page": "security/security-control-map",
+            "firstBatch": true
+          },
+          {
+            "page": "security/approval-policy-and-guardian",
+            "firstBatch": true
+          },
+          {
+            "page": "security/sandbox-policy-model",
+            "firstBatch": true
+          },
+          {
+            "page": "security/dangerous-command-intent-detection",
+            "firstBatch": true
+          },
+          {
+            "page": "security/exec-policy-and-amendments",
+            "firstBatch": true
+          },
+          {
+            "page": "security/runtime-isolation-and-process-hardening",
+            "firstBatch": false
+          },
+          {
+            "page": "security/tool-use-control-plane",
+            "firstBatch": false
+          },
+          {
+            "page": "security/human-approval-design",
+            "firstBatch": false
+          },
+          {
+            "page": "security/auditability-and-forensics",
+            "firstBatch": false
+          },
+          {
+            "page": "security/supply-chain-and-plugin-risk",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "Prompt Injection and Instruction Integrity",
+        "wikilinkCount": 7,
+        "firstBatchCount": 1,
+        "firstBatchLinks": [
+          "prompt-security/indirect-prompt-injection-surfaces"
+        ],
+        "links": [
+          {
+            "page": "prompt-security/instruction-hierarchy",
+            "firstBatch": false
+          },
+          {
+            "page": "prompt-security/indirect-prompt-injection-surfaces",
+            "firstBatch": true
+          },
+          {
+            "page": "prompt-security/repo-instruction-boundaries",
+            "firstBatch": false
+          },
+          {
+            "page": "prompt-security/tool-output-as-untrusted-data",
+            "firstBatch": false
+          },
+          {
+            "page": "prompt-security/context-poisoning-chain",
+            "firstBatch": false
+          },
+          {
+            "page": "prompt-security/defensive-prompt-patterns",
+            "firstBatch": false
+          },
+          {
+            "page": "prompt-security/prompt-injection-test-cases",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "Memory and Knowledge Integrity",
+        "wikilinkCount": 6,
+        "firstBatchCount": 1,
+        "firstBatchLinks": [
+          "memory/memory-threat-model"
+        ],
+        "links": [
+          {
+            "page": "memory/memory-threat-model",
+            "firstBatch": true
+          },
+          {
+            "page": "memory/memory-citation-and-provenance",
+            "firstBatch": false
+          },
+          {
+            "page": "memory/session-isolation-and-memory-mode",
+            "firstBatch": false
+          },
+          {
+            "page": "memory/compaction-as-information-loss",
+            "firstBatch": false
+          },
+          {
+            "page": "memory/knowledge-graph-as-memory-layer",
+            "firstBatch": false
+          },
+          {
+            "page": "memory/memory-cleanup-and-snapshot-forensics",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "Tools, MCP, Plugins, and Connectors",
+        "wikilinkCount": 7,
+        "firstBatchCount": 0,
+        "firstBatchLinks": [],
+        "links": [
+          {
+            "page": "tools/mcp-connection-manager",
+            "firstBatch": false
+          },
+          {
+            "page": "tools/tool-call-lifecycle",
+            "firstBatch": false
+          },
+          {
+            "page": "tools/plugin-skill-loading",
+            "firstBatch": false
+          },
+          {
+            "page": "tools/connector-identity-and-permissions",
+            "firstBatch": false
+          },
+          {
+            "page": "tools/parameter-policy-and-abac",
+            "firstBatch": false
+          },
+          {
+            "page": "tools/mcp-protocol-risk",
+            "firstBatch": false
+          },
+          {
+            "page": "tools/multi-agent-communication-risk",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "OWASP Agent and LLM Threat Crosswalk",
+        "wikilinkCount": 15,
+        "firstBatchCount": 3,
+        "firstBatchLinks": [
+          "owasp/t1-memory-poisoning",
+          "owasp/t2-tool-misuse",
+          "owasp/t11-remote-code-execution"
+        ],
+        "links": [
+          {
+            "page": "owasp/t1-memory-poisoning",
+            "firstBatch": true
+          },
+          {
+            "page": "owasp/t2-tool-misuse",
+            "firstBatch": true
+          },
+          {
+            "page": "owasp/t3-excessive-agency-and-unauthorized-call",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t4-resource-overload",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t5-cascading-hallucination",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t6-goal-and-intent-manipulation",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t7-inconsistency-and-deceptive-behavior",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t8-repudiation-and-nontraceability",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t9-identity-spoofing",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t10-human-oversight-overload",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t11-remote-code-execution",
+            "firstBatch": true
+          },
+          {
+            "page": "owasp/t12-agent-communication-poisoning",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t13-rogue-agent",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t14-human-attack-on-multi-agent-system",
+            "firstBatch": false
+          },
+          {
+            "page": "owasp/t15-human-manipulation",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "TC260-TR-005-2026 Risk Crosswalk",
+        "wikilinkCount": 11,
+        "firstBatchCount": 5,
+        "firstBatchLinks": [
+          "tc260/aia01-agent-hijack",
+          "tc260/aia08-runtime-environment-risk",
+          "tc260/aia09-human-oversight-traceability-failure",
+          "tc260/aia10-memory-hallucination-and-manipulation",
+          "tc260/aia11-tool-misuse"
+        ],
+        "links": [
+          {
+            "page": "tc260/aia01-agent-hijack",
+            "firstBatch": true
+          },
+          {
+            "page": "tc260/aia02-data-leakage-tampering-poisoning",
+            "firstBatch": false
+          },
+          {
+            "page": "tc260/aia03-supply-chain-plugin-poisoning",
+            "firstBatch": false
+          },
+          {
+            "page": "tc260/aia04-identity-spoofing-unauthorized-access",
+            "firstBatch": false
+          },
+          {
+            "page": "tc260/aia05-hallucination-and-strategic-refusal",
+            "firstBatch": false
+          },
+          {
+            "page": "tc260/aia06-multi-agent-cascade-deadlock-overload",
+            "firstBatch": false
+          },
+          {
+            "page": "tc260/aia07-protocol-risk",
+            "firstBatch": false
+          },
+          {
+            "page": "tc260/aia08-runtime-environment-risk",
+            "firstBatch": true
+          },
+          {
+            "page": "tc260/aia09-human-oversight-traceability-failure",
+            "firstBatch": true
+          },
+          {
+            "page": "tc260/aia10-memory-hallucination-and-manipulation",
+            "firstBatch": true
+          },
+          {
+            "page": "tc260/aia11-tool-misuse",
+            "firstBatch": true
+          }
+        ]
+      },
+      {
+        "section": "Evidence Sources and Raw Inputs",
+        "wikilinkCount": 6,
+        "firstBatchCount": 0,
+        "firstBatchLinks": [],
+        "links": [
+          {
+            "page": "source/understand-code-graph-summary",
+            "firstBatch": false
+          },
+          {
+            "page": "source/repository-docs-map",
+            "firstBatch": false
+          },
+          {
+            "page": "source/security-relevant-file-map",
+            "firstBatch": false
+          },
+          {
+            "page": "source/test-evidence-map",
+            "firstBatch": false
+          },
+          {
+            "page": "source/local-research-notes",
+            "firstBatch": false
+          },
+          {
+            "page": "source/standards-taxonomy-input",
+            "firstBatch": false
+          }
+        ]
+      },
+      {
+        "section": "Human Review Questions",
+        "wikilinkCount": 6,
+        "firstBatchCount": 0,
+        "firstBatchLinks": [],
+        "links": [
+          {
+            "page": "questions/long-horizon-design-intent",
+            "firstBatch": false
+          },
+          {
+            "page": "questions/security-guarantee-boundaries",
+            "firstBatch": false
+          },
+          {
+            "page": "questions/risk-taxonomy-fit",
+            "firstBatch": false
+          },
+          {
+            "page": "questions/agent-memory-policy",
+            "firstBatch": false
+          },
+          {
+            "page": "questions/tool-and-plugin-trust",
+            "firstBatch": false
+          },
+          {
+            "page": "questions/wiki-granularity",
+            "firstBatch": false
+          }
+        ]
+      }
+    ]
+  },
+  "graphTermSamples": {
+    "approval": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/ApplyPatchApprovalParams.json",
+        "type": "config",
+        "name": "ApplyPatchApprovalParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/ApplyPatchApprovalParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/ApplyPatchApprovalResponse.json",
+        "type": "config",
+        "name": "ApplyPatchApprovalResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/ApplyPatchApprovalResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/CommandExecutionRequestApprovalParams.json",
+        "type": "config",
+        "name": "CommandExecutionRequestApprovalParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/CommandExecutionRequestApprovalParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/CommandExecutionRequestApprovalResponse.json",
+        "type": "config",
+        "name": "CommandExecutionRequestApprovalResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/CommandExecutionRequestApprovalResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/ExecCommandApprovalParams.json",
+        "type": "config",
+        "name": "ExecCommandApprovalParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/ExecCommandApprovalParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/ExecCommandApprovalResponse.json",
+        "type": "config",
+        "name": "ExecCommandApprovalResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/ExecCommandApprovalResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/FileChangeRequestApprovalParams.json",
+        "type": "config",
+        "name": "FileChangeRequestApprovalParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/FileChangeRequestApprovalParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/FileChangeRequestApprovalResponse.json",
+        "type": "config",
+        "name": "FileChangeRequestApprovalResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/FileChangeRequestApprovalResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/PermissionsRequestApprovalParams.json",
+        "type": "config",
+        "name": "PermissionsRequestApprovalParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/PermissionsRequestApprovalParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/PermissionsRequestApprovalResponse.json",
+        "type": "config",
+        "name": "PermissionsRequestApprovalResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/PermissionsRequestApprovalResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewCompletedNotification.json",
+        "type": "config",
+        "name": "ItemGuardianApprovalReviewCompletedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewCompletedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewStartedNotification.json",
+        "type": "config",
+        "name": "ItemGuardianApprovalReviewStartedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewStartedNotification.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/ApplyPatchApprovalParams.ts",
+        "type": "file",
+        "name": "ApplyPatchApprovalParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/ApplyPatchApprovalParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/ApplyPatchApprovalResponse.ts",
+        "type": "file",
+        "name": "ApplyPatchApprovalResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/ApplyPatchApprovalResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/ExecCommandApprovalParams.ts",
+        "type": "file",
+        "name": "ExecCommandApprovalParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/ExecCommandApprovalParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/ExecCommandApprovalResponse.ts",
+        "type": "file",
+        "name": "ExecCommandApprovalResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/ExecCommandApprovalResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ApprovalsReviewer.ts",
+        "type": "file",
+        "name": "ApprovalsReviewer.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ApprovalsReviewer.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/AppToolApproval.ts",
+        "type": "file",
+        "name": "AppToolApproval.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/AppToolApproval.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/AskForApproval.ts",
+        "type": "file",
+        "name": "AskForApproval.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/AskForApproval.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/CommandExecutionApprovalDecision.ts",
+        "type": "file",
+        "name": "CommandExecutionApprovalDecision.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/CommandExecutionApprovalDecision.ts"
+      }
+    ],
+    "guardian": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/GuardianWarningNotification.json",
+        "type": "config",
+        "name": "GuardianWarningNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/GuardianWarningNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewCompletedNotification.json",
+        "type": "config",
+        "name": "ItemGuardianApprovalReviewCompletedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewCompletedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewStartedNotification.json",
+        "type": "config",
+        "name": "ItemGuardianApprovalReviewStartedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ItemGuardianApprovalReviewStartedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionParams.json",
+        "type": "config",
+        "name": "ThreadApproveGuardianDeniedActionParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionResponse.json",
+        "type": "config",
+        "name": "ThreadApproveGuardianDeniedActionResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionResponse.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/GuardianApprovalReview.ts",
+        "type": "file",
+        "name": "GuardianApprovalReview.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/GuardianApprovalReview.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/GuardianApprovalReviewAction.ts",
+        "type": "file",
+        "name": "GuardianApprovalReviewAction.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/GuardianApprovalReviewAction.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/GuardianApprovalReviewStatus.ts",
+        "type": "file",
+        "name": "GuardianApprovalReviewStatus.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/GuardianApprovalReviewStatus.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/GuardianCommandSource.ts",
+        "type": "file",
+        "name": "GuardianCommandSource.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/GuardianCommandSource.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/GuardianRiskLevel.ts",
+        "type": "file",
+        "name": "GuardianRiskLevel.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/GuardianRiskLevel.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/GuardianUserAuthorization.ts",
+        "type": "file",
+        "name": "GuardianUserAuthorization.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/GuardianUserAuthorization.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/GuardianWarningNotification.ts",
+        "type": "file",
+        "name": "GuardianWarningNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/GuardianWarningNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ItemGuardianApprovalReviewCompletedNotification.ts",
+        "type": "file",
+        "name": "ItemGuardianApprovalReviewCompletedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ItemGuardianApprovalReviewCompletedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ItemGuardianApprovalReviewStartedNotification.ts",
+        "type": "file",
+        "name": "ItemGuardianApprovalReviewStartedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ItemGuardianApprovalReviewStartedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ThreadApproveGuardianDeniedActionParams.ts",
+        "type": "file",
+        "name": "ThreadApproveGuardianDeniedActionParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ThreadApproveGuardianDeniedActionParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ThreadApproveGuardianDeniedActionResponse.ts",
+        "type": "file",
+        "name": "ThreadApproveGuardianDeniedActionResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ThreadApproveGuardianDeniedActionResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/core/src/context/guardian_followup_review_reminder.rs",
+        "type": "file",
+        "name": "guardian_followup_review_reminder.rs",
+        "filePath": "codex-rs/core/src/context/guardian_followup_review_reminder.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/guardian/approval_request.rs",
+        "type": "file",
+        "name": "approval_request.rs",
+        "filePath": "codex-rs/core/src/guardian/approval_request.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/guardian/mod.rs",
+        "type": "file",
+        "name": "mod.rs",
+        "filePath": "codex-rs/core/src/guardian/mod.rs"
+      },
+      {
+        "id": "document:codex-rs/core/src/guardian/policy_template.md",
+        "type": "document",
+        "name": "policy_template.md",
+        "filePath": "codex-rs/core/src/guardian/policy_template.md"
+      }
+    ],
+    "sandbox": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxReadinessResponse.json",
+        "type": "config",
+        "name": "WindowsSandboxReadinessResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxReadinessResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxSetupCompletedNotification.json",
+        "type": "config",
+        "name": "WindowsSandboxSetupCompletedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxSetupCompletedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxSetupStartParams.json",
+        "type": "config",
+        "name": "WindowsSandboxSetupStartParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxSetupStartParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxSetupStartResponse.json",
+        "type": "config",
+        "name": "WindowsSandboxSetupStartResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/WindowsSandboxSetupStartResponse.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/FileSystemSandboxEntry.ts",
+        "type": "file",
+        "name": "FileSystemSandboxEntry.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/FileSystemSandboxEntry.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/SandboxMode.ts",
+        "type": "file",
+        "name": "SandboxMode.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/SandboxMode.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/SandboxPolicy.ts",
+        "type": "file",
+        "name": "SandboxPolicy.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/SandboxPolicy.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/SandboxWorkspaceWrite.ts",
+        "type": "file",
+        "name": "SandboxWorkspaceWrite.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/SandboxWorkspaceWrite.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxReadiness.ts",
+        "type": "file",
+        "name": "WindowsSandboxReadiness.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxReadiness.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxReadinessResponse.ts",
+        "type": "file",
+        "name": "WindowsSandboxReadinessResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxReadinessResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupCompletedNotification.ts",
+        "type": "file",
+        "name": "WindowsSandboxSetupCompletedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupCompletedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupMode.ts",
+        "type": "file",
+        "name": "WindowsSandboxSetupMode.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupMode.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupStartParams.ts",
+        "type": "file",
+        "name": "WindowsSandboxSetupStartParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupStartParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupStartResponse.ts",
+        "type": "file",
+        "name": "WindowsSandboxSetupStartResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/WindowsSandboxSetupStartResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/src/protocol/v2/windows_sandbox.rs",
+        "type": "file",
+        "name": "windows_sandbox.rs",
+        "filePath": "codex-rs/app-server-protocol/src/protocol/v2/windows_sandbox.rs"
+      },
+      {
+        "id": "file:codex-rs/app-server/src/request_processors/windows_sandbox_processor.rs",
+        "type": "file",
+        "name": "windows_sandbox_processor.rs",
+        "filePath": "codex-rs/app-server/src/request_processors/windows_sandbox_processor.rs"
+      },
+      {
+        "id": "file:codex-rs/app-server/tests/suite/v2/windows_sandbox_setup.rs",
+        "type": "file",
+        "name": "windows_sandbox_setup.rs",
+        "filePath": "codex-rs/app-server/tests/suite/v2/windows_sandbox_setup.rs"
+      },
+      {
+        "id": "file:codex-rs/cli/src/debug_sandbox.rs",
+        "type": "file",
+        "name": "debug_sandbox.rs",
+        "filePath": "codex-rs/cli/src/debug_sandbox.rs"
+      },
+      {
+        "id": "file:codex-rs/cli/src/debug_sandbox/pid_tracker.rs",
+        "type": "file",
+        "name": "pid_tracker.rs",
+        "filePath": "codex-rs/cli/src/debug_sandbox/pid_tracker.rs"
+      },
+      {
+        "id": "file:codex-rs/cli/src/debug_sandbox/seatbelt.rs",
+        "type": "file",
+        "name": "seatbelt.rs",
+        "filePath": "codex-rs/cli/src/debug_sandbox/seatbelt.rs"
+      }
+    ],
+    "exec_policy": [
+      {
+        "id": "file:codex-rs/config/src/requirements_exec_policy.rs",
+        "type": "file",
+        "name": "requirements_exec_policy.rs",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/exec_policy_tests.rs",
+        "type": "file",
+        "name": "exec_policy_tests.rs",
+        "filePath": "codex-rs/core/src/exec_policy_tests.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/exec_policy_windows_tests.rs",
+        "type": "file",
+        "name": "exec_policy_windows_tests.rs",
+        "filePath": "codex-rs/core/src/exec_policy_windows_tests.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/exec_policy.rs",
+        "type": "file",
+        "name": "exec_policy.rs",
+        "filePath": "codex-rs/core/src/exec_policy.rs"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/exec_policy.rs",
+        "type": "file",
+        "name": "exec_policy.rs",
+        "filePath": "codex-rs/core/tests/suite/exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/app-server/src/lib.rs:exec_policy_warning_location",
+        "type": "function",
+        "name": "exec_policy_warning_location",
+        "filePath": "codex-rs/app-server/src/lib.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/config_requirements.rs:exec_policy_source",
+        "type": "function",
+        "name": "exec_policy_source",
+        "filePath": "codex-rs/config/src/config_requirements.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:new",
+        "type": "function",
+        "name": "new",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:eq",
+        "type": "function",
+        "name": "eq",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:as_ref",
+        "type": "function",
+        "name": "as_ref",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:policy_fingerprint",
+        "type": "function",
+        "name": "policy_fingerprint",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:as_decision",
+        "type": "function",
+        "name": "as_decision",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:to_policy",
+        "type": "function",
+        "name": "to_policy",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:to_requirements_policy",
+        "type": "function",
+        "name": "to_requirements_policy",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "function:codex-rs/config/src/requirements_exec_policy.rs:parse_pattern_token",
+        "type": "function",
+        "name": "parse_pattern_token",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "class:codex-rs/config/src/requirements_exec_policy.rs:RequirementsExecPolicy",
+        "type": "class",
+        "name": "RequirementsExecPolicy",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "class:codex-rs/config/src/requirements_exec_policy.rs:RequirementsExecPolicyToml",
+        "type": "class",
+        "name": "RequirementsExecPolicyToml",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "class:codex-rs/config/src/requirements_exec_policy.rs:RequirementsExecPolicyPrefixRuleToml",
+        "type": "class",
+        "name": "RequirementsExecPolicyPrefixRuleToml",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "class:codex-rs/config/src/requirements_exec_policy.rs:RequirementsExecPolicyPatternTokenToml",
+        "type": "class",
+        "name": "RequirementsExecPolicyPatternTokenToml",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      },
+      {
+        "id": "class:codex-rs/config/src/requirements_exec_policy.rs:RequirementsExecPolicyDecisionToml",
+        "type": "class",
+        "name": "RequirementsExecPolicyDecisionToml",
+        "filePath": "codex-rs/config/src/requirements_exec_policy.rs"
+      }
+    ],
+    "execpolicy": [
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/ExecPolicyAmendment.ts",
+        "type": "file",
+        "name": "ExecPolicyAmendment.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/ExecPolicyAmendment.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ExecPolicyAmendment.ts",
+        "type": "file",
+        "name": "ExecPolicyAmendment.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ExecPolicyAmendment.ts"
+      },
+      {
+        "id": "file:codex-rs/cli/tests/execpolicy.rs",
+        "type": "file",
+        "name": "execpolicy.rs",
+        "filePath": "codex-rs/cli/tests/execpolicy.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/BUILD.bazel",
+        "type": "file",
+        "name": "BUILD.bazel",
+        "filePath": "codex-rs/execpolicy-legacy/BUILD.bazel"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/build.rs",
+        "type": "file",
+        "name": "build.rs",
+        "filePath": "codex-rs/execpolicy-legacy/build.rs"
+      },
+      {
+        "id": "config:codex-rs/execpolicy-legacy/Cargo.toml",
+        "type": "config",
+        "name": "Cargo.toml",
+        "filePath": "codex-rs/execpolicy-legacy/Cargo.toml"
+      },
+      {
+        "id": "document:codex-rs/execpolicy-legacy/README.md",
+        "type": "document",
+        "name": "README.md",
+        "filePath": "codex-rs/execpolicy-legacy/README.md"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/arg_matcher.rs",
+        "type": "file",
+        "name": "arg_matcher.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/arg_matcher.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/arg_resolver.rs",
+        "type": "file",
+        "name": "arg_resolver.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/arg_resolver.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/arg_type.rs",
+        "type": "file",
+        "name": "arg_type.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/arg_type.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/default.policy",
+        "type": "file",
+        "name": "default.policy",
+        "filePath": "codex-rs/execpolicy-legacy/src/default.policy"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/error.rs",
+        "type": "file",
+        "name": "error.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/error.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/exec_call.rs",
+        "type": "file",
+        "name": "exec_call.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/exec_call.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/execv_checker.rs",
+        "type": "file",
+        "name": "execv_checker.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/execv_checker.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/lib.rs",
+        "type": "file",
+        "name": "lib.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/lib.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/main.rs",
+        "type": "file",
+        "name": "main.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/main.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/opt.rs",
+        "type": "file",
+        "name": "opt.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/opt.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/policy_parser.rs",
+        "type": "file",
+        "name": "policy_parser.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/policy_parser.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/policy.rs",
+        "type": "file",
+        "name": "policy.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/policy.rs"
+      },
+      {
+        "id": "file:codex-rs/execpolicy-legacy/src/program.rs",
+        "type": "file",
+        "name": "program.rs",
+        "filePath": "codex-rs/execpolicy-legacy/src/program.rs"
+      }
+    ],
+    "mcp": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/McpServerElicitationRequestParams.json",
+        "type": "config",
+        "name": "McpServerElicitationRequestParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/McpServerElicitationRequestParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/McpServerElicitationRequestResponse.json",
+        "type": "config",
+        "name": "McpServerElicitationRequestResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/McpServerElicitationRequestResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ListMcpServerStatusParams.json",
+        "type": "config",
+        "name": "ListMcpServerStatusParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ListMcpServerStatusParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ListMcpServerStatusResponse.json",
+        "type": "config",
+        "name": "ListMcpServerStatusResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ListMcpServerStatusResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpResourceReadParams.json",
+        "type": "config",
+        "name": "McpResourceReadParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpResourceReadParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpResourceReadResponse.json",
+        "type": "config",
+        "name": "McpResourceReadResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpResourceReadResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerOauthLoginCompletedNotification.json",
+        "type": "config",
+        "name": "McpServerOauthLoginCompletedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerOauthLoginCompletedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerOauthLoginParams.json",
+        "type": "config",
+        "name": "McpServerOauthLoginParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerOauthLoginParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerOauthLoginResponse.json",
+        "type": "config",
+        "name": "McpServerOauthLoginResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerOauthLoginResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerRefreshResponse.json",
+        "type": "config",
+        "name": "McpServerRefreshResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerRefreshResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerStatusUpdatedNotification.json",
+        "type": "config",
+        "name": "McpServerStatusUpdatedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerStatusUpdatedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallParams.json",
+        "type": "config",
+        "name": "McpServerToolCallParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallResponse.json",
+        "type": "config",
+        "name": "McpServerToolCallResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpToolCallProgressNotification.json",
+        "type": "config",
+        "name": "McpToolCallProgressNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpToolCallProgressNotification.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ListMcpServerStatusParams.ts",
+        "type": "file",
+        "name": "ListMcpServerStatusParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ListMcpServerStatusParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ListMcpServerStatusResponse.ts",
+        "type": "file",
+        "name": "ListMcpServerStatusResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ListMcpServerStatusResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/McpAuthStatus.ts",
+        "type": "file",
+        "name": "McpAuthStatus.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/McpAuthStatus.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/McpElicitationArrayType.ts",
+        "type": "file",
+        "name": "McpElicitationArrayType.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/McpElicitationArrayType.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/McpElicitationBooleanSchema.ts",
+        "type": "file",
+        "name": "McpElicitationBooleanSchema.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/McpElicitationBooleanSchema.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/McpElicitationBooleanType.ts",
+        "type": "file",
+        "name": "McpElicitationBooleanType.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/McpElicitationBooleanType.ts"
+      }
+    ],
+    "memory": [
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/ThreadMemoryMode.ts",
+        "type": "file",
+        "name": "ThreadMemoryMode.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/ThreadMemoryMode.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/MemoryCitation.ts",
+        "type": "file",
+        "name": "MemoryCitation.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/MemoryCitation.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/MemoryCitationEntry.ts",
+        "type": "file",
+        "name": "MemoryCitationEntry.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/MemoryCitationEntry.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server/tests/suite/v2/memory_reset.rs",
+        "type": "file",
+        "name": "memory_reset.rs",
+        "filePath": "codex-rs/app-server/tests/suite/v2/memory_reset.rs"
+      },
+      {
+        "id": "file:codex-rs/app-server/tests/suite/v2/thread_memory_mode_set.rs",
+        "type": "file",
+        "name": "thread_memory_mode_set.rs",
+        "filePath": "codex-rs/app-server/tests/suite/v2/thread_memory_mode_set.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/memory_usage.rs",
+        "type": "file",
+        "name": "memory_usage.rs",
+        "filePath": "codex-rs/core/src/memory_usage.rs"
+      },
+      {
+        "id": "file:codex-rs/protocol/src/memory_citation.rs",
+        "type": "file",
+        "name": "memory_citation.rs",
+        "filePath": "codex-rs/protocol/src/memory_citation.rs"
+      },
+      {
+        "id": "schema:codex-rs/state/migrations/0016_memory_usage.sql",
+        "type": "schema",
+        "name": "0016_memory_usage.sql",
+        "filePath": "codex-rs/state/migrations/0016_memory_usage.sql"
+      },
+      {
+        "id": "file:codex-rs/thread-store/src/in_memory.rs",
+        "type": "file",
+        "name": "in_memory.rs",
+        "filePath": "codex-rs/thread-store/src/in_memory.rs"
+      },
+      {
+        "id": "document:wiki/wiki/concepts/agent-state-memory.md",
+        "type": "document",
+        "name": "agent-state-memory.md",
+        "filePath": "wiki/wiki/concepts/agent-state-memory.md"
+      },
+      {
+        "id": "function:codex-rs/analytics/src/analytics_client_tests.rs:subagent_thread_started_memory_consolidation_serializes_expected_shape",
+        "type": "function",
+        "name": "subagent_thread_started_memory_consolidation_serializes_expected_shape",
+        "filePath": "codex-rs/analytics/src/analytics_client_tests.rs"
+      },
+      {
+        "id": "class:codex-rs/app-server-protocol/src/protocol/v2/item.rs:MemoryCitation",
+        "type": "class",
+        "name": "MemoryCitation",
+        "filePath": "codex-rs/app-server-protocol/src/protocol/v2/item.rs"
+      },
+      {
+        "id": "class:codex-rs/app-server-protocol/src/protocol/v2/item.rs:MemoryCitationEntry",
+        "type": "class",
+        "name": "MemoryCitationEntry",
+        "filePath": "codex-rs/app-server-protocol/src/protocol/v2/item.rs"
+      },
+      {
+        "id": "class:codex-rs/app-server-protocol/src/protocol/v2/thread.rs:ThreadMemoryMode",
+        "type": "class",
+        "name": "ThreadMemoryMode",
+        "filePath": "codex-rs/app-server-protocol/src/protocol/v2/thread.rs"
+      },
+      {
+        "id": "class:codex-rs/app-server-protocol/src/protocol/v2/thread.rs:ThreadMemoryModeSetParams",
+        "type": "class",
+        "name": "ThreadMemoryModeSetParams",
+        "filePath": "codex-rs/app-server-protocol/src/protocol/v2/thread.rs"
+      },
+      {
+        "id": "class:codex-rs/app-server-protocol/src/protocol/v2/thread.rs:ThreadMemoryModeSetResponse",
+        "type": "class",
+        "name": "ThreadMemoryModeSetResponse",
+        "filePath": "codex-rs/app-server-protocol/src/protocol/v2/thread.rs"
+      },
+      {
+        "id": "class:codex-rs/app-server-protocol/src/protocol/v2/thread.rs:MemoryResetResponse",
+        "type": "class",
+        "name": "MemoryResetResponse",
+        "filePath": "codex-rs/app-server-protocol/src/protocol/v2/thread.rs"
+      },
+      {
+        "id": "function:codex-rs/app-server/src/request_processors/thread_processor.rs:thread_memory_mode_set",
+        "type": "function",
+        "name": "thread_memory_mode_set",
+        "filePath": "codex-rs/app-server/src/request_processors/thread_processor.rs"
+      },
+      {
+        "id": "function:codex-rs/app-server/src/request_processors/thread_processor.rs:memory_reset",
+        "type": "function",
+        "name": "memory_reset",
+        "filePath": "codex-rs/app-server/src/request_processors/thread_processor.rs"
+      },
+      {
+        "id": "function:codex-rs/app-server/src/request_processors/thread_processor.rs:thread_memory_mode_set_response_inner",
+        "type": "function",
+        "name": "thread_memory_mode_set_response_inner",
+        "filePath": "codex-rs/app-server/src/request_processors/thread_processor.rs"
+      }
+    ],
+    "memories": [
+      {
+        "id": "file:codex-rs/cli/tests/debug_clear_memories.rs",
+        "type": "file",
+        "name": "debug_clear_memories.rs",
+        "filePath": "codex-rs/cli/tests/debug_clear_memories.rs"
+      },
+      {
+        "id": "file:codex-rs/codex-api/src/endpoint/memories.rs",
+        "type": "file",
+        "name": "memories.rs",
+        "filePath": "codex-rs/codex-api/src/endpoint/memories.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/BUILD.bazel",
+        "type": "file",
+        "name": "BUILD.bazel",
+        "filePath": "codex-rs/ext/memories/BUILD.bazel"
+      },
+      {
+        "id": "config:codex-rs/ext/memories/Cargo.toml",
+        "type": "config",
+        "name": "Cargo.toml",
+        "filePath": "codex-rs/ext/memories/Cargo.toml"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/backend.rs",
+        "type": "file",
+        "name": "backend.rs",
+        "filePath": "codex-rs/ext/memories/src/backend.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/extension.rs",
+        "type": "file",
+        "name": "extension.rs",
+        "filePath": "codex-rs/ext/memories/src/extension.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/lib.rs",
+        "type": "file",
+        "name": "lib.rs",
+        "filePath": "codex-rs/ext/memories/src/lib.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/local.rs",
+        "type": "file",
+        "name": "local.rs",
+        "filePath": "codex-rs/ext/memories/src/local.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/local/list.rs",
+        "type": "file",
+        "name": "list.rs",
+        "filePath": "codex-rs/ext/memories/src/local/list.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/local/path.rs",
+        "type": "file",
+        "name": "path.rs",
+        "filePath": "codex-rs/ext/memories/src/local/path.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/local/read.rs",
+        "type": "file",
+        "name": "read.rs",
+        "filePath": "codex-rs/ext/memories/src/local/read.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/local/search.rs",
+        "type": "file",
+        "name": "search.rs",
+        "filePath": "codex-rs/ext/memories/src/local/search.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/schema.rs",
+        "type": "file",
+        "name": "schema.rs",
+        "filePath": "codex-rs/ext/memories/src/schema.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/tests.rs",
+        "type": "file",
+        "name": "tests.rs",
+        "filePath": "codex-rs/ext/memories/src/tests.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/tools/list.rs",
+        "type": "file",
+        "name": "list.rs",
+        "filePath": "codex-rs/ext/memories/src/tools/list.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/tools/mod.rs",
+        "type": "file",
+        "name": "mod.rs",
+        "filePath": "codex-rs/ext/memories/src/tools/mod.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/tools/read.rs",
+        "type": "file",
+        "name": "read.rs",
+        "filePath": "codex-rs/ext/memories/src/tools/read.rs"
+      },
+      {
+        "id": "file:codex-rs/ext/memories/src/tools/search.rs",
+        "type": "file",
+        "name": "search.rs",
+        "filePath": "codex-rs/ext/memories/src/tools/search.rs"
+      },
+      {
+        "id": "file:codex-rs/memories/mcp/BUILD.bazel",
+        "type": "file",
+        "name": "BUILD.bazel",
+        "filePath": "codex-rs/memories/mcp/BUILD.bazel"
+      },
+      {
+        "id": "config:codex-rs/memories/mcp/Cargo.toml",
+        "type": "config",
+        "name": "Cargo.toml",
+        "filePath": "codex-rs/memories/mcp/Cargo.toml"
+      }
+    ],
+    "compact": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ContextCompactedNotification.json",
+        "type": "config",
+        "name": "ContextCompactedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ContextCompactedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartParams.json",
+        "type": "config",
+        "name": "ThreadCompactStartParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartResponse.json",
+        "type": "config",
+        "name": "ThreadCompactStartResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartResponse.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/AutoCompactTokenLimitScope.ts",
+        "type": "file",
+        "name": "AutoCompactTokenLimitScope.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/AutoCompactTokenLimitScope.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ContextCompactedNotification.ts",
+        "type": "file",
+        "name": "ContextCompactedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ContextCompactedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ThreadCompactStartParams.ts",
+        "type": "file",
+        "name": "ThreadCompactStartParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ThreadCompactStartParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/ThreadCompactStartResponse.ts",
+        "type": "file",
+        "name": "ThreadCompactStartResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/ThreadCompactStartResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server/tests/suite/v2/compaction.rs",
+        "type": "file",
+        "name": "compaction.rs",
+        "filePath": "codex-rs/app-server/tests/suite/v2/compaction.rs"
+      },
+      {
+        "id": "file:codex-rs/codex-api/src/endpoint/compact.rs",
+        "type": "file",
+        "name": "compact.rs",
+        "filePath": "codex-rs/codex-api/src/endpoint/compact.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/compact_remote_v2.rs",
+        "type": "file",
+        "name": "compact_remote_v2.rs",
+        "filePath": "codex-rs/core/src/compact_remote_v2.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/compact_remote.rs",
+        "type": "file",
+        "name": "compact_remote.rs",
+        "filePath": "codex-rs/core/src/compact_remote.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/compact_tests.rs",
+        "type": "file",
+        "name": "compact_tests.rs",
+        "filePath": "codex-rs/core/src/compact_tests.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/compact.rs",
+        "type": "file",
+        "name": "compact.rs",
+        "filePath": "codex-rs/core/src/compact.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/state/auto_compact_window.rs",
+        "type": "file",
+        "name": "auto_compact_window.rs",
+        "filePath": "codex-rs/core/src/state/auto_compact_window.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/tasks/compact.rs",
+        "type": "file",
+        "name": "compact.rs",
+        "filePath": "codex-rs/core/src/tasks/compact.rs"
+      },
+      {
+        "id": "document:codex-rs/core/templates/compact/prompt.md",
+        "type": "document",
+        "name": "prompt.md",
+        "filePath": "codex-rs/core/templates/compact/prompt.md"
+      },
+      {
+        "id": "document:codex-rs/core/templates/compact/summary_prefix.md",
+        "type": "document",
+        "name": "summary_prefix.md",
+        "filePath": "codex-rs/core/templates/compact/summary_prefix.md"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/compact_remote_parity.rs",
+        "type": "file",
+        "name": "compact_remote_parity.rs",
+        "filePath": "codex-rs/core/tests/suite/compact_remote_parity.rs"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/compact_remote.rs",
+        "type": "file",
+        "name": "compact_remote.rs",
+        "filePath": "codex-rs/core/tests/suite/compact_remote.rs"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/compact_resume_fork.rs",
+        "type": "file",
+        "name": "compact_resume_fork.rs",
+        "filePath": "codex-rs/core/tests/suite/compact_resume_fork.rs"
+      }
+    ],
+    "compaction": [
+      {
+        "id": "file:codex-rs/app-server/tests/suite/v2/compaction.rs",
+        "type": "file",
+        "name": "compaction.rs",
+        "filePath": "codex-rs/app-server/tests/suite/v2/compaction.rs"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact__mid_turn_compaction_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact__mid_turn_compaction_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact__mid_turn_compaction_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_sampling_model_switch_compaction_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact__pre_sampling_model_switch_compaction_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_sampling_model_switch_compaction_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_turn_compaction_context_window_exceeded_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact__pre_turn_compaction_context_window_exceeded_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_turn_compaction_context_window_exceeded_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_turn_compaction_including_incoming_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact__pre_turn_compaction_including_incoming_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_turn_compaction_including_incoming_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_turn_compaction_strips_incoming_model_switch_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact__pre_turn_compaction_strips_incoming_model_switch_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact__pre_turn_compaction_strips_incoming_model_switch_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_does_not_restate_realtime_end_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_mid_turn_compaction_does_not_restate_realtime_end_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_does_not_restate_realtime_end_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_multi_summary_reinjects_above_last_summary_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_mid_turn_compaction_multi_summary_reinjects_above_last_summary_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_multi_summary_reinjects_above_last_summary_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_mid_turn_compaction_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_summary_only_reinjects_context_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_mid_turn_compaction_summary_only_reinjects_context_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_mid_turn_compaction_summary_only_reinjects_context_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_context_window_exceeded_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_pre_turn_compaction_context_window_exceeded_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_context_window_exceeded_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_failure_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_pre_turn_compaction_failure_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_failure_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_including_incoming_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_pre_turn_compaction_including_incoming_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_including_incoming_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_restates_realtime_end_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_pre_turn_compaction_restates_realtime_end_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_restates_realtime_end_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_restates_realtime_start_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_pre_turn_compaction_restates_realtime_start_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_restates_realtime_start_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_strips_incoming_model_switch_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_remote__remote_pre_turn_compaction_strips_incoming_model_switch_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_remote__remote_pre_turn_compaction_strips_incoming_model_switch_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__compact_resume_fork__rollback_past_compaction_shapes.snap",
+        "type": "file",
+        "name": "all__suite__compact_resume_fork__rollback_past_compaction_shapes.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__compact_resume_fork__rollback_past_compaction_shapes.snap"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/compaction.rs",
+        "type": "file",
+        "name": "compaction.rs",
+        "filePath": "codex-rs/rollout-trace/src/compaction.rs"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/reducer/compaction.rs",
+        "type": "file",
+        "name": "compaction.rs",
+        "filePath": "codex-rs/rollout-trace/src/reducer/compaction.rs"
+      },
+      {
+        "id": "document:wiki/wiki/concepts/context-compaction-for-agents.md",
+        "type": "document",
+        "name": "context-compaction-for-agents.md",
+        "filePath": "wiki/wiki/concepts/context-compaction-for-agents.md"
+      }
+    ],
+    "thread": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionParams.json",
+        "type": "config",
+        "name": "ThreadApproveGuardianDeniedActionParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionResponse.json",
+        "type": "config",
+        "name": "ThreadApproveGuardianDeniedActionResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadApproveGuardianDeniedActionResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadArchivedNotification.json",
+        "type": "config",
+        "name": "ThreadArchivedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadArchivedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadArchiveParams.json",
+        "type": "config",
+        "name": "ThreadArchiveParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadArchiveParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadArchiveResponse.json",
+        "type": "config",
+        "name": "ThreadArchiveResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadArchiveResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadClosedNotification.json",
+        "type": "config",
+        "name": "ThreadClosedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadClosedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartParams.json",
+        "type": "config",
+        "name": "ThreadCompactStartParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartResponse.json",
+        "type": "config",
+        "name": "ThreadCompactStartResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadCompactStartResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadForkParams.json",
+        "type": "config",
+        "name": "ThreadForkParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadForkParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadForkResponse.json",
+        "type": "config",
+        "name": "ThreadForkResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadForkResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalClearedNotification.json",
+        "type": "config",
+        "name": "ThreadGoalClearedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalClearedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalClearParams.json",
+        "type": "config",
+        "name": "ThreadGoalClearParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalClearParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalClearResponse.json",
+        "type": "config",
+        "name": "ThreadGoalClearResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalClearResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalGetParams.json",
+        "type": "config",
+        "name": "ThreadGoalGetParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalGetParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalGetResponse.json",
+        "type": "config",
+        "name": "ThreadGoalGetResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalGetResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalSetParams.json",
+        "type": "config",
+        "name": "ThreadGoalSetParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalSetParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalSetResponse.json",
+        "type": "config",
+        "name": "ThreadGoalSetResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalSetResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadGoalUpdatedNotification.json",
+        "type": "config",
+        "name": "ThreadGoalUpdatedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadGoalUpdatedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadInjectItemsParams.json",
+        "type": "config",
+        "name": "ThreadInjectItemsParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadInjectItemsParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/ThreadInjectItemsResponse.json",
+        "type": "config",
+        "name": "ThreadInjectItemsResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/ThreadInjectItemsResponse.json"
+      }
+    ],
+    "turn": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnCompletedNotification.json",
+        "type": "config",
+        "name": "TurnCompletedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnCompletedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnDiffUpdatedNotification.json",
+        "type": "config",
+        "name": "TurnDiffUpdatedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnDiffUpdatedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnInterruptParams.json",
+        "type": "config",
+        "name": "TurnInterruptParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnInterruptParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnInterruptResponse.json",
+        "type": "config",
+        "name": "TurnInterruptResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnInterruptResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnPlanUpdatedNotification.json",
+        "type": "config",
+        "name": "TurnPlanUpdatedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnPlanUpdatedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnStartedNotification.json",
+        "type": "config",
+        "name": "TurnStartedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnStartedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnStartParams.json",
+        "type": "config",
+        "name": "TurnStartParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnStartParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnStartResponse.json",
+        "type": "config",
+        "name": "TurnStartResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnStartResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnSteerParams.json",
+        "type": "config",
+        "name": "TurnSteerParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnSteerParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/TurnSteerResponse.json",
+        "type": "config",
+        "name": "TurnSteerResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/TurnSteerResponse.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/NonSteerableTurnKind.ts",
+        "type": "file",
+        "name": "NonSteerableTurnKind.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/NonSteerableTurnKind.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/Turn.ts",
+        "type": "file",
+        "name": "Turn.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/Turn.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnCompletedNotification.ts",
+        "type": "file",
+        "name": "TurnCompletedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnCompletedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnDiffUpdatedNotification.ts",
+        "type": "file",
+        "name": "TurnDiffUpdatedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnDiffUpdatedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnEnvironmentParams.ts",
+        "type": "file",
+        "name": "TurnEnvironmentParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnEnvironmentParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnError.ts",
+        "type": "file",
+        "name": "TurnError.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnError.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnInterruptParams.ts",
+        "type": "file",
+        "name": "TurnInterruptParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnInterruptParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnInterruptResponse.ts",
+        "type": "file",
+        "name": "TurnInterruptResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnInterruptResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnItemsView.ts",
+        "type": "file",
+        "name": "TurnItemsView.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnItemsView.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/TurnPlanStep.ts",
+        "type": "file",
+        "name": "TurnPlanStep.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/TurnPlanStep.ts"
+      }
+    ],
+    "session": [
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/FuzzyFileSearchSessionCompletedNotification.json",
+        "type": "config",
+        "name": "FuzzyFileSearchSessionCompletedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/FuzzyFileSearchSessionCompletedNotification.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/FuzzyFileSearchSessionUpdatedNotification.json",
+        "type": "config",
+        "name": "FuzzyFileSearchSessionUpdatedNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/FuzzyFileSearchSessionUpdatedNotification.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/FuzzyFileSearchSessionCompletedNotification.ts",
+        "type": "file",
+        "name": "FuzzyFileSearchSessionCompletedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/FuzzyFileSearchSessionCompletedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/FuzzyFileSearchSessionUpdatedNotification.ts",
+        "type": "file",
+        "name": "FuzzyFileSearchSessionUpdatedNotification.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/FuzzyFileSearchSessionUpdatedNotification.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/InternalSessionSource.ts",
+        "type": "file",
+        "name": "InternalSessionSource.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/InternalSessionSource.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/SessionSource.ts",
+        "type": "file",
+        "name": "SessionSource.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/SessionSource.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/SessionMigration.ts",
+        "type": "file",
+        "name": "SessionMigration.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/SessionMigration.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/SessionSource.ts",
+        "type": "file",
+        "name": "SessionSource.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/SessionSource.ts"
+      },
+      {
+        "id": "file:codex-rs/codex-api/src/endpoint/session.rs",
+        "type": "file",
+        "name": "session.rs",
+        "filePath": "codex-rs/codex-api/src/endpoint/session.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/guardian/review_session.rs",
+        "type": "file",
+        "name": "review_session.rs",
+        "filePath": "codex-rs/core/src/guardian/review_session.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session_prefix.rs",
+        "type": "file",
+        "name": "session_prefix.rs",
+        "filePath": "codex-rs/core/src/session_prefix.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session_rollout_init_error.rs",
+        "type": "file",
+        "name": "session_rollout_init_error.rs",
+        "filePath": "codex-rs/core/src/session_rollout_init_error.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session_startup_prewarm.rs",
+        "type": "file",
+        "name": "session_startup_prewarm.rs",
+        "filePath": "codex-rs/core/src/session_startup_prewarm.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/config_lock.rs",
+        "type": "file",
+        "name": "config_lock.rs",
+        "filePath": "codex-rs/core/src/session/config_lock.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/handlers.rs",
+        "type": "file",
+        "name": "handlers.rs",
+        "filePath": "codex-rs/core/src/session/handlers.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/input_queue.rs",
+        "type": "file",
+        "name": "input_queue.rs",
+        "filePath": "codex-rs/core/src/session/input_queue.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/mcp_tests.rs",
+        "type": "file",
+        "name": "mcp_tests.rs",
+        "filePath": "codex-rs/core/src/session/mcp_tests.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/mcp.rs",
+        "type": "file",
+        "name": "mcp.rs",
+        "filePath": "codex-rs/core/src/session/mcp.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/mod.rs",
+        "type": "file",
+        "name": "mod.rs",
+        "filePath": "codex-rs/core/src/session/mod.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/multi_agents.rs",
+        "type": "file",
+        "name": "multi_agents.rs",
+        "filePath": "codex-rs/core/src/session/multi_agents.rs"
+      }
+    ],
+    "rollout": [
+      {
+        "id": "file:codex-rs/app-server/tests/common/rollout.rs",
+        "type": "file",
+        "name": "rollout.rs",
+        "filePath": "codex-rs/app-server/tests/common/rollout.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/rollout.rs",
+        "type": "file",
+        "name": "rollout.rs",
+        "filePath": "codex-rs/core/src/rollout.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session_rollout_init_error.rs",
+        "type": "file",
+        "name": "session_rollout_init_error.rs",
+        "filePath": "codex-rs/core/src/session_rollout_init_error.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/rollout_reconstruction_tests.rs",
+        "type": "file",
+        "name": "rollout_reconstruction_tests.rs",
+        "filePath": "codex-rs/core/src/session/rollout_reconstruction_tests.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/session/rollout_reconstruction.rs",
+        "type": "file",
+        "name": "rollout_reconstruction.rs",
+        "filePath": "codex-rs/core/src/session/rollout_reconstruction.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/thread_rollout_truncation_tests.rs",
+        "type": "file",
+        "name": "thread_rollout_truncation_tests.rs",
+        "filePath": "codex-rs/core/src/thread_rollout_truncation_tests.rs"
+      },
+      {
+        "id": "file:codex-rs/core/src/thread_rollout_truncation.rs",
+        "type": "file",
+        "name": "thread_rollout_truncation.rs",
+        "filePath": "codex-rs/core/src/thread_rollout_truncation.rs"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/image_rollout.rs",
+        "type": "file",
+        "name": "image_rollout.rs",
+        "filePath": "codex-rs/core/tests/suite/image_rollout.rs"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/rollout_list_find.rs",
+        "type": "file",
+        "name": "rollout_list_find.rs",
+        "filePath": "codex-rs/core/tests/suite/rollout_list_find.rs"
+      },
+      {
+        "id": "file:codex-rs/core/tests/suite/snapshots/all__suite__model_visible_layout__model_visible_layout_resume_override_matches_rollout_model.snap",
+        "type": "file",
+        "name": "all__suite__model_visible_layout__model_visible_layout_resume_override_matches_rollout_model.snap",
+        "filePath": "codex-rs/core/tests/suite/snapshots/all__suite__model_visible_layout__model_visible_layout_resume_override_matches_rollout_model.snap"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/BUILD.bazel",
+        "type": "file",
+        "name": "BUILD.bazel",
+        "filePath": "codex-rs/rollout-trace/BUILD.bazel"
+      },
+      {
+        "id": "config:codex-rs/rollout-trace/Cargo.toml",
+        "type": "config",
+        "name": "Cargo.toml",
+        "filePath": "codex-rs/rollout-trace/Cargo.toml"
+      },
+      {
+        "id": "document:codex-rs/rollout-trace/README.md",
+        "type": "document",
+        "name": "README.md",
+        "filePath": "codex-rs/rollout-trace/README.md"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/bundle.rs",
+        "type": "file",
+        "name": "bundle.rs",
+        "filePath": "codex-rs/rollout-trace/src/bundle.rs"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/code_cell.rs",
+        "type": "file",
+        "name": "code_cell.rs",
+        "filePath": "codex-rs/rollout-trace/src/code_cell.rs"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/compaction.rs",
+        "type": "file",
+        "name": "compaction.rs",
+        "filePath": "codex-rs/rollout-trace/src/compaction.rs"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/inference.rs",
+        "type": "file",
+        "name": "inference.rs",
+        "filePath": "codex-rs/rollout-trace/src/inference.rs"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/lib.rs",
+        "type": "file",
+        "name": "lib.rs",
+        "filePath": "codex-rs/rollout-trace/src/lib.rs"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/mcp.rs",
+        "type": "file",
+        "name": "mcp.rs",
+        "filePath": "codex-rs/rollout-trace/src/mcp.rs"
+      },
+      {
+        "id": "file:codex-rs/rollout-trace/src/model/conversation.rs",
+        "type": "file",
+        "name": "conversation.rs",
+        "filePath": "codex-rs/rollout-trace/src/model/conversation.rs"
+      }
+    ],
+    "tool": [
+      {
+        "id": "file:.github/scripts/install-musl-build-tools.sh",
+        "type": "file",
+        "name": "install-musl-build-tools.sh",
+        "filePath": ".github/scripts/install-musl-build-tools.sh"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/DynamicToolCallParams.json",
+        "type": "config",
+        "name": "DynamicToolCallParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/DynamicToolCallParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/DynamicToolCallResponse.json",
+        "type": "config",
+        "name": "DynamicToolCallResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/DynamicToolCallResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/ToolRequestUserInputParams.json",
+        "type": "config",
+        "name": "ToolRequestUserInputParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/ToolRequestUserInputParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/ToolRequestUserInputResponse.json",
+        "type": "config",
+        "name": "ToolRequestUserInputResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/ToolRequestUserInputResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallParams.json",
+        "type": "config",
+        "name": "McpServerToolCallParams.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallParams.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallResponse.json",
+        "type": "config",
+        "name": "McpServerToolCallResponse.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpServerToolCallResponse.json"
+      },
+      {
+        "id": "config:codex-rs/app-server-protocol/schema/json/v2/McpToolCallProgressNotification.json",
+        "type": "config",
+        "name": "McpToolCallProgressNotification.json",
+        "filePath": "codex-rs/app-server-protocol/schema/json/v2/McpToolCallProgressNotification.json"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/Tool.ts",
+        "type": "file",
+        "name": "Tool.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/Tool.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/AppToolApproval.ts",
+        "type": "file",
+        "name": "AppToolApproval.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/AppToolApproval.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/AppToolsConfig.ts",
+        "type": "file",
+        "name": "AppToolsConfig.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/AppToolsConfig.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/CollabAgentTool.ts",
+        "type": "file",
+        "name": "CollabAgentTool.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/CollabAgentTool.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/CollabAgentToolCallStatus.ts",
+        "type": "file",
+        "name": "CollabAgentToolCallStatus.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/CollabAgentToolCallStatus.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallOutputContentItem.ts",
+        "type": "file",
+        "name": "DynamicToolCallOutputContentItem.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallOutputContentItem.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallParams.ts",
+        "type": "file",
+        "name": "DynamicToolCallParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallResponse.ts",
+        "type": "file",
+        "name": "DynamicToolCallResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallResponse.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallStatus.ts",
+        "type": "file",
+        "name": "DynamicToolCallStatus.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolCallStatus.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolSpec.ts",
+        "type": "file",
+        "name": "DynamicToolSpec.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/DynamicToolSpec.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/McpServerToolCallParams.ts",
+        "type": "file",
+        "name": "McpServerToolCallParams.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/McpServerToolCallParams.ts"
+      },
+      {
+        "id": "file:codex-rs/app-server-protocol/schema/typescript/v2/McpServerToolCallResponse.ts",
+        "type": "file",
+        "name": "McpServerToolCallResponse.ts",
+        "filePath": "codex-rs/app-server-protocol/schema/typescript/v2/McpServerToolCallResponse.ts"
+      }
+    ]
+  },
+  "unknowns": [
+    {
+      "kind": "wikilink_count_mismatch",
+      "expectedFromUserPrompt": 94,
+      "actualCurrentIndex": 93,
+      "note": "Current derived-knowledge/index.md contains 93 wikilinks when parsed with [[...]] syntax."
+    },
+    {
+      "kind": "design_intent_gap",
+      "note": "The graph proves structure and file relationships, but historical or product intent should stay marked as needing source validation unless a source file or document states it directly."
+    },
+    {
+      "kind": "standards_source_gap",
+      "note": "OWASP and TC260 taxonomies are available from the user prompt/index plan; no canonical local OWASP/TC260 source document was found in this evidence pass."
+    },
+    {
+      "kind": "local_overlay_sample_filename_encoding",
+      "note": "local-knowledge-overlay 的原始图谱样例包含编码受损的 wiki/raw 文件名；本 summary 仅保留可读的 wiki 页面样例，原始文件名需要在单独的知识库修复任务中核验。"
+    }
+  ]
+}

@@ -1,0 +1,2772 @@
+{
+  "generatedAt": "2026-06-01T05:45:12.902Z",
+  "generatorRole": "Agent 1 Evidence Compiler",
+  "repositoryRoot": "D:\\Project\\codexx-wiki\\sss-codex",
+  "inputMaterials": [
+    ".understand-anything/knowledge-graph.json",
+    ".understand-anything/meta.json",
+    "derived-knowledge/index.md"
+  ],
+  "graphBaseline": {
+    "graphProject": {
+      "name": "codex-monorepo",
+      "languages": [
+        "rust",
+        "typescript",
+        "python",
+        "markdown",
+        "json",
+        "toml",
+        "yaml",
+        "bazel",
+        "shell",
+        "sql"
+      ],
+      "frameworks": [
+        "Cargo workspace",
+        "Tokio",
+        "Ratatui",
+        "Axum",
+        "Bazel",
+        "pnpm",
+        "Node.js",
+        "GitHub Actions"
+      ],
+      "description": "OpenAI Codex CLI monorepo: Rust agent/runtime crates, TypeScript CLI packaging, SDKs, tooling, documentation, CI, and local wiki materials.",
+      "analyzedAt": "2026-05-31T10:32:54.022Z",
+      "gitCommitHash": "b14f11d3d2ca048bdae1872ef66087a2ce3f6b0c"
+    },
+    "graphStats": {
+      "nodes": 39902,
+      "edges": 39927,
+      "layers": 21,
+      "tour": 10,
+      "analyzedFiles": 4582
+    }
+  },
+  "topics": {
+    "orientation": {
+      "purpose": "建立阅读入口：用仓库 README、AGENTS 约束、工作区清单和 app-server 文档确认代码图谱的范围、构建方式和首批导航锚点。",
+      "evidenceFiles": [
+        {
+          "path": "README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是仓库导航主题的证据点，包含 Codex CLI、install、usage。它用于确认阅读入口、工作区范围和图谱基线，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Codex CLI",
+            "install",
+            "usage"
+          ],
+          "graphNodeIds": [
+            "document:README.md",
+            "concept:README.md:Quickstart",
+            "concept:README.md:Installing and running Codex CLI",
+            "concept:README.md:Using Codex with your ChatGPT plan",
+            "concept:README.md:Docs"
+          ]
+        },
+        {
+          "path": "AGENTS.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是仓库导航主题的证据点，包含 codex-rs、just fmt、cargo test、TUI style、app-server v2。它用于确认阅读入口、工作区范围和图谱基线，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "codex-rs",
+            "just fmt",
+            "cargo test",
+            "TUI style",
+            "app-server v2"
+          ],
+          "graphNodeIds": [
+            "document:AGENTS.md",
+            "concept:AGENTS.md:Rust/codex-rs",
+            "concept:AGENTS.md:The `codex-core` crate",
+            "concept:AGENTS.md:TUI style conventions",
+            "concept:AGENTS.md:TUI code conventions",
+            "concept:AGENTS.md:TUI Styling (ratatui)",
+            "concept:AGENTS.md:Text wrapping",
+            "concept:AGENTS.md:Tests"
+          ]
+        },
+        {
+          "path": "package.json",
+          "kind": "json",
+          "exists": true,
+          "whyRelevant": "该文件是仓库导航主题的证据点，包含 pnpm、workspace、scripts。它用于确认阅读入口、工作区范围和图谱基线，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "pnpm",
+            "workspace",
+            "scripts"
+          ],
+          "graphNodeIds": [
+            "config:package.json",
+            "concept:package.json:name",
+            "concept:package.json:private",
+            "concept:package.json:description",
+            "concept:package.json:scripts",
+            "concept:package.json:devDependencies",
+            "concept:package.json:resolutions",
+            "concept:package.json:overrides"
+          ]
+        },
+        {
+          "path": "codex-rs/Cargo.toml",
+          "kind": "config",
+          "exists": true,
+          "whyRelevant": "该文件是仓库导航主题的证据点，包含 workspace、members、codex-core、codex-tui。它用于确认阅读入口、工作区范围和图谱基线，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "workspace",
+            "members",
+            "codex-core",
+            "codex-tui"
+          ],
+          "graphNodeIds": [
+            "config:codex-rs/Cargo.toml",
+            "concept:codex-rs/Cargo.toml:workspace",
+            "concept:codex-rs/Cargo.toml:workspace.package",
+            "concept:codex-rs/Cargo.toml:workspace.dependencies",
+            "concept:codex-rs/Cargo.toml:workspace.lints",
+            "concept:codex-rs/Cargo.toml:workspace.lints.clippy",
+            "concept:codex-rs/Cargo.toml:workspace.metadata.cargo-shear",
+            "concept:codex-rs/Cargo.toml:profile.dev"
+          ]
+        },
+        {
+          "path": "codex-rs/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是仓库导航主题的证据点，包含 Rust、workspace、Codex。它用于确认阅读入口、工作区范围和图谱基线，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Rust",
+            "workspace",
+            "Codex"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/README.md",
+            "concept:codex-rs/README.md:Codex CLI (Rust Implementation)",
+            "concept:codex-rs/README.md:Installing Codex",
+            "concept:codex-rs/README.md:Documentation quickstart",
+            "concept:codex-rs/README.md:What's new in the Rust CLI",
+            "concept:codex-rs/README.md:Config",
+            "concept:codex-rs/README.md:Model Context Protocol Support",
+            "concept:codex-rs/README.md:MCP client"
+          ]
+        },
+        {
+          "path": "codex-rs/app-server/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是仓库导航主题的证据点，包含 app-server、JSON-RPC、v2。它用于确认阅读入口、工作区范围和图谱基线，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "app-server",
+            "JSON-RPC",
+            "v2"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/app-server/README.md",
+            "concept:codex-rs/app-server/README.md:codex-app-server",
+            "concept:codex-rs/app-server/README.md:Table of Contents",
+            "concept:codex-rs/app-server/README.md:Protocol",
+            "concept:codex-rs/app-server/README.md:Message Schema",
+            "concept:codex-rs/app-server/README.md:Core Primitives",
+            "concept:codex-rs/app-server/README.md:Lifecycle Overview",
+            "concept:codex-rs/app-server/README.md:Initialization"
+          ]
+        }
+      ]
+    },
+    "architecture": {
+      "purpose": "梳理核心运行时、TUI、app-server、SDK、工具系统与沙箱相关模块之间的分层关系。",
+      "evidenceFiles": [
+        {
+          "path": "codex-rs/core/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 codex-core、session、tools、config。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "codex-core",
+            "session",
+            "tools",
+            "config"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/lib.rs"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/session/mod.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 session、turn、handlers、mcp。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "session",
+            "turn",
+            "handlers",
+            "mcp"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/session/mod.rs",
+            "function:codex-rs/core/src/session/mod.rs:to_error_event",
+            "function:codex-rs/core/src/session/mod.rs:spawn",
+            "function:codex-rs/core/src/session/mod.rs:spawn_internal",
+            "function:codex-rs/core/src/session/mod.rs:submit",
+            "function:codex-rs/core/src/session/mod.rs:submit_with_trace",
+            "function:codex-rs/core/src/session/mod.rs:submit_with_id",
+            "function:codex-rs/core/src/session/mod.rs:set_thread_memory_mode"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/session/session.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 Session、SessionServices、submit。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Session",
+            "SessionServices",
+            "submit"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/session/session.rs",
+            "function:codex-rs/core/src/session/session.rs:codex_home",
+            "function:codex-rs/core/src/session/session.rs:permission_profile_state",
+            "function:codex-rs/core/src/session/session.rs:permission_profile",
+            "function:codex-rs/core/src/session/session.rs:active_permission_profile",
+            "function:codex-rs/core/src/session/session.rs:profile_workspace_roots",
+            "function:codex-rs/core/src/session/session.rs:apply_permission_profile_to_permissions",
+            "function:codex-rs/core/src/session/session.rs:set_permission_profile_for_tests"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/session/turn.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 run_turn、EventMsg、ResponseItem、ToolCall。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "run_turn",
+            "EventMsg",
+            "ResponseItem",
+            "ToolCall"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/session/turn.rs",
+            "function:codex-rs/core/src/session/turn.rs:run_turn",
+            "function:codex-rs/core/src/session/turn.rs:build_skills_and_plugins",
+            "function:codex-rs/core/src/session/turn.rs:track_turn_resolved_config_analytics",
+            "function:codex-rs/core/src/session/turn.rs:auto_compact_token_status",
+            "function:codex-rs/core/src/session/turn.rs:run_pre_sampling_compact",
+            "function:codex-rs/core/src/session/turn.rs:maybe_run_previous_model_inline_compact",
+            "function:codex-rs/core/src/session/turn.rs:run_auto_compact"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/session/turn_context.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 TurnContext、approval_policy、sandbox_policy、cwd。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "TurnContext",
+            "approval_policy",
+            "sandbox_policy",
+            "cwd"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/session/turn_context.rs",
+            "function:codex-rs/core/src/session/turn_context.rs:new",
+            "function:codex-rs/core/src/session/turn_context.rs:selection",
+            "function:codex-rs/core/src/session/turn_context.rs:permission_profile",
+            "function:codex-rs/core/src/session/turn_context.rs:file_system_sandbox_policy",
+            "function:codex-rs/core/src/session/turn_context.rs:network_sandbox_policy",
+            "function:codex-rs/core/src/session/turn_context.rs:sandbox_policy",
+            "function:codex-rs/core/src/session/turn_context.rs:effective_reasoning_effort"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/mod.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 tools、handlers、runtimes、registry。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "tools",
+            "handlers",
+            "runtimes",
+            "registry"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/mod.rs",
+            "function:codex-rs/core/src/tools/mod.rs:flat_tool_name",
+            "function:codex-rs/core/src/tools/mod.rs:tool_user_shell_type",
+            "function:codex-rs/core/src/tools/mod.rs:format_exec_output_for_model",
+            "function:codex-rs/core/src/tools/mod.rs:format_exec_output_str",
+            "function:codex-rs/core/src/tools/mod.rs:build_content_with_timeout"
+          ]
+        },
+        {
+          "path": "codex-rs/app-server-protocol/src/protocol/v2/mod.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 v2、thread、turn、mcp、config。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "v2",
+            "thread",
+            "turn",
+            "mcp",
+            "config"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/app-server-protocol/src/protocol/v2/mod.rs"
+          ]
+        },
+        {
+          "path": "codex-rs/app-server/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 app-server、server、request_processors。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "app-server",
+            "server",
+            "request_processors"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/app-server/src/lib.rs",
+            "function:codex-rs/app-server/src/lib.rs:configured_thread_config_loader",
+            "function:codex-rs/app-server/src/lib.rs:shutdown_signal",
+            "function:codex-rs/app-server/src/lib.rs:requested",
+            "function:codex-rs/app-server/src/lib.rs:forced",
+            "function:codex-rs/app-server/src/lib.rs:on_signal",
+            "function:codex-rs/app-server/src/lib.rs:update",
+            "function:codex-rs/app-server/src/lib.rs:config_warning_from_error"
+          ]
+        },
+        {
+          "path": "codex-rs/tui/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 codex-tui、chatwidget、bottom_pane。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "codex-tui",
+            "chatwidget",
+            "bottom_pane"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/tui/src/lib.rs",
+            "function:codex-rs/tui/src/lib.rs:start_embedded_app_server",
+            "function:codex-rs/tui/src/lib.rs:uses_remote_workspace",
+            "function:codex-rs/tui/src/lib.rs:thread_params_mode",
+            "function:codex-rs/tui/src/lib.rs:init_state_db_for_app_server_target",
+            "function:codex-rs/tui/src/lib.rs:remote_addr_has_explicit_port",
+            "function:codex-rs/tui/src/lib.rs:websocket_url_supports_auth_token",
+            "function:codex-rs/tui/src/lib.rs:resolve_remote_addr"
+          ]
+        },
+        {
+          "path": "sdk/typescript/src/exec.ts",
+          "kind": "typescript",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 exec、TypeScript SDK。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "exec",
+            "TypeScript SDK"
+          ],
+          "graphNodeIds": [
+            "file:sdk/typescript/src/exec.ts",
+            "function:sdk/typescript/src/exec.ts:serializeConfigOverrides",
+            "function:sdk/typescript/src/exec.ts:flattenConfigOverrides",
+            "function:sdk/typescript/src/exec.ts:toTomlValue",
+            "function:sdk/typescript/src/exec.ts:formatTomlKey",
+            "function:sdk/typescript/src/exec.ts:isPlainObject",
+            "function:sdk/typescript/src/exec.ts:findCodexPath",
+            "function:sdk/typescript/src/exec.ts:resolveNativePackage"
+          ]
+        },
+        {
+          "path": "sdk/python/src/openai_codex/_approval_mode.py",
+          "kind": "python",
+          "exists": true,
+          "whyRelevant": "该文件是架构分层主题的证据点，包含 approval mode、Python SDK。它用于说明运行时、接口层和用户界面之间的职责边界，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "approval mode",
+            "Python SDK"
+          ],
+          "graphNodeIds": [
+            "file:sdk/python/src/openai_codex/_approval_mode.py",
+            "function:sdk/python/src/openai_codex/_approval_mode.py:_approval_mode_settings",
+            "function:sdk/python/src/openai_codex/_approval_mode.py:_assert_never_approval_mode",
+            "function:sdk/python/src/openai_codex/_approval_mode.py:_approval_mode_override_settings",
+            "class:sdk/python/src/openai_codex/_approval_mode.py:ApprovalMode"
+          ]
+        }
+      ]
+    },
+    "long_horizon": {
+      "purpose": "追踪 thread、session、turn、rollout、compaction、subagent 与 resume 相关的数据链路，支撑长程代理行为分析。",
+      "evidenceFiles": [
+        {
+          "path": "codex-rs/protocol/src/thread_id.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 ThreadId。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ThreadId"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/thread_id.rs",
+            "function:codex-rs/protocol/src/thread_id.rs:new",
+            "function:codex-rs/protocol/src/thread_id.rs:from_string",
+            "function:codex-rs/protocol/src/thread_id.rs:try_from",
+            "function:codex-rs/protocol/src/thread_id.rs:try_from#2",
+            "function:codex-rs/protocol/src/thread_id.rs:from",
+            "function:codex-rs/protocol/src/thread_id.rs:default",
+            "function:codex-rs/protocol/src/thread_id.rs:fmt"
+          ]
+        },
+        {
+          "path": "codex-rs/protocol/src/session_id.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 SessionId。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "SessionId"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/session_id.rs",
+            "function:codex-rs/protocol/src/session_id.rs:new",
+            "function:codex-rs/protocol/src/session_id.rs:from_string",
+            "function:codex-rs/protocol/src/session_id.rs:try_from",
+            "function:codex-rs/protocol/src/session_id.rs:try_from#2",
+            "function:codex-rs/protocol/src/session_id.rs:from",
+            "function:codex-rs/protocol/src/session_id.rs:from#2",
+            "function:codex-rs/protocol/src/session_id.rs:from#3"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/codex_thread.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 CodexThread、approval_policy、sandbox_policy。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "CodexThread",
+            "approval_policy",
+            "sandbox_policy"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/codex_thread.rs",
+            "function:codex-rs/core/src/codex_thread.rs:sandbox_policy",
+            "function:codex-rs/core/src/codex_thread.rs:new",
+            "function:codex-rs/core/src/codex_thread.rs:submit",
+            "function:codex-rs/core/src/codex_thread.rs:session_telemetry",
+            "function:codex-rs/core/src/codex_thread.rs:shutdown_and_wait",
+            "function:codex-rs/core/src/codex_thread.rs:wait_until_terminated",
+            "function:codex-rs/core/src/codex_thread.rs:emit_thread_resume_lifecycle"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/thread_manager.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 ThreadManager、resume、fork、agent_control。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ThreadManager",
+            "resume",
+            "fork",
+            "agent_control"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/thread_manager.rs",
+            "function:codex-rs/core/src/thread_manager.rs:set_thread_manager_test_mode_for_tests",
+            "function:codex-rs/core/src/thread_manager.rs:should_use_test_thread_manager_behavior",
+            "function:codex-rs/core/src/thread_manager.rs:drop",
+            "function:codex-rs/core/src/thread_manager.rs:from",
+            "function:codex-rs/core/src/thread_manager.rs:build_models_manager",
+            "function:codex-rs/core/src/thread_manager.rs:thread_store_from_config",
+            "function:codex-rs/core/src/thread_manager.rs:new"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/session/turn_context.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 TurnContext、sub_id、cwd、config、network。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "TurnContext",
+            "sub_id",
+            "cwd",
+            "config",
+            "network"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/session/turn_context.rs",
+            "function:codex-rs/core/src/session/turn_context.rs:new",
+            "function:codex-rs/core/src/session/turn_context.rs:selection",
+            "function:codex-rs/core/src/session/turn_context.rs:permission_profile",
+            "function:codex-rs/core/src/session/turn_context.rs:file_system_sandbox_policy",
+            "function:codex-rs/core/src/session/turn_context.rs:network_sandbox_policy",
+            "function:codex-rs/core/src/session/turn_context.rs:sandbox_policy",
+            "function:codex-rs/core/src/session/turn_context.rs:effective_reasoning_effort"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/session/turn.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 turn、EventMsg、handle_response_item、memory_citation。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "turn",
+            "EventMsg",
+            "handle_response_item",
+            "memory_citation"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/session/turn.rs",
+            "function:codex-rs/core/src/session/turn.rs:run_turn",
+            "function:codex-rs/core/src/session/turn.rs:build_skills_and_plugins",
+            "function:codex-rs/core/src/session/turn.rs:track_turn_resolved_config_analytics",
+            "function:codex-rs/core/src/session/turn.rs:auto_compact_token_status",
+            "function:codex-rs/core/src/session/turn.rs:run_pre_sampling_compact",
+            "function:codex-rs/core/src/session/turn.rs:maybe_run_previous_model_inline_compact",
+            "function:codex-rs/core/src/session/turn.rs:run_auto_compact"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/session/rollout_reconstruction.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 rollout reconstruction、InitialHistory。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "rollout reconstruction",
+            "InitialHistory"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/session/rollout_reconstruction.rs",
+            "function:codex-rs/core/src/session/rollout_reconstruction.rs:turn_ids_are_compatible",
+            "function:codex-rs/core/src/session/rollout_reconstruction.rs:finalize_active_segment",
+            "function:codex-rs/core/src/session/rollout_reconstruction.rs:reconstruct_history_from_rollout",
+            "class:codex-rs/core/src/session/rollout_reconstruction.rs:RolloutReconstruction",
+            "class:codex-rs/core/src/session/rollout_reconstruction.rs:TurnReferenceContextItem",
+            "class:codex-rs/core/src/session/rollout_reconstruction.rs:ActiveReplaySegment"
+          ]
+        },
+        {
+          "path": "codex-rs/thread-store/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 thread-store、local store、live writer。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "thread-store",
+            "local store",
+            "live writer"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/thread-store/README.md",
+            "concept:codex-rs/thread-store/README.md:Thread Store",
+            "concept:codex-rs/thread-store/README.md:Responsibilities",
+            "concept:codex-rs/thread-store/README.md:Direction"
+          ]
+        },
+        {
+          "path": "codex-rs/thread-store/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 ThreadStore、ThreadMetadata。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ThreadStore",
+            "ThreadMetadata"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/thread-store/src/lib.rs"
+          ]
+        },
+        {
+          "path": "codex-rs/thread-store/src/local/live_writer.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 live writer、thread events。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "live writer",
+            "thread events"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/thread-store/src/local/live_writer.rs",
+            "function:codex-rs/thread-store/src/local/live_writer.rs:create_thread",
+            "function:codex-rs/thread-store/src/local/live_writer.rs:resume_thread",
+            "function:codex-rs/thread-store/src/local/live_writer.rs:append_items",
+            "function:codex-rs/thread-store/src/local/live_writer.rs:persist_thread",
+            "function:codex-rs/thread-store/src/local/live_writer.rs:flush_thread",
+            "function:codex-rs/thread-store/src/local/live_writer.rs:shutdown_thread",
+            "function:codex-rs/thread-store/src/local/live_writer.rs:discard_thread"
+          ]
+        },
+        {
+          "path": "codex-rs/rollout/src/recorder.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 RolloutRecorder、record、metadata。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "RolloutRecorder",
+            "record",
+            "metadata"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/rollout/src/recorder.rs",
+            "function:codex-rs/rollout/src/recorder.rs:new",
+            "function:codex-rs/rollout/src/recorder.rs:set_handle",
+            "function:codex-rs/rollout/src/recorder.rs:mark_failed",
+            "function:codex-rs/rollout/src/recorder.rs:terminal_failure",
+            "function:codex-rs/rollout/src/recorder.rs:clone_io_error",
+            "function:codex-rs/rollout/src/recorder.rs:new#2",
+            "function:codex-rs/rollout/src/recorder.rs:resume"
+          ]
+        },
+        {
+          "path": "codex-rs/rollout-trace/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 rollout trace、raw events、reducer。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "rollout trace",
+            "raw events",
+            "reducer"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/rollout-trace/README.md",
+            "concept:codex-rs/rollout-trace/README.md:Rollout Trace",
+            "concept:codex-rs/rollout-trace/README.md:What This Gives Us",
+            "concept:codex-rs/rollout-trace/README.md:System Shape",
+            "concept:codex-rs/rollout-trace/README.md:Bundle Layout",
+            "concept:codex-rs/rollout-trace/README.md:Raw Evidence vs Reduced Graph",
+            "concept:codex-rs/rollout-trace/README.md:Multi-Agent v2",
+            "concept:codex-rs/rollout-trace/README.md:Reducer Invariants"
+          ]
+        },
+        {
+          "path": "codex-rs/rollout-trace/src/payload.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 RawTraceEventPayload、payload。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "RawTraceEventPayload",
+            "payload"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/rollout-trace/src/payload.rs",
+            "class:codex-rs/rollout-trace/src/payload.rs:RawPayloadRef",
+            "class:codex-rs/rollout-trace/src/payload.rs:RawPayloadKind"
+          ]
+        },
+        {
+          "path": "codex-rs/rollout-trace/src/inference.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 ThreadStarted、CodexTurnStarted、CodexTurnId。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ThreadStarted",
+            "CodexTurnStarted",
+            "CodexTurnId"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/rollout-trace/src/inference.rs",
+            "function:codex-rs/rollout-trace/src/inference.rs:disabled",
+            "function:codex-rs/rollout-trace/src/inference.rs:enabled",
+            "function:codex-rs/rollout-trace/src/inference.rs:start_attempt",
+            "function:codex-rs/rollout-trace/src/inference.rs:disabled#2",
+            "function:codex-rs/rollout-trace/src/inference.rs:inference_call_id",
+            "function:codex-rs/rollout-trace/src/inference.rs:add_request_headers",
+            "function:codex-rs/rollout-trace/src/inference.rs:record_started"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 spawn_agent、fork_turns、SpawnAgentForkMode。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "spawn_agent",
+            "fork_turns",
+            "SpawnAgentForkMode"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:new",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:tool_name",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:spec",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:handle",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:handle_spawn_agent",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:matches_kind",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:fork_mode"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 wait、AgentStatus。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "wait",
+            "AgentStatus"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs:new",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs:tool_name",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs:spec",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs:handle",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs:matches_kind",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs:from_timed_out",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs:log_preview"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/multi_agents_v2/followup_task.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是长程代理主题的证据点，包含 followup_task、TriggerTurn。它用于还原跨 turn、跨 session 和子代理的状态流转，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "followup_task",
+            "TriggerTurn"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/multi_agents_v2/followup_task.rs",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/followup_task.rs:tool_name",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/followup_task.rs:spec",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/followup_task.rs:handle",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/followup_task.rs:matches_kind",
+            "class:codex-rs/core/src/tools/handlers/multi_agents_v2/followup_task.rs:Handler"
+          ]
+        }
+      ]
+    },
+    "memory": {
+      "purpose": "定位 memory 读取、写入、consolidation、citation、session isolation 和 compaction 之间的证据链。",
+      "evidenceFiles": [
+        {
+          "path": "codex-rs/memories/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 memory pipeline、Phase 1、Phase 2、consolidation、raw_memories.md。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "memory pipeline",
+            "Phase 1",
+            "Phase 2",
+            "consolidation",
+            "raw_memories.md"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/memories/README.md",
+            "concept:codex-rs/memories/README.md:Memories",
+            "concept:codex-rs/memories/README.md:Crates",
+            "concept:codex-rs/memories/README.md:Prompt Templates",
+            "concept:codex-rs/memories/README.md:When it runs",
+            "concept:codex-rs/memories/README.md:Phase 1: Rollout Extraction (per-thread)",
+            "concept:codex-rs/memories/README.md:Phase 2: Global Consolidation",
+            "concept:codex-rs/memories/README.md:Why it is split into two phases"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/read/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 codex-memories-read。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "codex-memories-read"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/memories/read/src/lib.rs",
+            "function:codex-rs/memories/read/src/lib.rs:memory_root"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/read/src/citations.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 parse_memory_citation、thread_ids_from_memory_citation。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "parse_memory_citation",
+            "thread_ids_from_memory_citation"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/memories/read/src/citations.rs",
+            "function:codex-rs/memories/read/src/citations.rs:parse_memory_citation",
+            "function:codex-rs/memories/read/src/citations.rs:thread_ids_from_memory_citation",
+            "function:codex-rs/memories/read/src/citations.rs:parse_memory_citation_entry",
+            "function:codex-rs/memories/read/src/citations.rs:extract_block",
+            "function:codex-rs/memories/read/src/citations.rs:extract_ids_block"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/read/templates/memories/read_path.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 read path、template。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "read path",
+            "template"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/memories/read/templates/memories/read_path.md",
+            "concept:codex-rs/memories/read/templates/memories/read_path.md:Memory"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/write/src/phase1.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 phase1、stage1、raw_memory、rollout_summary。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "phase1",
+            "stage1",
+            "raw_memory",
+            "rollout_summary"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/memories/write/src/phase1.rs",
+            "function:codex-rs/memories/write/src/phase1.rs:run",
+            "function:codex-rs/memories/write/src/phase1.rs:prune",
+            "function:codex-rs/memories/write/src/phase1.rs:output_schema",
+            "function:codex-rs/memories/write/src/phase1.rs:claim_startup_jobs",
+            "function:codex-rs/memories/write/src/phase1.rs:build_request_context",
+            "function:codex-rs/memories/write/src/phase1.rs:run_jobs",
+            "function:codex-rs/memories/write/src/phase1.rs:aggregate_stats"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/write/src/phase2.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 phase2、consolidation、global lock。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "phase2",
+            "consolidation",
+            "global lock"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/memories/write/src/phase2.rs",
+            "function:codex-rs/memories/write/src/phase2.rs:run",
+            "function:codex-rs/memories/write/src/phase2.rs:sync_phase2_workspace_inputs",
+            "function:codex-rs/memories/write/src/phase2.rs:get_watermark",
+            "function:codex-rs/memories/write/src/phase2.rs:is_final_agent_status",
+            "function:codex-rs/memories/write/src/phase2.rs:emit_metrics",
+            "function:codex-rs/memories/write/src/phase2.rs:emit_token_usage_metrics",
+            "class:codex-rs/memories/write/src/phase2.rs:Claim"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/write/src/control.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 control、generate_memories、use_memories。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "control",
+            "generate_memories",
+            "use_memories"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/memories/write/src/control.rs",
+            "function:codex-rs/memories/write/src/control.rs:clear_memory_roots_contents",
+            "function:codex-rs/memories/write/src/control.rs:clear_memory_root_contents"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/write/src/guard.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 guard、redact、secrets。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "guard",
+            "redact",
+            "secrets"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/memories/write/src/guard.rs",
+            "function:codex-rs/memories/write/src/guard.rs:rate_limits_ok",
+            "function:codex-rs/memories/write/src/guard.rs:rate_limits_check",
+            "function:codex-rs/memories/write/src/guard.rs:snapshot_allows_startup",
+            "function:codex-rs/memories/write/src/guard.rs:window_allows_startup"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/write/templates/memories/consolidation.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 consolidation prompt。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "consolidation prompt"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/memories/write/templates/memories/consolidation.md",
+            "concept:codex-rs/memories/write/templates/memories/consolidation.md:Memory Writing Agent: Phase 2 (Consolidation)",
+            "concept:codex-rs/memories/write/templates/memories/consolidation.md:Task Group: <cwd / project / workflow / detail-task family; broad but distinguishable>",
+            "concept:codex-rs/memories/write/templates/memories/consolidation.md:Task 1: <task description, outcome>",
+            "concept:codex-rs/memories/write/templates/memories/consolidation.md:rollout_summary_files",
+            "concept:codex-rs/memories/write/templates/memories/consolidation.md:keywords",
+            "concept:codex-rs/memories/write/templates/memories/consolidation.md:Task 2: <task description, outcome>",
+            "concept:codex-rs/memories/write/templates/memories/consolidation.md:rollout_summary_files#2"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/mcp/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 memory MCP、read-only。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "memory MCP",
+            "read-only"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/memories/mcp/src/lib.rs"
+          ]
+        },
+        {
+          "path": "codex-rs/ext/memories/src/extension.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 extension、memories tools。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "extension",
+            "memories tools"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/ext/memories/src/extension.rs",
+            "function:codex-rs/ext/memories/src/extension.rs:from_config",
+            "function:codex-rs/ext/memories/src/extension.rs:contribute",
+            "function:codex-rs/ext/memories/src/extension.rs:on_thread_start",
+            "function:codex-rs/ext/memories/src/extension.rs:on_config_changed",
+            "function:codex-rs/ext/memories/src/extension.rs:tools",
+            "function:codex-rs/ext/memories/src/extension.rs:install",
+            "class:codex-rs/ext/memories/src/extension.rs:MemoriesExtension"
+          ]
+        },
+        {
+          "path": "codex-rs/state/src/runtime/memories.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 memory_stage1、memory_consolidate_global、memory_mode、polluted。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "memory_stage1",
+            "memory_consolidate_global",
+            "memory_mode",
+            "polluted"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/state/src/runtime/memories.rs",
+            "function:codex-rs/state/src/runtime/memories.rs:clear_memory_data",
+            "function:codex-rs/state/src/runtime/memories.rs:record_stage1_output_usage",
+            "function:codex-rs/state/src/runtime/memories.rs:claim_stage1_jobs_for_startup",
+            "function:codex-rs/state/src/runtime/memories.rs:list_stage1_outputs_for_global",
+            "function:codex-rs/state/src/runtime/memories.rs:prune_stage1_outputs_for_retention",
+            "function:codex-rs/state/src/runtime/memories.rs:get_phase2_input_selection",
+            "function:codex-rs/state/src/runtime/memories.rs:mark_thread_memory_mode_polluted"
+          ]
+        },
+        {
+          "path": "codex-rs/state/src/runtime/threads.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 get_thread_memory_mode、set_thread_memory_mode。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "get_thread_memory_mode",
+            "set_thread_memory_mode"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/state/src/runtime/threads.rs",
+            "function:codex-rs/state/src/runtime/threads.rs:get_thread",
+            "function:codex-rs/state/src/runtime/threads.rs:get_thread_memory_mode",
+            "function:codex-rs/state/src/runtime/threads.rs:set_thread_preview_if_empty",
+            "function:codex-rs/state/src/runtime/threads.rs:get_dynamic_tools",
+            "function:codex-rs/state/src/runtime/threads.rs:upsert_thread_spawn_edge",
+            "function:codex-rs/state/src/runtime/threads.rs:set_thread_spawn_edge_status",
+            "function:codex-rs/state/src/runtime/threads.rs:list_thread_spawn_children_with_status"
+          ]
+        },
+        {
+          "path": "codex-rs/protocol/src/memory_citation.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 MemoryCitation、citation_entries、rollout_ids。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "MemoryCitation",
+            "citation_entries",
+            "rollout_ids"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/memory_citation.rs",
+            "class:codex-rs/protocol/src/memory_citation.rs:MemoryCitation",
+            "class:codex-rs/protocol/src/memory_citation.rs:MemoryCitationEntry"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/stream_events_utils.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 strip_citations、record_stage1_output_usage、mark_thread_memory_mode_polluted_if_external_context。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "strip_citations",
+            "record_stage1_output_usage",
+            "mark_thread_memory_mode_polluted_if_external_context"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/stream_events_utils.rs",
+            "function:codex-rs/core/src/stream_events_utils.rs:image_generation_artifact_path",
+            "function:codex-rs/core/src/stream_events_utils.rs:strip_hidden_assistant_markup",
+            "function:codex-rs/core/src/stream_events_utils.rs:strip_hidden_assistant_markup_and_parse_memory_citation",
+            "function:codex-rs/core/src/stream_events_utils.rs:raw_assistant_output_text_from_item",
+            "function:codex-rs/core/src/stream_events_utils.rs:save_image_generation_result",
+            "function:codex-rs/core/src/stream_events_utils.rs:record_completed_response_item",
+            "function:codex-rs/core/src/stream_events_utils.rs:record_completed_response_item_with_finalized_facts"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/compact.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 compact、PreCompact、PostCompact。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "compact",
+            "PreCompact",
+            "PostCompact"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/compact.rs",
+            "function:codex-rs/core/src/compact.rs:should_use_remote_compact_task",
+            "function:codex-rs/core/src/compact.rs:run_inline_auto_compact_task",
+            "function:codex-rs/core/src/compact.rs:run_compact_task",
+            "function:codex-rs/core/src/compact.rs:run_compact_task_inner",
+            "function:codex-rs/core/src/compact.rs:run_compact_task_inner_impl",
+            "function:codex-rs/core/src/compact.rs:begin",
+            "function:codex-rs/core/src/compact.rs:track"
+          ]
+        },
+        {
+          "path": "codex-rs/hooks/src/events/compact.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是记忆完整性主题的证据点，包含 PreCompactRequest、PostCompactRequest、PreCompactOutcome。它用于分析记忆读写、引用、污染标记和压缩带来的信息变化，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "PreCompactRequest",
+            "PostCompactRequest",
+            "PreCompactOutcome"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/hooks/src/events/compact.rs",
+            "function:codex-rs/hooks/src/events/compact.rs:preview_pre",
+            "function:codex-rs/hooks/src/events/compact.rs:run_pre",
+            "function:codex-rs/hooks/src/events/compact.rs:pre_command_input_json",
+            "function:codex-rs/hooks/src/events/compact.rs:preview_post",
+            "function:codex-rs/hooks/src/events/compact.rs:run_post",
+            "function:codex-rs/hooks/src/events/compact.rs:post_command_input_json",
+            "function:codex-rs/hooks/src/events/compact.rs:parse_pre_completed"
+          ]
+        }
+      ]
+    },
+    "security": {
+      "purpose": "覆盖 approval policy、guardian risk、sandbox policy、exec policy、shell escalation、process hardening、MCP/tool control 与审计链路。",
+      "coverageChecklist": {
+        "approvalPolicy": true,
+        "guardianRisk": true,
+        "sandboxPolicy": true,
+        "execPolicyAndShellEscalation": true,
+        "processHardening": true,
+        "mcpToolControl": true,
+        "auditLogging": true
+      },
+      "evidenceFiles": [
+        {
+          "path": "docs/sandbox.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 sandbox、workspace-write、read-only、network。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "sandbox",
+            "workspace-write",
+            "read-only",
+            "network"
+          ],
+          "graphNodeIds": [
+            "document:docs/sandbox.md",
+            "concept:docs/sandbox.md:Sandbox & approvals"
+          ]
+        },
+        {
+          "path": "docs/execpolicy.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 exec policy、policy rules、approval。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "exec policy",
+            "policy rules",
+            "approval"
+          ],
+          "graphNodeIds": [
+            "document:docs/execpolicy.md",
+            "concept:docs/execpolicy.md:Execution policy"
+          ]
+        },
+        {
+          "path": "docs/exec.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 exec、command execution。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "exec",
+            "command execution"
+          ],
+          "graphNodeIds": [
+            "document:docs/exec.md",
+            "concept:docs/exec.md:Non-interactive mode"
+          ]
+        },
+        {
+          "path": "docs/config.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 approval_policy、sandbox_mode、config.toml。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "approval_policy",
+            "sandbox_mode",
+            "config.toml"
+          ],
+          "graphNodeIds": [
+            "document:docs/config.md",
+            "concept:docs/config.md:Configuration",
+            "concept:docs/config.md:Lifecycle hooks"
+          ]
+        },
+        {
+          "path": "codex-rs/protocol/src/approvals.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 AskForApproval、GuardianRiskLevel、ExecPolicyAmendment、ExecApprovalRequestEvent、ReviewDecision。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "AskForApproval",
+            "GuardianRiskLevel",
+            "ExecPolicyAmendment",
+            "ExecApprovalRequestEvent",
+            "ReviewDecision"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/approvals.rs",
+            "function:codex-rs/protocol/src/approvals.rs:new",
+            "function:codex-rs/protocol/src/approvals.rs:command",
+            "function:codex-rs/protocol/src/approvals.rs:from",
+            "function:codex-rs/protocol/src/approvals.rs:effective_approval_id",
+            "function:codex-rs/protocol/src/approvals.rs:effective_available_decisions",
+            "function:codex-rs/protocol/src/approvals.rs:default_available_decisions",
+            "function:codex-rs/protocol/src/approvals.rs:message"
+          ]
+        },
+        {
+          "path": "codex-rs/protocol/src/config_types.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 SandboxMode、ApprovalsReviewer。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "SandboxMode",
+            "ApprovalsReviewer"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/config_types.rs",
+            "function:codex-rs/protocol/src/config_types.rs:as_str",
+            "function:codex-rs/protocol/src/config_types.rs:fmt",
+            "function:codex-rs/protocol/src/config_types.rs:from_str",
+            "function:codex-rs/protocol/src/config_types.rs:deref",
+            "function:codex-rs/protocol/src/config_types.rs:fmt#2",
+            "function:codex-rs/protocol/src/config_types.rs:schema_name",
+            "function:codex-rs/protocol/src/config_types.rs:json_schema"
+          ]
+        },
+        {
+          "path": "codex-rs/protocol/src/models.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 PermissionProfile、FileSystemSandboxPolicy、NetworkSandboxPolicy、SandboxPolicy。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "PermissionProfile",
+            "FileSystemSandboxPolicy",
+            "NetworkSandboxPolicy",
+            "SandboxPolicy"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/models.rs",
+            "function:codex-rs/protocol/src/models.rs:requires_escalated_permissions",
+            "function:codex-rs/protocol/src/models.rs:requests_sandbox_override",
+            "function:codex-rs/protocol/src/models.rs:uses_additional_permissions",
+            "function:codex-rs/protocol/src/models.rs:is_empty",
+            "function:codex-rs/protocol/src/models.rs:from_read_write_roots",
+            "function:codex-rs/protocol/src/models.rs:explicit_path_entries",
+            "function:codex-rs/protocol/src/models.rs:legacy_read_write_roots"
+          ]
+        },
+        {
+          "path": "codex-rs/config/src/requirements_exec_policy.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 RequirementsExecPolicy、RequirementsExecPolicyToml。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "RequirementsExecPolicy",
+            "RequirementsExecPolicyToml"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/config/src/requirements_exec_policy.rs",
+            "function:codex-rs/config/src/requirements_exec_policy.rs:new",
+            "function:codex-rs/config/src/requirements_exec_policy.rs:eq",
+            "function:codex-rs/config/src/requirements_exec_policy.rs:as_ref",
+            "function:codex-rs/config/src/requirements_exec_policy.rs:policy_fingerprint",
+            "function:codex-rs/config/src/requirements_exec_policy.rs:as_decision",
+            "function:codex-rs/config/src/requirements_exec_policy.rs:to_policy",
+            "function:codex-rs/config/src/requirements_exec_policy.rs:to_requirements_policy"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/exec_policy.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 ExecPolicyManager、is_known_safe_command、command_might_be_dangerous、ExecApprovalRequest。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ExecPolicyManager",
+            "is_known_safe_command",
+            "command_might_be_dangerous",
+            "ExecApprovalRequest"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/exec_policy.rs",
+            "function:codex-rs/core/src/exec_policy.rs:child_uses_parent_exec_policy",
+            "function:codex-rs/core/src/exec_policy.rs:is_policy_match",
+            "function:codex-rs/core/src/exec_policy.rs:prompt_is_rejected_by_policy",
+            "function:codex-rs/core/src/exec_policy.rs:new",
+            "function:codex-rs/core/src/exec_policy.rs:load",
+            "function:codex-rs/core/src/exec_policy.rs:current",
+            "function:codex-rs/core/src/exec_policy.rs:create_exec_approval_requirement_for_command"
+          ]
+        },
+        {
+          "path": "codex-rs/execpolicy/src/policy.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 Policy、Rule、Decision。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Policy",
+            "Rule",
+            "Decision"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/execpolicy/src/policy.rs",
+            "function:codex-rs/execpolicy/src/policy.rs:new",
+            "function:codex-rs/execpolicy/src/policy.rs:from_parts",
+            "function:codex-rs/execpolicy/src/policy.rs:empty",
+            "function:codex-rs/execpolicy/src/policy.rs:rules",
+            "function:codex-rs/execpolicy/src/policy.rs:network_rules",
+            "function:codex-rs/execpolicy/src/policy.rs:host_executables",
+            "function:codex-rs/execpolicy/src/policy.rs:get_allowed_prefixes"
+          ]
+        },
+        {
+          "path": "codex-rs/execpolicy/src/decision.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 Decision。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Decision"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/execpolicy/src/decision.rs",
+            "function:codex-rs/execpolicy/src/decision.rs:parse",
+            "class:codex-rs/execpolicy/src/decision.rs:Decision"
+          ]
+        },
+        {
+          "path": "codex-rs/execpolicy/src/amend.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 amend、ApprovedExecpolicyAmendment。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "amend",
+            "ApprovedExecpolicyAmendment"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/execpolicy/src/amend.rs",
+            "function:codex-rs/execpolicy/src/amend.rs:blocking_append_allow_prefix_rule",
+            "function:codex-rs/execpolicy/src/amend.rs:blocking_append_network_rule",
+            "function:codex-rs/execpolicy/src/amend.rs:append_rule_line",
+            "function:codex-rs/execpolicy/src/amend.rs:append_locked_line",
+            "class:codex-rs/execpolicy/src/amend.rs:AmendError"
+          ]
+        },
+        {
+          "path": "codex-rs/shell-command/src/command_safety/is_safe_command.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 is_known_safe_command、safe command。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "is_known_safe_command",
+            "safe command"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/shell-command/src/command_safety/is_safe_command.rs",
+            "function:codex-rs/shell-command/src/command_safety/is_safe_command.rs:is_known_safe_command",
+            "function:codex-rs/shell-command/src/command_safety/is_safe_command.rs:is_safe_powershell_words",
+            "function:codex-rs/shell-command/src/command_safety/is_safe_command.rs:is_safe_to_call_with_exec",
+            "function:codex-rs/shell-command/src/command_safety/is_safe_command.rs:is_safe_git_command",
+            "function:codex-rs/shell-command/src/command_safety/is_safe_command.rs:git_branch_is_read_only",
+            "function:codex-rs/shell-command/src/command_safety/is_safe_command.rs:matches",
+            "function:codex-rs/shell-command/src/command_safety/is_safe_command.rs:git_matches_option_pattern"
+          ]
+        },
+        {
+          "path": "codex-rs/shell-command/src/command_safety/is_dangerous_command.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 command_might_be_dangerous、is_dangerous_powershell_words。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "command_might_be_dangerous",
+            "is_dangerous_powershell_words"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs",
+            "function:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs:command_might_be_dangerous",
+            "function:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs:is_dangerous_powershell_words",
+            "function:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs:is_git_global_option_with_value",
+            "function:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs:is_git_global_option_with_inline_value",
+            "function:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs:executable_name_lookup_key",
+            "function:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs:find_git_subcommand",
+            "function:codex-rs/shell-command/src/command_safety/is_dangerous_command.rs:is_dangerous_to_call_with_exec"
+          ]
+        },
+        {
+          "path": "codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 PowerShell、dangerous commands、Remove-Item。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "PowerShell",
+            "dangerous commands",
+            "Remove-Item"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs",
+            "function:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs:is_dangerous_command_windows",
+            "function:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs:is_dangerous_powershell",
+            "function:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs:is_dangerous_powershell_words",
+            "function:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs:is_dangerous_cmd",
+            "function:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs:is_direct_gui_launch",
+            "function:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs:split_embedded_cmd_operators",
+            "function:codex-rs/shell-command/src/command_safety/windows_dangerous_commands.rs:has_force_delete_cmdlet"
+          ]
+        },
+        {
+          "path": "codex-rs/shell-command/src/command_safety/powershell_parser.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 PowerShell parser、command segments。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "PowerShell parser",
+            "command segments"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/shell-command/src/command_safety/powershell_parser.rs",
+            "function:codex-rs/shell-command/src/command_safety/powershell_parser.rs:parse_with_powershell_ast",
+            "function:codex-rs/shell-command/src/command_safety/powershell_parser.rs:try_parse_powershell_ast_commands",
+            "function:codex-rs/shell-command/src/command_safety/powershell_parser.rs:parse_with_cached_process",
+            "function:codex-rs/shell-command/src/command_safety/powershell_parser.rs:encode_powershell_base64",
+            "function:codex-rs/shell-command/src/command_safety/powershell_parser.rs:encoded_parser_script",
+            "function:codex-rs/shell-command/src/command_safety/powershell_parser.rs:spawn",
+            "function:codex-rs/shell-command/src/command_safety/powershell_parser.rs:parse"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/shell.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 ShellHandler、sandbox_permissions、AskForApproval::OnRequest。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ShellHandler",
+            "sandbox_permissions",
+            "AskForApproval::OnRequest"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/shell.rs",
+            "function:codex-rs/core/src/tools/handlers/shell.rs:shell_command_payload_command",
+            "function:codex-rs/core/src/tools/handlers/shell.rs:run_exec_like",
+            "class:codex-rs/core/src/tools/handlers/shell.rs:RunExecLikeArgs"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 ExecCommandHandler、require_escalated、PreToolUsePayload、PostToolUsePayload。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ExecCommandHandler",
+            "require_escalated",
+            "PreToolUsePayload",
+            "PostToolUsePayload"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs",
+            "function:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs:default",
+            "function:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs:new",
+            "function:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs:tool_name",
+            "function:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs:spec",
+            "function:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs:supports_parallel_tool_calls",
+            "function:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs:handle",
+            "function:codex-rs/core/src/tools/handlers/unified_exec/exec_command.rs:matches_kind"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 unix escalation、InterceptedExecPolicyContext、ApprovalDecision。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "unix escalation",
+            "InterceptedExecPolicyContext",
+            "ApprovalDecision"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs",
+            "function:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs:approval_sandbox_permissions",
+            "function:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs:try_run_zsh_fork",
+            "function:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs:prepare_unified_exec_zsh_fork",
+            "function:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs:execve_prompt_is_rejected_by_policy",
+            "function:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs:decision_driven_by_policy",
+            "function:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs:shell_request_escalation_execution",
+            "function:codex-rs/core/src/tools/runtimes/shell/unix_escalation.rs:prompt"
+          ]
+        },
+        {
+          "path": "codex-rs/shell-escalation/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 shell escalation、execve wrapper。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "shell escalation",
+            "execve wrapper"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/shell-escalation/README.md",
+            "concept:codex-rs/shell-escalation/README.md:codex-shell-escalation",
+            "concept:codex-rs/shell-escalation/README.md:Patched zsh"
+          ]
+        },
+        {
+          "path": "codex-rs/shell-escalation/src/unix/escalation_policy.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 EscalationPolicy、prefix rule。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "EscalationPolicy",
+            "prefix rule"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/shell-escalation/src/unix/escalation_policy.rs",
+            "class:codex-rs/shell-escalation/src/unix/escalation_policy.rs:EscalationPolicy"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/guardian/review.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 GuardianApprovalRequest、review、risk_level。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "GuardianApprovalRequest",
+            "review",
+            "risk_level"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/guardian/review.rs",
+            "function:codex-rs/core/src/guardian/review.rs:new_guardian_review_id",
+            "function:codex-rs/core/src/guardian/review.rs:guardian_rejection_message",
+            "function:codex-rs/core/src/guardian/review.rs:guardian_timeout_message",
+            "function:codex-rs/core/src/guardian/review.rs:prompt_build",
+            "function:codex-rs/core/src/guardian/review.rs:session",
+            "function:codex-rs/core/src/guardian/review.rs:parse",
+            "function:codex-rs/core/src/guardian/review.rs:failure_reason"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/guardian/approval_request.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 GuardianApprovalRequest、Shell、ExecCommand、ApplyPatch。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "GuardianApprovalRequest",
+            "Shell",
+            "ExecCommand",
+            "ApplyPatch"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/guardian/approval_request.rs",
+            "function:codex-rs/core/src/guardian/approval_request.rs:serialize_guardian_action",
+            "function:codex-rs/core/src/guardian/approval_request.rs:serialize_command_guardian_action",
+            "function:codex-rs/core/src/guardian/approval_request.rs:command_assessment_action",
+            "function:codex-rs/core/src/guardian/approval_request.rs:guardian_command_source_tool_name",
+            "function:codex-rs/core/src/guardian/approval_request.rs:truncate_guardian_action_value",
+            "function:codex-rs/core/src/guardian/approval_request.rs:guardian_approval_request_to_json",
+            "function:codex-rs/core/src/guardian/approval_request.rs:guardian_assessment_action"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/guardian/policy_template.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 guardian policy、risk_level。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "guardian policy",
+            "risk_level"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/core/src/guardian/policy_template.md",
+            "concept:codex-rs/core/src/guardian/policy_template.md:Evidence Handling",
+            "concept:codex-rs/core/src/guardian/policy_template.md:User Authorization Scoring",
+            "concept:codex-rs/core/src/guardian/policy_template.md:Base Risk Taxonomy",
+            "concept:codex-rs/core/src/guardian/policy_template.md:Policy Configuration",
+            "concept:codex-rs/core/src/guardian/policy_template.md:Investigation Guidelines",
+            "concept:codex-rs/core/src/guardian/policy_template.md:Outcome Policy"
+          ]
+        },
+        {
+          "path": "codex-rs/ext/guardian/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 guardian extension。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "guardian extension"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/ext/guardian/src/lib.rs",
+            "function:codex-rs/ext/guardian/src/lib.rs:new",
+            "function:codex-rs/ext/guardian/src/lib.rs:spawn_subagent",
+            "function:codex-rs/ext/guardian/src/lib.rs:forked_from_thread_id",
+            "function:codex-rs/ext/guardian/src/lib.rs:on_thread_start",
+            "function:codex-rs/ext/guardian/src/lib.rs:install",
+            "class:codex-rs/ext/guardian/src/lib.rs:GuardianExtension",
+            "class:codex-rs/ext/guardian/src/lib.rs:GuardianThreadContext"
+          ]
+        },
+        {
+          "path": "codex-rs/sandboxing/src/manager.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 SandboxManager、landlock、seatbelt、bwrap。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "SandboxManager",
+            "landlock",
+            "seatbelt",
+            "bwrap"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/sandboxing/src/manager.rs",
+            "function:codex-rs/sandboxing/src/manager.rs:as_metric_tag",
+            "function:codex-rs/sandboxing/src/manager.rs:get_platform_sandbox",
+            "function:codex-rs/sandboxing/src/manager.rs:fmt",
+            "function:codex-rs/sandboxing/src/manager.rs:new",
+            "function:codex-rs/sandboxing/src/manager.rs:select_initial",
+            "function:codex-rs/sandboxing/src/manager.rs:transform",
+            "function:codex-rs/sandboxing/src/manager.rs:compatibility_sandbox_policy_for_permission_profile"
+          ]
+        },
+        {
+          "path": "codex-rs/sandboxing/src/landlock.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 Landlock。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Landlock"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/sandboxing/src/landlock.rs",
+            "function:codex-rs/sandboxing/src/landlock.rs:allow_network_for_proxy",
+            "function:codex-rs/sandboxing/src/landlock.rs:create_linux_sandbox_command_args_for_permission_profile",
+            "function:codex-rs/sandboxing/src/landlock.rs:create_linux_sandbox_command_args"
+          ]
+        },
+        {
+          "path": "codex-rs/sandboxing/src/seatbelt.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 seatbelt、sandbox-exec。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "seatbelt",
+            "sandbox-exec"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/sandboxing/src/seatbelt.rs",
+            "function:codex-rs/sandboxing/src/seatbelt.rs:is_loopback_host",
+            "function:codex-rs/sandboxing/src/seatbelt.rs:proxy_scheme_default_port",
+            "function:codex-rs/sandboxing/src/seatbelt.rs:proxy_loopback_ports_from_env",
+            "function:codex-rs/sandboxing/src/seatbelt.rs:default",
+            "function:codex-rs/sandboxing/src/seatbelt.rs:proxy_policy_inputs",
+            "function:codex-rs/sandboxing/src/seatbelt.rs:normalize_path_for_sandbox",
+            "function:codex-rs/sandboxing/src/seatbelt.rs:unix_socket_path_params"
+          ]
+        },
+        {
+          "path": "codex-rs/sandboxing/src/bwrap.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 bubblewrap、bwrap。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "bubblewrap",
+            "bwrap"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/sandboxing/src/bwrap.rs",
+            "function:codex-rs/sandboxing/src/bwrap.rs:system_bwrap_warning",
+            "function:codex-rs/sandboxing/src/bwrap.rs:should_warn_about_system_bwrap",
+            "function:codex-rs/sandboxing/src/bwrap.rs:system_bwrap_warning_for_path",
+            "function:codex-rs/sandboxing/src/bwrap.rs:system_bwrap_has_user_namespace_access",
+            "function:codex-rs/sandboxing/src/bwrap.rs:is_wsl1",
+            "function:codex-rs/sandboxing/src/bwrap.rs:proc_version_indicates_wsl1",
+            "function:codex-rs/sandboxing/src/bwrap.rs:is_user_namespace_failure"
+          ]
+        },
+        {
+          "path": "codex-rs/windows-sandbox-rs/src/policy.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 Windows sandbox、policy。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Windows sandbox",
+            "policy"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/windows-sandbox-rs/src/policy.rs",
+            "function:codex-rs/windows-sandbox-rs/src/policy.rs:parse_policy"
+          ]
+        },
+        {
+          "path": "codex-rs/windows-sandbox-rs/src/process.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 process、Windows sandbox。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "process",
+            "Windows sandbox"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/windows-sandbox-rs/src/process.rs",
+            "function:codex-rs/windows-sandbox-rs/src/process.rs:make_env_block",
+            "function:codex-rs/windows-sandbox-rs/src/process.rs:ensure_inheritable_stdio",
+            "function:codex-rs/windows-sandbox-rs/src/process.rs:create_process_as_user",
+            "function:codex-rs/windows-sandbox-rs/src/process.rs:spawn_process_with_pipes",
+            "function:codex-rs/windows-sandbox-rs/src/process.rs:read_handle_loop",
+            "class:codex-rs/windows-sandbox-rs/src/process.rs:CreatedProcess",
+            "class:codex-rs/windows-sandbox-rs/src/process.rs:StdinMode"
+          ]
+        },
+        {
+          "path": "codex-rs/windows-sandbox-rs/src/audit.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 audit、Windows sandbox。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "audit",
+            "Windows sandbox"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/windows-sandbox-rs/src/audit.rs",
+            "function:codex-rs/windows-sandbox-rs/src/audit.rs:unique_push",
+            "function:codex-rs/windows-sandbox-rs/src/audit.rs:gather_candidates",
+            "function:codex-rs/windows-sandbox-rs/src/audit.rs:path_has_world_write_allow",
+            "function:codex-rs/windows-sandbox-rs/src/audit.rs:audit_everyone_writable",
+            "function:codex-rs/windows-sandbox-rs/src/audit.rs:apply_world_writable_scan_and_denies",
+            "function:codex-rs/windows-sandbox-rs/src/audit.rs:apply_world_writable_scan_and_denies_for_permissions",
+            "function:codex-rs/windows-sandbox-rs/src/audit.rs:apply_capability_denies_for_world_writable_for_permissions"
+          ]
+        },
+        {
+          "path": "codex-rs/process-hardening/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 process hardening、macOS、Windows。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "process hardening",
+            "macOS",
+            "Windows"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/process-hardening/README.md",
+            "concept:codex-rs/process-hardening/README.md:codex-process-hardening"
+          ]
+        },
+        {
+          "path": "codex-rs/process-hardening/src/lib.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 harden_process、process hardening。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "harden_process",
+            "process hardening"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/process-hardening/src/lib.rs",
+            "function:codex-rs/process-hardening/src/lib.rs:pre_main_hardening",
+            "function:codex-rs/process-hardening/src/lib.rs:pre_main_hardening_linux",
+            "function:codex-rs/process-hardening/src/lib.rs:disable_process_dumping",
+            "function:codex-rs/process-hardening/src/lib.rs:pre_main_hardening_bsd",
+            "function:codex-rs/process-hardening/src/lib.rs:pre_main_hardening_macos",
+            "function:codex-rs/process-hardening/src/lib.rs:set_core_file_size_limit_to_zero",
+            "function:codex-rs/process-hardening/src/lib.rs:pre_main_hardening_windows"
+          ]
+        },
+        {
+          "path": "codex-rs/codex-mcp/src/connection_manager.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 McpConnectionManager、tools、call_tool。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpConnectionManager",
+            "tools",
+            "call_tool"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/codex-mcp/src/connection_manager.rs",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:new_uninitialized",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:new_uninitialized_with_permission_profile",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:has_servers",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:begin_shutdown",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:shutdown",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:server_origin",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:server_pollutes_memory"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/mcp_tool_call.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 McpToolCall、CallToolResult。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpToolCall",
+            "CallToolResult"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/mcp_tool_call.rs",
+            "function:codex-rs/core/src/mcp_tool_call.rs:handle_mcp_tool_call",
+            "function:codex-rs/core/src/mcp_tool_call.rs:handle_approved_mcp_tool_call",
+            "function:codex-rs/core/src/mcp_tool_call.rs:emit_mcp_call_metrics",
+            "function:codex-rs/core/src/mcp_tool_call.rs:mcp_call_metric_tags",
+            "function:codex-rs/core/src/mcp_tool_call.rs:mcp_tool_call_span",
+            "function:codex-rs/core/src/mcp_tool_call.rs:record_server_fields",
+            "function:codex-rs/core/src/mcp_tool_call.rs:record_mcp_result_span_telemetry"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/mcp_tool_exposure.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 McpToolExposure。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpToolExposure"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/mcp_tool_exposure.rs",
+            "function:codex-rs/core/src/mcp_tool_exposure.rs:build_mcp_tool_exposure",
+            "function:codex-rs/core/src/mcp_tool_exposure.rs:filter_non_codex_apps_mcp_tools_only",
+            "function:codex-rs/core/src/mcp_tool_exposure.rs:filter_codex_apps_mcp_tools",
+            "class:codex-rs/core/src/mcp_tool_exposure.rs:McpToolExposure"
+          ]
+        },
+        {
+          "path": "codex-rs/protocol/src/mcp_approval_meta.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 McpApprovalMeta。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpApprovalMeta"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/mcp_approval_meta.rs"
+          ]
+        },
+        {
+          "path": "codex-rs/hooks/src/events/pre_tool_use.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 PreToolUse、HookEventName。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "PreToolUse",
+            "HookEventName"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/hooks/src/events/pre_tool_use.rs",
+            "function:codex-rs/hooks/src/events/pre_tool_use.rs:preview",
+            "function:codex-rs/hooks/src/events/pre_tool_use.rs:run",
+            "function:codex-rs/hooks/src/events/pre_tool_use.rs:latest_updated_input",
+            "function:codex-rs/hooks/src/events/pre_tool_use.rs:command_input_json",
+            "function:codex-rs/hooks/src/events/pre_tool_use.rs:parse_completed",
+            "function:codex-rs/hooks/src/events/pre_tool_use.rs:serialization_failure_outcome",
+            "class:codex-rs/hooks/src/events/pre_tool_use.rs:PreToolUseRequest"
+          ]
+        },
+        {
+          "path": "codex-rs/hooks/src/events/post_tool_use.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 PostToolUse、HookEventName。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "PostToolUse",
+            "HookEventName"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/hooks/src/events/post_tool_use.rs",
+            "function:codex-rs/hooks/src/events/post_tool_use.rs:preview",
+            "function:codex-rs/hooks/src/events/post_tool_use.rs:run",
+            "function:codex-rs/hooks/src/events/post_tool_use.rs:command_input_json",
+            "function:codex-rs/hooks/src/events/post_tool_use.rs:parse_completed",
+            "function:codex-rs/hooks/src/events/post_tool_use.rs:serialization_failure_outcome",
+            "class:codex-rs/hooks/src/events/post_tool_use.rs:PostToolUseRequest",
+            "class:codex-rs/hooks/src/events/post_tool_use.rs:PostToolUseOutcome"
+          ]
+        },
+        {
+          "path": "codex-rs/rollout-trace/src/raw_event.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 RawTraceEventPayload。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "RawTraceEventPayload"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/rollout-trace/src/raw_event.rs",
+            "function:codex-rs/rollout-trace/src/raw_event.rs:raw_payload_refs",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawTraceEvent",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawTraceEventContext",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawToolCallRequester",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawTraceEventPayload"
+          ]
+        },
+        {
+          "path": "codex-rs/otel/src/events/session_telemetry.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 SessionTelemetry。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "SessionTelemetry"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/otel/src/events/session_telemetry.rs",
+            "function:codex-rs/otel/src/events/session_telemetry.rs:trace_field_value",
+            "function:codex-rs/otel/src/events/session_telemetry.rs:with_auth_env",
+            "function:codex-rs/otel/src/events/session_telemetry.rs:with_model",
+            "function:codex-rs/otel/src/events/session_telemetry.rs:with_metrics_service_name",
+            "function:codex-rs/otel/src/events/session_telemetry.rs:with_metrics",
+            "function:codex-rs/otel/src/events/session_telemetry.rs:with_metrics_without_metadata_tags",
+            "function:codex-rs/otel/src/events/session_telemetry.rs:with_metrics_config"
+          ]
+        },
+        {
+          "path": "codex-rs/app-server/src/app_server_tracing.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是安全控制主题的证据点，包含 tracing、app-server。它用于审查命令执行、审批、沙箱、guardian 与审计控制，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "tracing",
+            "app-server"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/app-server/src/app_server_tracing.rs",
+            "function:codex-rs/app-server/src/app_server_tracing.rs:request_span",
+            "function:codex-rs/app-server/src/app_server_tracing.rs:typed_request_span",
+            "function:codex-rs/app-server/src/app_server_tracing.rs:transport_name",
+            "function:codex-rs/app-server/src/app_server_tracing.rs:app_server_request_span_template",
+            "function:codex-rs/app-server/src/app_server_tracing.rs:record_client_info",
+            "function:codex-rs/app-server/src/app_server_tracing.rs:attach_parent_context",
+            "function:codex-rs/app-server/src/app_server_tracing.rs:client_name"
+          ]
+        }
+      ]
+    },
+    "prompt_security": {
+      "purpose": "定位 instruction hierarchy、repo instructions、skills/plugins instructions、tool output 和间接 prompt injection 的主要入口。",
+      "evidenceFiles": [
+        {
+          "path": "AGENTS.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 AGENTS.md、instructions、scope。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "AGENTS.md",
+            "instructions",
+            "scope"
+          ],
+          "graphNodeIds": [
+            "document:AGENTS.md",
+            "concept:AGENTS.md:Rust/codex-rs",
+            "concept:AGENTS.md:The `codex-core` crate",
+            "concept:AGENTS.md:TUI style conventions",
+            "concept:AGENTS.md:TUI code conventions",
+            "concept:AGENTS.md:TUI Styling (ratatui)",
+            "concept:AGENTS.md:Text wrapping",
+            "concept:AGENTS.md:Tests"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/context/available_skills_instructions.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 available skills、SKILL.md、instructions。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "available skills",
+            "SKILL.md",
+            "instructions"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/context/available_skills_instructions.rs",
+            "function:codex-rs/core/src/context/available_skills_instructions.rs:from",
+            "function:codex-rs/core/src/context/available_skills_instructions.rs:role",
+            "function:codex-rs/core/src/context/available_skills_instructions.rs:markers",
+            "function:codex-rs/core/src/context/available_skills_instructions.rs:type_markers",
+            "function:codex-rs/core/src/context/available_skills_instructions.rs:body",
+            "class:codex-rs/core/src/context/available_skills_instructions.rs:AvailableSkillsInstructions"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/context/available_plugins_instructions.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 plugins、instructions。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "plugins",
+            "instructions"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/context/available_plugins_instructions.rs",
+            "function:codex-rs/core/src/context/available_plugins_instructions.rs:from_plugins",
+            "function:codex-rs/core/src/context/available_plugins_instructions.rs:role",
+            "function:codex-rs/core/src/context/available_plugins_instructions.rs:markers",
+            "function:codex-rs/core/src/context/available_plugins_instructions.rs:type_markers",
+            "function:codex-rs/core/src/context/available_plugins_instructions.rs:body",
+            "class:codex-rs/core/src/context/available_plugins_instructions.rs:AvailablePluginsInstructions"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/context/skill_instructions.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 skill instructions、SKILL.md。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "skill instructions",
+            "SKILL.md"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/context/skill_instructions.rs",
+            "function:codex-rs/core/src/context/skill_instructions.rs:from",
+            "function:codex-rs/core/src/context/skill_instructions.rs:role",
+            "function:codex-rs/core/src/context/skill_instructions.rs:markers",
+            "function:codex-rs/core/src/context/skill_instructions.rs:type_markers",
+            "function:codex-rs/core/src/context/skill_instructions.rs:body",
+            "class:codex-rs/core/src/context/skill_instructions.rs:SkillInstructions"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/context/plugin_instructions.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 plugin instructions。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "plugin instructions"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/context/plugin_instructions.rs",
+            "function:codex-rs/core/src/context/plugin_instructions.rs:new",
+            "function:codex-rs/core/src/context/plugin_instructions.rs:role",
+            "function:codex-rs/core/src/context/plugin_instructions.rs:markers",
+            "function:codex-rs/core/src/context/plugin_instructions.rs:type_markers",
+            "function:codex-rs/core/src/context/plugin_instructions.rs:body",
+            "class:codex-rs/core/src/context/plugin_instructions.rs:PluginInstructions"
+          ]
+        },
+        {
+          "path": "codex-rs/core-skills/src/injection.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 skill injection、instructions。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "skill injection",
+            "instructions"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core-skills/src/injection.rs",
+            "function:codex-rs/core-skills/src/injection.rs:build_skill_injections",
+            "function:codex-rs/core-skills/src/injection.rs:emit_skill_injected_metric",
+            "function:codex-rs/core-skills/src/injection.rs:collect_explicit_skill_mentions",
+            "function:codex-rs/core-skills/src/injection.rs:is_empty",
+            "function:codex-rs/core-skills/src/injection.rs:plain_names",
+            "function:codex-rs/core-skills/src/injection.rs:paths",
+            "function:codex-rs/core-skills/src/injection.rs:tool_kind_for_path"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/registry.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 ToolExecutor、PreToolUsePayload、PostToolUsePayload。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ToolExecutor",
+            "PreToolUsePayload",
+            "PostToolUsePayload"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/registry.rs",
+            "function:codex-rs/core/src/tools/registry.rs:into_response",
+            "function:codex-rs/core/src/tools/registry.rs:code_mode_result",
+            "function:codex-rs/core/src/tools/registry.rs:override_tool_exposure",
+            "function:codex-rs/core/src/tools/registry.rs:tool_name",
+            "function:codex-rs/core/src/tools/registry.rs:spec",
+            "function:codex-rs/core/src/tools/registry.rs:exposure",
+            "function:codex-rs/core/src/tools/registry.rs:supports_parallel_tool_calls"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/mcp.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 McpHandler、tool output、ToolPayload。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpHandler",
+            "tool output",
+            "ToolPayload"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/mcp.rs",
+            "function:codex-rs/core/src/tools/handlers/mcp.rs:new",
+            "function:codex-rs/core/src/tools/handlers/mcp.rs:tool_name",
+            "function:codex-rs/core/src/tools/handlers/mcp.rs:spec",
+            "function:codex-rs/core/src/tools/handlers/mcp.rs:supports_parallel_tool_calls",
+            "function:codex-rs/core/src/tools/handlers/mcp.rs:handle",
+            "function:codex-rs/core/src/tools/handlers/mcp.rs:search_info",
+            "function:codex-rs/core/src/tools/handlers/mcp.rs:telemetry_tags"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/stream_events_utils.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 strip_hidden_assistant_markup、strip_citations、proposed_plan。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "strip_hidden_assistant_markup",
+            "strip_citations",
+            "proposed_plan"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/stream_events_utils.rs",
+            "function:codex-rs/core/src/stream_events_utils.rs:image_generation_artifact_path",
+            "function:codex-rs/core/src/stream_events_utils.rs:strip_hidden_assistant_markup",
+            "function:codex-rs/core/src/stream_events_utils.rs:strip_hidden_assistant_markup_and_parse_memory_citation",
+            "function:codex-rs/core/src/stream_events_utils.rs:raw_assistant_output_text_from_item",
+            "function:codex-rs/core/src/stream_events_utils.rs:save_image_generation_result",
+            "function:codex-rs/core/src/stream_events_utils.rs:record_completed_response_item",
+            "function:codex-rs/core/src/stream_events_utils.rs:record_completed_response_item_with_finalized_facts"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/context/prompts/permissions/sandbox_mode/workspace_write.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 workspace-write、permission prompt。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "workspace-write",
+            "permission prompt"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/core/src/context/prompts/permissions/sandbox_mode/workspace_write.md"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 approval policy、on-request。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "approval policy",
+            "on-request"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md",
+            "concept:codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md:Escalation Requests",
+            "concept:codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md:How to request escalation",
+            "concept:codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md:When to request escalation",
+            "concept:codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md:prefix_rule guidance",
+            "concept:codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md:Banned prefix_rules",
+            "concept:codex-rs/core/src/context/prompts/permissions/approval_policy/on_request.md:Examples"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/consequential_tool_message_templates.json",
+          "kind": "json",
+          "exists": true,
+          "whyRelevant": "该文件是提示安全主题的证据点，包含 consequential tool、templates。它用于识别指令来源、信任边界和工具输出进入上下文的路径，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "consequential tool",
+            "templates"
+          ],
+          "graphNodeIds": [
+            "config:codex-rs/core/src/consequential_tool_message_templates.json",
+            "concept:codex-rs/core/src/consequential_tool_message_templates.json:schema_version",
+            "concept:codex-rs/core/src/consequential_tool_message_templates.json:templates"
+          ]
+        }
+      ],
+      "unknowns": [
+        "当前证据包能定位指令来源和工具输出边界，但没有覆盖完整的对抗性测试夹具；测试结论需要后续以专门用例确认。"
+      ]
+    },
+    "tools_mcp": {
+      "purpose": "梳理 MCP、tools、plugins、skills、connectors 如何进入 agent 工具平面，以及 tool call 如何被列举、暴露、分发和审计。",
+      "evidenceFiles": [
+        {
+          "path": "codex-rs/codex-mcp/src/connection_manager.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 McpConnectionManager、list_tools、call_tool。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpConnectionManager",
+            "list_tools",
+            "call_tool"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/codex-mcp/src/connection_manager.rs",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:new_uninitialized",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:new_uninitialized_with_permission_profile",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:has_servers",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:begin_shutdown",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:shutdown",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:server_origin",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:server_pollutes_memory"
+          ]
+        },
+        {
+          "path": "codex-rs/codex-mcp/src/tools.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 tools、MCP。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "tools",
+            "MCP"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/codex-mcp/src/tools.rs",
+            "function:codex-rs/codex-mcp/src/tools.rs:canonical_tool_name",
+            "function:codex-rs/codex-mcp/src/tools.rs:declared_openai_file_input_param_names",
+            "function:codex-rs/codex-mcp/src/tools.rs:from_config",
+            "function:codex-rs/codex-mcp/src/tools.rs:allows",
+            "function:codex-rs/codex-mcp/src/tools.rs:tool_with_model_visible_input_schema",
+            "function:codex-rs/codex-mcp/src/tools.rs:filter_tools",
+            "function:codex-rs/codex-mcp/src/tools.rs:normalize_tools_for_model"
+          ]
+        },
+        {
+          "path": "codex-rs/codex-mcp/src/runtime.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 McpRuntimeContext。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpRuntimeContext"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/codex-mcp/src/runtime.rs",
+            "function:codex-rs/codex-mcp/src/runtime.rs:new",
+            "function:codex-rs/codex-mcp/src/runtime.rs:local_stdio_fallback_cwd",
+            "function:codex-rs/codex-mcp/src/runtime.rs:resolve_server_environment",
+            "function:codex-rs/codex-mcp/src/runtime.rs:ensure_remote_stdio_cwd",
+            "function:codex-rs/codex-mcp/src/runtime.rs:emit_duration",
+            "class:codex-rs/codex-mcp/src/runtime.rs:SandboxState",
+            "class:codex-rs/codex-mcp/src/runtime.rs:McpRuntimeContext"
+          ]
+        },
+        {
+          "path": "codex-rs/rmcp-client/src/rmcp_client.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 rmcp、client。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "rmcp",
+            "client"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/rmcp-client/src/rmcp_client.rs",
+            "function:codex-rs/rmcp-client/src/rmcp_client.rs:new",
+            "function:codex-rs/rmcp-client/src/rmcp_client.rs:enter",
+            "function:codex-rs/rmcp-client/src/rmcp_client.rs:subscribe",
+            "function:codex-rs/rmcp-client/src/rmcp_client.rs:drop",
+            "function:codex-rs/rmcp-client/src/rmcp_client.rs:active_time_timeout",
+            "function:codex-rs/rmcp-client/src/rmcp_client.rs:from",
+            "function:codex-rs/rmcp-client/src/rmcp_client.rs:from#2"
+          ]
+        },
+        {
+          "path": "codex-rs/rmcp-client/src/stdio_server_launcher.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 stdio、server launcher。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "stdio",
+            "server launcher"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/rmcp-client/src/stdio_server_launcher.rs",
+            "function:codex-rs/rmcp-client/src/stdio_server_launcher.rs:send",
+            "function:codex-rs/rmcp-client/src/stdio_server_launcher.rs:receive",
+            "function:codex-rs/rmcp-client/src/stdio_server_launcher.rs:close",
+            "function:codex-rs/rmcp-client/src/stdio_server_launcher.rs:process_handle",
+            "function:codex-rs/rmcp-client/src/stdio_server_launcher.rs:new",
+            "function:codex-rs/rmcp-client/src/stdio_server_launcher.rs:new#2",
+            "function:codex-rs/rmcp-client/src/stdio_server_launcher.rs:launch"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/mcp.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 mcp、core。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "mcp",
+            "core"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/mcp.rs",
+            "function:codex-rs/core/src/mcp.rs:new",
+            "function:codex-rs/core/src/mcp.rs:configured_servers",
+            "function:codex-rs/core/src/mcp.rs:effective_servers",
+            "function:codex-rs/core/src/mcp.rs:tool_plugin_provenance",
+            "class:codex-rs/core/src/mcp.rs:McpManager"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/mcp_tool_call.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 McpToolCall、CallToolResult。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpToolCall",
+            "CallToolResult"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/mcp_tool_call.rs",
+            "function:codex-rs/core/src/mcp_tool_call.rs:handle_mcp_tool_call",
+            "function:codex-rs/core/src/mcp_tool_call.rs:handle_approved_mcp_tool_call",
+            "function:codex-rs/core/src/mcp_tool_call.rs:emit_mcp_call_metrics",
+            "function:codex-rs/core/src/mcp_tool_call.rs:mcp_call_metric_tags",
+            "function:codex-rs/core/src/mcp_tool_call.rs:mcp_tool_call_span",
+            "function:codex-rs/core/src/mcp_tool_call.rs:record_server_fields",
+            "function:codex-rs/core/src/mcp_tool_call.rs:record_mcp_result_span_telemetry"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/mcp_tool_exposure.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 tool exposure、McpToolExposure。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "tool exposure",
+            "McpToolExposure"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/mcp_tool_exposure.rs",
+            "function:codex-rs/core/src/mcp_tool_exposure.rs:build_mcp_tool_exposure",
+            "function:codex-rs/core/src/mcp_tool_exposure.rs:filter_non_codex_apps_mcp_tools_only",
+            "function:codex-rs/core/src/mcp_tool_exposure.rs:filter_codex_apps_mcp_tools",
+            "class:codex-rs/core/src/mcp_tool_exposure.rs:McpToolExposure"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/orchestrator.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 ToolOrchestrator、tool dispatch。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ToolOrchestrator",
+            "tool dispatch"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/orchestrator.rs",
+            "function:codex-rs/core/src/tools/orchestrator.rs:new",
+            "function:codex-rs/core/src/tools/orchestrator.rs:run_attempt",
+            "function:codex-rs/core/src/tools/orchestrator.rs:run",
+            "function:codex-rs/core/src/tools/orchestrator.rs:request_approval",
+            "function:codex-rs/core/src/tools/orchestrator.rs:reject_if_not_approved",
+            "function:codex-rs/core/src/tools/orchestrator.rs:build_denial_reason_from_output",
+            "class:codex-rs/core/src/tools/orchestrator.rs:ToolOrchestrator"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/registry.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 ToolRegistry、ToolExecutor。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ToolRegistry",
+            "ToolExecutor"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/registry.rs",
+            "function:codex-rs/core/src/tools/registry.rs:into_response",
+            "function:codex-rs/core/src/tools/registry.rs:code_mode_result",
+            "function:codex-rs/core/src/tools/registry.rs:override_tool_exposure",
+            "function:codex-rs/core/src/tools/registry.rs:tool_name",
+            "function:codex-rs/core/src/tools/registry.rs:spec",
+            "function:codex-rs/core/src/tools/registry.rs:exposure",
+            "function:codex-rs/core/src/tools/registry.rs:supports_parallel_tool_calls"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/tool_search.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 tool_search、deferred tools。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "tool_search",
+            "deferred tools"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/tool_search.rs",
+            "function:codex-rs/core/src/tools/handlers/tool_search.rs:new",
+            "function:codex-rs/core/src/tools/handlers/tool_search.rs:tool_name",
+            "function:codex-rs/core/src/tools/handlers/tool_search.rs:spec",
+            "function:codex-rs/core/src/tools/handlers/tool_search.rs:supports_parallel_tool_calls",
+            "function:codex-rs/core/src/tools/handlers/tool_search.rs:handle",
+            "function:codex-rs/core/src/tools/handlers/tool_search.rs:search",
+            "function:codex-rs/core/src/tools/handlers/tool_search.rs:search_output_tools"
+          ]
+        },
+        {
+          "path": "codex-rs/app-server/src/request_processors/mcp_processor.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 McpRequestProcessor、mcp_server_tool_call、mcp_resource_read。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpRequestProcessor",
+            "mcp_server_tool_call",
+            "mcp_resource_read"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/app-server/src/request_processors/mcp_processor.rs",
+            "function:codex-rs/app-server/src/request_processors/mcp_processor.rs:new",
+            "function:codex-rs/app-server/src/request_processors/mcp_processor.rs:mcp_server_oauth_login",
+            "function:codex-rs/app-server/src/request_processors/mcp_processor.rs:mcp_server_refresh",
+            "function:codex-rs/app-server/src/request_processors/mcp_processor.rs:mcp_server_status_list",
+            "function:codex-rs/app-server/src/request_processors/mcp_processor.rs:mcp_resource_read",
+            "function:codex-rs/app-server/src/request_processors/mcp_processor.rs:mcp_server_tool_call",
+            "function:codex-rs/app-server/src/request_processors/mcp_processor.rs:mcp_server_refresh_response"
+          ]
+        },
+        {
+          "path": "codex-rs/app-server-protocol/src/protocol/v2/mcp.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 McpServerToolCallParams、McpServerStatus、McpServerElicitationRequest。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "McpServerToolCallParams",
+            "McpServerStatus",
+            "McpServerElicitationRequest"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs",
+            "function:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:from",
+            "function:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:from#2",
+            "function:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:from#3",
+            "function:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:to_core",
+            "function:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:from#4",
+            "function:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:from#5",
+            "function:codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:try_from"
+          ]
+        },
+        {
+          "path": "codex-rs/core-plugins/src/loader.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 plugin loader。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "plugin loader"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core-plugins/src/loader.rs",
+            "function:codex-rs/core-plugins/src/loader.rs:log_plugin_load_errors",
+            "function:codex-rs/core-plugins/src/loader.rs:into_mcp_servers",
+            "function:codex-rs/core-plugins/src/loader.rs:load_plugins_from_layer_stack",
+            "function:codex-rs/core-plugins/src/loader.rs:remote_installed_plugins_to_config",
+            "function:codex-rs/core-plugins/src/loader.rs:refresh_curated_plugin_cache",
+            "function:codex-rs/core-plugins/src/loader.rs:curated_plugin_cache_version",
+            "function:codex-rs/core-plugins/src/loader.rs:refresh_non_curated_plugin_cache"
+          ]
+        },
+        {
+          "path": "codex-rs/core-skills/src/loader.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 skill loader。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "skill loader"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core-skills/src/loader.rs",
+            "function:codex-rs/core-skills/src/loader.rs:fmt",
+            "function:codex-rs/core-skills/src/loader.rs:load_skills_from_roots",
+            "function:codex-rs/core-skills/src/loader.rs:skill_roots",
+            "function:codex-rs/core-skills/src/loader.rs:skill_roots_with_home_dir",
+            "function:codex-rs/core-skills/src/loader.rs:skill_roots_from_layer_stack_inner",
+            "function:codex-rs/core-skills/src/loader.rs:repo_agents_skill_roots",
+            "function:codex-rs/core-skills/src/loader.rs:project_root_markers_from_stack"
+          ]
+        },
+        {
+          "path": "codex-rs/connectors/src/metadata.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 connector metadata。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "connector metadata"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/connectors/src/metadata.rs",
+            "function:codex-rs/connectors/src/metadata.rs:connector_display_label",
+            "function:codex-rs/connectors/src/metadata.rs:connector_mention_slug",
+            "function:codex-rs/connectors/src/metadata.rs:connector_install_url",
+            "function:codex-rs/connectors/src/metadata.rs:sanitize_name",
+            "function:codex-rs/connectors/src/metadata.rs:sort_connectors_by_accessibility_and_name"
+          ]
+        },
+        {
+          "path": "codex-rs/utils/plugins/src/mcp_connector.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是工具和 MCP主题的证据点，包含 MCP connector、plugin namespace。它用于理解工具注册、MCP 连接、插件技能加载和工具调用分发，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "MCP connector",
+            "plugin namespace"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/utils/plugins/src/mcp_connector.rs",
+            "function:codex-rs/utils/plugins/src/mcp_connector.rs:is_connector_id_allowed",
+            "function:codex-rs/utils/plugins/src/mcp_connector.rs:is_connector_id_allowed_for_originator",
+            "function:codex-rs/utils/plugins/src/mcp_connector.rs:sanitize_name",
+            "function:codex-rs/utils/plugins/src/mcp_connector.rs:sanitize_slug"
+          ]
+        }
+      ]
+    },
+    "owasp_tc260": {
+      "purpose": "把仓库证据映射到 OWASP Agent/LLM T1-T15 与 TC260 AIA01-AIA11 风险分类，供页面层做来源化 crosswalk。",
+      "evidenceFiles": [
+        {
+          "path": "derived-knowledge/index.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 OWASP、TC260、AIA01、T1、crosswalk。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "OWASP",
+            "TC260",
+            "AIA01",
+            "T1",
+            "crosswalk"
+          ],
+          "graphNodeIds": []
+        },
+        {
+          "path": "codex-rs/protocol/src/approvals.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 AskForApproval、ExecApprovalRequestEvent、GuardianRiskLevel。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "AskForApproval",
+            "ExecApprovalRequestEvent",
+            "GuardianRiskLevel"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/protocol/src/approvals.rs",
+            "function:codex-rs/protocol/src/approvals.rs:new",
+            "function:codex-rs/protocol/src/approvals.rs:command",
+            "function:codex-rs/protocol/src/approvals.rs:from",
+            "function:codex-rs/protocol/src/approvals.rs:effective_approval_id",
+            "function:codex-rs/protocol/src/approvals.rs:effective_available_decisions",
+            "function:codex-rs/protocol/src/approvals.rs:default_available_decisions",
+            "function:codex-rs/protocol/src/approvals.rs:message"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/exec_policy.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 ExecPolicyManager、command_might_be_dangerous。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "ExecPolicyManager",
+            "command_might_be_dangerous"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/exec_policy.rs",
+            "function:codex-rs/core/src/exec_policy.rs:child_uses_parent_exec_policy",
+            "function:codex-rs/core/src/exec_policy.rs:is_policy_match",
+            "function:codex-rs/core/src/exec_policy.rs:prompt_is_rejected_by_policy",
+            "function:codex-rs/core/src/exec_policy.rs:new",
+            "function:codex-rs/core/src/exec_policy.rs:load",
+            "function:codex-rs/core/src/exec_policy.rs:current",
+            "function:codex-rs/core/src/exec_policy.rs:create_exec_approval_requirement_for_command"
+          ]
+        },
+        {
+          "path": "codex-rs/sandboxing/src/manager.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 sandbox、manager。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "sandbox",
+            "manager"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/sandboxing/src/manager.rs",
+            "function:codex-rs/sandboxing/src/manager.rs:as_metric_tag",
+            "function:codex-rs/sandboxing/src/manager.rs:get_platform_sandbox",
+            "function:codex-rs/sandboxing/src/manager.rs:fmt",
+            "function:codex-rs/sandboxing/src/manager.rs:new",
+            "function:codex-rs/sandboxing/src/manager.rs:select_initial",
+            "function:codex-rs/sandboxing/src/manager.rs:transform",
+            "function:codex-rs/sandboxing/src/manager.rs:compatibility_sandbox_policy_for_permission_profile"
+          ]
+        },
+        {
+          "path": "codex-rs/windows-sandbox-rs/src/policy.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 Windows sandbox、policy。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "Windows sandbox",
+            "policy"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/windows-sandbox-rs/src/policy.rs",
+            "function:codex-rs/windows-sandbox-rs/src/policy.rs:parse_policy"
+          ]
+        },
+        {
+          "path": "codex-rs/process-hardening/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 process hardening。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "process hardening"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/process-hardening/README.md",
+            "concept:codex-rs/process-hardening/README.md:codex-process-hardening"
+          ]
+        },
+        {
+          "path": "codex-rs/memories/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 memory poisoning、consolidation、stage1、phase2。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "memory poisoning",
+            "consolidation",
+            "stage1",
+            "phase2"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/memories/README.md",
+            "concept:codex-rs/memories/README.md:Memories",
+            "concept:codex-rs/memories/README.md:Crates",
+            "concept:codex-rs/memories/README.md:Prompt Templates",
+            "concept:codex-rs/memories/README.md:When it runs",
+            "concept:codex-rs/memories/README.md:Phase 1: Rollout Extraction (per-thread)",
+            "concept:codex-rs/memories/README.md:Phase 2: Global Consolidation",
+            "concept:codex-rs/memories/README.md:Why it is split into two phases"
+          ]
+        },
+        {
+          "path": "codex-rs/state/src/runtime/memories.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 memory_mode、polluted、clear_memory_data。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "memory_mode",
+            "polluted",
+            "clear_memory_data"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/state/src/runtime/memories.rs",
+            "function:codex-rs/state/src/runtime/memories.rs:clear_memory_data",
+            "function:codex-rs/state/src/runtime/memories.rs:record_stage1_output_usage",
+            "function:codex-rs/state/src/runtime/memories.rs:claim_stage1_jobs_for_startup",
+            "function:codex-rs/state/src/runtime/memories.rs:list_stage1_outputs_for_global",
+            "function:codex-rs/state/src/runtime/memories.rs:prune_stage1_outputs_for_retention",
+            "function:codex-rs/state/src/runtime/memories.rs:get_phase2_input_selection",
+            "function:codex-rs/state/src/runtime/memories.rs:mark_thread_memory_mode_polluted"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/stream_events_utils.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 memory_citation、mark_thread_memory_mode_polluted_if_external_context。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "memory_citation",
+            "mark_thread_memory_mode_polluted_if_external_context"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/stream_events_utils.rs",
+            "function:codex-rs/core/src/stream_events_utils.rs:image_generation_artifact_path",
+            "function:codex-rs/core/src/stream_events_utils.rs:strip_hidden_assistant_markup",
+            "function:codex-rs/core/src/stream_events_utils.rs:strip_hidden_assistant_markup_and_parse_memory_citation",
+            "function:codex-rs/core/src/stream_events_utils.rs:raw_assistant_output_text_from_item",
+            "function:codex-rs/core/src/stream_events_utils.rs:save_image_generation_result",
+            "function:codex-rs/core/src/stream_events_utils.rs:record_completed_response_item",
+            "function:codex-rs/core/src/stream_events_utils.rs:record_completed_response_item_with_finalized_facts"
+          ]
+        },
+        {
+          "path": "codex-rs/rollout-trace/README.md",
+          "kind": "markdown",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 rollout trace、audit、forensics。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "rollout trace",
+            "audit",
+            "forensics"
+          ],
+          "graphNodeIds": [
+            "document:codex-rs/rollout-trace/README.md",
+            "concept:codex-rs/rollout-trace/README.md:Rollout Trace",
+            "concept:codex-rs/rollout-trace/README.md:What This Gives Us",
+            "concept:codex-rs/rollout-trace/README.md:System Shape",
+            "concept:codex-rs/rollout-trace/README.md:Bundle Layout",
+            "concept:codex-rs/rollout-trace/README.md:Raw Evidence vs Reduced Graph",
+            "concept:codex-rs/rollout-trace/README.md:Multi-Agent v2",
+            "concept:codex-rs/rollout-trace/README.md:Reducer Invariants"
+          ]
+        },
+        {
+          "path": "codex-rs/rollout-trace/src/raw_event.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 RawTraceEventPayload。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "RawTraceEventPayload"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/rollout-trace/src/raw_event.rs",
+            "function:codex-rs/rollout-trace/src/raw_event.rs:raw_payload_refs",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawTraceEvent",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawTraceEventContext",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawToolCallRequester",
+            "class:codex-rs/rollout-trace/src/raw_event.rs:RawTraceEventPayload"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 spawn_agent、fork_turns。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "spawn_agent",
+            "fork_turns"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:new",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:tool_name",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:spec",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:handle",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:handle_spawn_agent",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:matches_kind",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:fork_mode"
+          ]
+        },
+        {
+          "path": "codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 InterAgentCommunication、TriggerTurn。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "InterAgentCommunication",
+            "TriggerTurn"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:apply",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:message_content",
+            "function:codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:handle_message_string_tool",
+            "class:codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:MessageDeliveryMode",
+            "class:codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:SendMessageArgs",
+            "class:codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:FollowupTaskArgs"
+          ]
+        },
+        {
+          "path": "codex-rs/codex-mcp/src/connection_manager.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 MCP、tool call、server status。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "MCP",
+            "tool call",
+            "server status"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/codex-mcp/src/connection_manager.rs",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:new_uninitialized",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:new_uninitialized_with_permission_profile",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:has_servers",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:begin_shutdown",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:shutdown",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:server_origin",
+            "function:codex-rs/codex-mcp/src/connection_manager.rs:server_pollutes_memory"
+          ]
+        },
+        {
+          "path": "codex-rs/core-plugins/src/marketplace_add/install.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 plugin install、marketplace。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "plugin install",
+            "marketplace"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core-plugins/src/marketplace_add/install.rs",
+            "function:codex-rs/core-plugins/src/marketplace_add/install.rs:clone_git_source",
+            "function:codex-rs/core-plugins/src/marketplace_add/install.rs:safe_marketplace_dir_name",
+            "function:codex-rs/core-plugins/src/marketplace_add/install.rs:ensure_marketplace_destination_is_inside_install_root",
+            "function:codex-rs/core-plugins/src/marketplace_add/install.rs:replace_marketplace_root",
+            "function:codex-rs/core-plugins/src/marketplace_add/install.rs:marketplace_staging_root",
+            "function:codex-rs/core-plugins/src/marketplace_add/install.rs:run_git"
+          ]
+        },
+        {
+          "path": "codex-rs/core-skills/src/loader.rs",
+          "kind": "rust",
+          "exists": true,
+          "whyRelevant": "该文件是标准映射主题的证据点，包含 skill loading。它用于把源码证据落到 OWASP 与 TC260 风险条目，并帮助页面作者把结论限定在源码或文档能够支撑的范围内。",
+          "symbolsOrTerms": [
+            "skill loading"
+          ],
+          "graphNodeIds": [
+            "file:codex-rs/core-skills/src/loader.rs",
+            "function:codex-rs/core-skills/src/loader.rs:fmt",
+            "function:codex-rs/core-skills/src/loader.rs:load_skills_from_roots",
+            "function:codex-rs/core-skills/src/loader.rs:skill_roots",
+            "function:codex-rs/core-skills/src/loader.rs:skill_roots_with_home_dir",
+            "function:codex-rs/core-skills/src/loader.rs:skill_roots_from_layer_stack_inner",
+            "function:codex-rs/core-skills/src/loader.rs:repo_agents_skill_roots",
+            "function:codex-rs/core-skills/src/loader.rs:project_root_markers_from_stack"
+          ]
+        }
+      ],
+      "unknowns": [
+        "OWASP/TC260 crosswalk 目前基于索引规划和仓库证据，标准条文的权威出处需要后续研究补齐。",
+        "部分控制属于流程、审计或交互约束，页面层需要标明执行边界与安全保证强度。"
+      ]
+    }
+  },
+  "unknowns": [
+    {
+      "kind": "index_count_mismatch",
+      "note": "derived-knowledge/index.md 以 [[...]] 语法解析为 93 个 wikilink；后续若需要 94 个条目，应先确认索引页是否已被更新。"
+    },
+    {
+      "kind": "canonical_standard_sources_missing",
+      "note": "本轮 raw 修复没有发现本地 OWASP 或 TC260 官方标准文件；跨表映射应在页面层引用用户提供的 taxonomy，后续研究再补官方来源。"
+    },
+    {
+      "kind": "security_semantics_need_page_level_validation",
+      "note": "本文件只给出相关源码、文档和符号，不承诺任何安全保证；涉及设计意图、历史原因或保证强度的说法仍需页面级来源验证。"
+    }
+  ]
+}
