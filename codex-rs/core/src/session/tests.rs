@@ -654,8 +654,7 @@ fn test_tool_runtime(session: Arc<Session>, turn_context: Arc<TurnContext>) -> T
         step_context.as_ref(),
         crate::tools::router::ToolRouterParams {
             tool_suggest_candidates: None,
-            mcp_tools: None,
-            deferred_mcp_tools: None,
+            tool_runtimes: Vec::new(),
             extension_tool_executors: Vec::new(),
             dynamic_tools: turn_context.dynamic_tools.as_slice(),
         },
@@ -3796,6 +3795,7 @@ async fn set_rate_limits_retains_previous_credits() {
             balance: Some("10.00".to_string()),
         }),
         individual_limit: None,
+        spend_control_reached: None,
         plan_type: Some(codex_protocol::account::PlanType::Plus),
         rate_limit_reached_type: None,
     };
@@ -3816,6 +3816,7 @@ async fn set_rate_limits_retains_previous_credits() {
         }),
         credits: None,
         individual_limit: None,
+        spend_control_reached: None,
         plan_type: None,
         rate_limit_reached_type: None,
     };
@@ -3830,6 +3831,7 @@ async fn set_rate_limits_retains_previous_credits() {
             secondary: update.secondary,
             credits: initial.credits,
             individual_limit: initial.individual_limit,
+            spend_control_reached: initial.spend_control_reached,
             plan_type: initial.plan_type,
             rate_limit_reached_type: None,
         })
@@ -3906,6 +3908,7 @@ async fn set_rate_limits_updates_plan_type_when_present() {
             balance: Some("15.00".to_string()),
         }),
         individual_limit: None,
+        spend_control_reached: None,
         plan_type: Some(codex_protocol::account::PlanType::Plus),
         rate_limit_reached_type: None,
     };
@@ -3922,6 +3925,7 @@ async fn set_rate_limits_updates_plan_type_when_present() {
         secondary: None,
         credits: None,
         individual_limit: None,
+        spend_control_reached: None,
         plan_type: Some(codex_protocol::account::PlanType::Pro),
         rate_limit_reached_type: None,
     };
@@ -3936,6 +3940,7 @@ async fn set_rate_limits_updates_plan_type_when_present() {
             secondary: update.secondary,
             credits: initial.credits,
             individual_limit: initial.individual_limit,
+            spend_control_reached: initial.spend_control_reached,
             plan_type: update.plan_type,
             rate_limit_reached_type: None,
         })
@@ -7734,6 +7739,7 @@ async fn plugin_availability_change_reuses_the_mcp_manager() {
     session.services.mcp_manager = Arc::new(McpManager::new_with_extensions(
         Arc::clone(&session.services.plugins_manager),
         registry,
+        crate::CodexAppsToolsCache::default(),
     ));
     let session = Arc::new(session);
     session
@@ -10388,22 +10394,12 @@ async fn abort_review_task_emits_exited_then_aborted_and_records_history() {
 #[tokio::test]
 async fn fatal_tool_error_stops_turn_and_reports_error() {
     let (session, turn_context, _rx) = make_session_and_context_with_rx().await;
-    let tools = {
-        session
-            .services
-            .latest_mcp_runtime()
-            .manager()
-            .list_all_tools()
-            .await
-    };
-    let deferred_mcp_tools = Some(tools.clone());
     let step_context = StepContext::for_test(Arc::clone(&turn_context));
     let router = ToolRouter::from_context(
         step_context.as_ref(),
         crate::tools::router::ToolRouterParams {
             tool_suggest_candidates: None,
-            deferred_mcp_tools,
-            mcp_tools: Some(tools),
+            tool_runtimes: Vec::new(),
             extension_tool_executors: Vec::new(),
             dynamic_tools: turn_context.dynamic_tools.as_slice(),
         },
