@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>01 · Agent 身份与任务绑定</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] }, svg: { fontCache: "global" } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="../assets/report.js"></script>
+</head>
+<body>
+  
+    <nav class="topnav">
+      <a class="brand" href="../index.html">ASI03 Codex</a>
+      <div class="navlinks">
+        <a class="active" href="../chapters/01-identity.html">01</a><a class="" href="../chapters/02-permission-sandbox.html">02</a><a class="" href="../chapters/03-approval-guardian.html">03</a><a class="" href="../chapters/04-mcp-connectors.html">04</a><a class="" href="../chapters/05-multi-agent-memory.html">05</a><a class="" href="../chapters/06-gaps.html">06</a>
+      </div>
+    </nav>
+  
+  
+    <main>
+      <header class="chapter-hero">
+        <p class="eyebrow">Chapter 01</p>
+        <h1>Agent 身份与任务绑定</h1>
+        <p class="lede">身份接受路径、运行时任务断言、persona 标签边界，以及 Define Intent 缺口。</p>
+        <div class="formula">\(\text{assertion}=\operatorname{Sign}_{agentKey}(runtimeId\,\Vert\,taskId\,\Vert\,timestamp)\)</div>
+      </header>
+      <section class="band intro-band">
+        <div class="intro-copy">
+          <h2>Risk Frame</h2>
+          <p>ASI03 的身份问题像门禁卡与姓名牌混在一起：门禁卡代表真实权限，姓名牌只表达角色描述。Codex 在 Agent Identity 上使用签名和任务绑定来保护门禁卡；nickname、role、path 这类 persona 元数据仍属于可解释标签。</p>
+        </div>
+        <div class="chain-layout">
+          
+    <section class="chain-block">
+      <h3>Attack Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>攻击者注入伪造 Agent Identity JWT</p></li><li><span>02</span><p>系统接受伪身份并生成请求头</p></li><li><span>03</span><p>模型或后端把伪身份当作真实 agent</p></li>
+      </ol>
+    </section>
+  
+          
+    <section class="chain-block">
+      <h3>Codex Defense Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>JWKS 验证 issuer/audience/kid/signature</p></li><li><span>02</span><p>进程启动时注册 task_id</p></li><li><span>03</span><p>每次 provider 请求发送 AgentAssertion</p></li>
+      </ol>
+    </section>
+  
+        </div>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Pseudocode</p>
+          <h2>Control Logic</h2>
+        </div>
+        <pre class="pseudo"><code>claims = verify_jwt(jwt, jwks, issuer, audience)
+task_id = register_agent_task(runtime_id, key)
+header = sign(runtime_id, task_id, now)</code></pre>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Reviewed Claims</p>
+          <h2>Source Evidence Cards</h2>
+        </div>
+        <div class="claim-stack">
+          
+    <article class="claim-card" id="I-01">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">I-01 · Synthetic Identity Injection</p>
+          <h3>登录管理路径对 Agent Identity JWT 执行 JWKS 验证，校验 issuer、audience、kid 和签名，再转成 auth record。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>攻击者把伪造或未签名 Agent Identity JWT 注入本地 auth 路径，试图冒充 runtime/account。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>storage 层可以做 payload pre-parse；manager 路径随后拉取 JWKS 并调用 verified decode。这个分层让存储转换与身份接受分开。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>身份接受走 verification path，类似先验票面格式再验防伪码。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>直接调用 storage 的 from_agent_identity_jwt 仍会走无 JWKS payload decode；Agent Identity JWT revocation 未在当前本地证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>validation.set_audience(...); validation.set_issuer(...); decode(jwt, key, validation)</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L64" title="codex-rs/agent-identity/src/lib.rs:64"><span>JWT claims</span><code>codex-rs/agent-identity/src/lib.rs:64</code></a><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L147" title="codex-rs/agent-identity/src/lib.rs:147"><span>JWKS verify</span><code>codex-rs/agent-identity/src/lib.rs:147</code></a><a class="source-chip" href="../../codex-rs/login/src/auth/manager.rs#L492" title="codex-rs/login/src/auth/manager.rs:492"><span>manager accepts JWT</span><code>codex-rs/login/src/auth/manager.rs:492</code></a><a class="source-chip" href="../../codex-rs/login/src/auth/storage.rs#L61" title="codex-rs/login/src/auth/storage.rs:61"><span>payload pre-parse</span><code>codex-rs/login/src/auth/storage.rs:61</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L550" title="codex-rs/agent-identity/src/lib.rs:550"><span>JWKS verification tests</span><code>codex-rs/agent-identity/src/lib.rs:550</code></a><a class="source-chip" href="../../codex-rs/login/src/auth/auth_tests.rs#L91" title="codex-rs/login/src/auth/auth_tests.rs:91"><span>auth manager tests</span><code>codex-rs/login/src/auth/auth_tests.rs:91</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="I-02">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">I-02 · Forged Agent Persona</p>
+          <h3>provider 请求头携带 AgentAssertion，签名覆盖 runtime id、task id 和 timestamp；runtime mismatch 会失败。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>攻击者在模型文本、tool input 或本地 caller 中声称自己是另一个 agent/persona。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>auth load 注册 process task；provider 每次请求用存储的 agent key 对 task assertion 签名，并把 account id 放入 header。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>runtime/task 是加密绑定，persona 标签只是解释性 metadata。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>agent_nickname、agent_role、agent_path 没有在本地源码中证明被加密绑定。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>payload = `${agent_runtime_id}:${task_id}:${timestamp}`</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L80" title="codex-rs/agent-identity/src/lib.rs:80"><span>assertion envelope</span><code>codex-rs/agent-identity/src/lib.rs:80</code></a><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L106" title="codex-rs/agent-identity/src/lib.rs:106"><span>authorization header</span><code>codex-rs/agent-identity/src/lib.rs:106</code></a><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L358" title="codex-rs/agent-identity/src/lib.rs:358"><span>signed payload</span><code>codex-rs/agent-identity/src/lib.rs:358</code></a><a class="source-chip" href="../../codex-rs/login/src/auth/agent_identity.rs#L19" title="codex-rs/login/src/auth/agent_identity.rs:19"><span>task registration</span><code>codex-rs/login/src/auth/agent_identity.rs:19</code></a><a class="source-chip" href="../../codex-rs/model-provider/src/auth.rs#L21" title="codex-rs/model-provider/src/auth.rs:21"><span>provider header</span><code>codex-rs/model-provider/src/auth.rs:21</code></a><a class="source-chip" href="../../codex-rs/protocol/src/protocol.rs#L2636" title="codex-rs/protocol/src/protocol.rs:2636"><span>persona metadata boundary</span><code>codex-rs/protocol/src/protocol.rs:2636</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L416" title="codex-rs/agent-identity/src/lib.rs:416"><span>assertion verifies</span><code>codex-rs/agent-identity/src/lib.rs:416</code></a><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L468" title="codex-rs/agent-identity/src/lib.rs:468"><span>runtime mismatch rejected</span><code>codex-rs/agent-identity/src/lib.rs:468</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="I-03">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">I-03 · Define Intent</p>
+          <h3>当前本地证据只证明 runtime/task/timestamp/account 绑定；未证明 subject/resource/purpose/duration intent object。</h3>
+        </div>
+        <span class="status unsupported_gap">unsupported_gap</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>同一个 token/assertion 被拿去访问不同 subject、resource 或 purpose，形成授权漂移。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>AgentAssertion envelope 包含 runtime id、task id、timestamp、signature。JWT claims 带 account/user/runtime 信息。resource 与 purpose 没有一等字段。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>当前绑定面很小，审查边界清晰。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>OAuth token intent binding、audience/resource/purpose/session 级拒绝逻辑属于 unsupported_gap。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>{ agent_runtime_id, task_id, timestamp, signature }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L64" title="codex-rs/agent-identity/src/lib.rs:64"><span>account/runtime claims</span><code>codex-rs/agent-identity/src/lib.rs:64</code></a><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L80" title="codex-rs/agent-identity/src/lib.rs:80"><span>assertion fields</span><code>codex-rs/agent-identity/src/lib.rs:80</code></a><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L358" title="codex-rs/agent-identity/src/lib.rs:358"><span>signed payload fields</span><code>codex-rs/agent-identity/src/lib.rs:358</code></a><a class="source-chip" href="../../codex-rs/model-provider/src/auth.rs#L29" title="codex-rs/model-provider/src/auth.rs:29"><span>provider account header</span><code>codex-rs/model-provider/src/auth.rs:29</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L416" title="codex-rs/agent-identity/src/lib.rs:416"><span>assertion tests</span><code>codex-rs/agent-identity/src/lib.rs:416</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: unsupported_gap</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+        </div>
+      </section>
+    </main>
+  
+  <footer class="site-footer">
+    <p>Generated 2026-06-02. Source proof uses local repo links; graph data was used only as navigation.</p>
+    <p>Report root: <code>D:\Project\codexx-wiki\sss-codex\asi03-identity-privilege-report</code></p>
+  </footer>
+</body>
+</html>

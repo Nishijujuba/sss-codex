@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex ASI03 Identity and Privilege Abuse 安全分析</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] }, svg: { fontCache: "global" } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="assets/report.js"></script>
+</head>
+<body>
+  
+    <nav class="topnav">
+      <a class="brand" href="index.html">ASI03 Codex</a>
+      <div class="navlinks">
+        <a class="" href="chapters/01-identity.html">01</a><a class="" href="chapters/02-permission-sandbox.html">02</a><a class="" href="chapters/03-approval-guardian.html">03</a><a class="" href="chapters/04-mcp-connectors.html">04</a><a class="" href="chapters/05-multi-agent-memory.html">05</a><a class="" href="chapters/06-gaps.html">06</a>
+      </div>
+    </nav>
+  
+  
+    <main>
+      <header class="report-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Security Analysis · OWASP ASI03</p>
+          <h1>Codex ASI03 Identity and Privilege Abuse 安全分析</h1>
+          <p class="lede">以用户贴入的 ASI03 文本为基准，结合当前本地仓库和 <code>.understand-anything/knowledge-graph.json</code> 导航结果，逐项说明 Codex 如何降低身份滥用、权限继承、上下文串线、跨 agent 信任和授权漂移风险。</p>
+        </div>
+        <div class="hero-panel">
+          <div class="metric"><strong>32</strong><span>reviewed claims</span></div>
+          <div class="metric"><strong>25</strong><span>pass</span></div>
+          <div class="metric"><strong>7</strong><span>unsupported_gap</span></div>
+          <div class="metric"><strong>6</strong><span>pages</span></div>
+        </div>
+      </header>
+
+      <section class="band summary-band">
+        <div class="section-heading">
+          <p class="eyebrow">Executive Summary</p>
+          <h2>What the repo can actually prove</h2>
+        </div>
+        <div class="summary-grid">
+          <article><h3>身份</h3><p>Agent Identity JWT verification 与 AgentAssertion task binding 有源码和测试证据。persona label 的 cryptographic binding 属于 gap。</p></article>
+          <article><h3>权限</h3><p>PermissionProfile 约束、turn/session grant 和 explicit escalation 有证据。TTL、scheduled rollback 与完整 purpose binding 缺失。</p></article>
+          <article><h3>执行</h3><p>sandboxed first attempt、unsandboxed retry、Windows deny-read fail-closed 可证明。workspace-write 默认是写边界并保留 broad read。</p></article>
+          <article><h3>审查</h3><p>Guardian exact-action review、typed HITL decision 与 fail-closed 路径可证明。语义 intent verifier 仍依赖 reviewer。</p></article>
+          <article><h3>MCP</h3><p>Codex Apps reserved identity、tool name normalization、raw routing、cache scoping、auth elicitation gate 有证据。device-code detector 缺失。</p></article>
+          <article><h3>多 agent / memory</h3><p>lineage、inter-agent envelope、audit telemetry、memory pollution gating 有证据。automatic delegated-privilege alert 与 per-subagent app identity 缺失。</p></article>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Coverage Matrix</p>
+          <h2>ASI03 items mapped to evidence status</h2>
+        </div>
+        
+    <div class="matrix-wrap">
+      <table class="coverage-matrix">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>ASI03 Item</th>
+            <th>Claim</th>
+            <th>Status</th>
+            <th>Evidence Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td>Common</td>
+                <td>Un-scoped Privilege Inheritance</td>
+                <td><code>P-01</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>PermissionProfile constraints 与 grant intersection；TTL 是 U-02。</td>
+              </tr><tr>
+                <td>Common</td>
+                <td>Memory-Based Privilege Retention &amp; Data Leakage</td>
+                <td><code>G-04</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>memory pollution gating；default false 与 current live context 是 residual。</td>
+              </tr><tr>
+                <td>Common</td>
+                <td>Cross-Agent Trust Exploitation</td>
+                <td><code>G-01</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>InterAgentCommunication envelope 与 lineage；semantic confused-deputy filter 是 gap。</td>
+              </tr><tr>
+                <td>Common</td>
+                <td>TOCTOU in Agent Workflows</td>
+                <td><code>A-04</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>originating turn grant 与 execve interception；file-content binding 是 gap。</td>
+              </tr><tr>
+                <td>Common</td>
+                <td>Synthetic Identity Injection</td>
+                <td><code>I-01</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>JWKS verification 与 AgentAssertion path。</td>
+              </tr><tr>
+                <td>Scenario</td>
+                <td>Delegated Privilege Abuse</td>
+                <td><code>P-01 / G-02</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>parent-mediated grants 与 inherited runtime profile；hard disjoint write-set enforcement 是 gap。</td>
+              </tr><tr>
+                <td>Scenario</td>
+                <td>Memory-Based Escalation</td>
+                <td><code>G-05</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>memory mode/reset 可证明；semantic validation 是 unsupported_gap。</td>
+              </tr><tr>
+                <td>Scenario</td>
+                <td>Cross-Agent Trust Exploitation</td>
+                <td><code>G-01 / G-03</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>lineage 与 audit telemetry；automatic blocker 是 U-04。</td>
+              </tr><tr>
+                <td>Scenario</td>
+                <td>Device-code phishing across agents</td>
+                <td><code>U-05</code></td>
+                <td><span class="status unsupported_gap">unsupported_gap</span></td>
+                <td>OAuth URL flow 可见；device-code-specific detection unsupported。</td>
+              </tr><tr>
+                <td>Scenario</td>
+                <td>Workflow Authorization Drift</td>
+                <td><code>A-03 / A-04</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>Guardian exact-action review；external IAM re-check unsupported。</td>
+              </tr><tr>
+                <td>Scenario</td>
+                <td>Forged Agent Persona</td>
+                <td><code>I-02</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>runtime/task cryptographic binding；persona labels remain metadata。</td>
+              </tr><tr>
+                <td>Scenario</td>
+                <td>Identity Sharing</td>
+                <td><code>U-03</code></td>
+                <td><span class="status unsupported_gap">unsupported_gap</span></td>
+                <td>OS sandbox identity partially split；per-subagent app identity unsupported。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Task-Scoped, Time-Bound Permissions</td>
+                <td><code>P-02 / U-02</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>Turn scope exists；time-bound TTL unsupported。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Isolate Agent Identities and Contexts</td>
+                <td><code>P-05 / G-04 / U-03</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>sandbox and memory controls exist；per-subagent app identity gap。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Mandate Per-Action Authorization</td>
+                <td><code>A-01</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>typed exact action review。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Human-in-the-Loop for Privilege Escalation</td>
+                <td><code>A-02</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>typed ReviewDecision and pending approvals。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Define Intent</td>
+                <td><code>I-03 / U-01</code></td>
+                <td><span class="status unsupported_gap">unsupported_gap</span></td>
+                <td>runtime/task binding exists；subject/resource/purpose/duration unsupported。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Agentic Identity Management Platforms</td>
+                <td><code>U-06</code></td>
+                <td><span class="status unsupported_gap">unsupported_gap</span></td>
+                <td>external platform ability outside repo evidence。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Bind permissions to subject/resource/purpose/duration</td>
+                <td><code>U-01 / U-02</code></td>
+                <td><span class="status unsupported_gap">unsupported_gap</span></td>
+                <td>partial runtime/task/time stamp binding only。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Detect Delegated and Transitive Permissions</td>
+                <td><code>G-03 / U-04</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>lineage observable；automatic alert unsupported。</td>
+              </tr><tr>
+                <td>Mitigation</td>
+                <td>Detect abnormal elevation and device-code flows</td>
+                <td><code>A-06 / U-05</code></td>
+                <td><span class="status pass">pass</span></td>
+                <td>approval telemetry present；device-code detector unsupported。</td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+  
+      </section>
+
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Chapters</p>
+          <h2>Multi-page report</h2>
+        </div>
+        <div class="chapter-grid">
+          <a class="chapter-card" href="chapters/01-identity.html">
+                <span>01</span>
+                <h3>Agent 身份与任务绑定</h3>
+                <p>身份接受路径、运行时任务断言、persona 标签边界，以及 Define Intent 缺口。</p>
+              </a><a class="chapter-card" href="chapters/02-permission-sandbox.html">
+                <span>02</span>
+                <h3>权限继承与 sandbox 边界</h3>
+                <p>PermissionProfile 约束、turn/session grant、workspace-write 的真实语义，以及显式 unsandboxed escalation。</p>
+              </a><a class="chapter-card" href="chapters/03-approval-guardian.html">
+                <span>03</span>
+                <h3>Per-Action Authorization 与 Guardian</h3>
+                <p>精确 action 审查、HITL 决策类型、Guardian 隔离 reviewer、TOCTOU 与 prefix rule 风险。</p>
+              </a><a class="chapter-card" href="chapters/04-mcp-connectors.html">
+                <span>04</span>
+                <h3>MCP / Connector 身份与 auth elicitation</h3>
+                <p>Codex Apps reserved namespace、MCP tool 列表清洗、raw routing key、cache scoping 与显式 auth URL 请求。</p>
+              </a><a class="chapter-card" href="chapters/05-multi-agent-memory.html">
+                <span>05</span>
+                <h3>Multi-Agent 与 memory/context 隔离</h3>
+                <p>InterAgentCommunication envelope、subagent lineage、audit telemetry、memory pollution gating 与 compaction/reconstruction。</p>
+              </a><a class="chapter-card" href="chapters/06-gaps.html">
+                <span>06</span>
+                <h3>缺口与证据边界</h3>
+                <p>把源码能证明的控制与源码无法证明的愿景分开，避免把产品外部能力写成已实现机制。</p>
+              </a>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Graph Navigation</p>
+          <h2>Knowledge graph was used as a map</h2>
+        </div>
+        <div class="graph-note">
+          <p>Graph nodes were found for <code>agent-identity/src/lib.rs</code>, <code>guardian/review.rs</code>, <code>tools/sandboxing.rs</code>, <code>codex-mcp/src/connection_manager.rs</code>, <code>multi_agents_common.rs</code>, and <code>mcp_tool_call.rs</code>. The graph guided file selection; every accepted claim still uses source files, tests, protocol types, or generated schema as proof.</p>
+          <div class="source-list"><a class="source-chip" href="../.understand-anything/knowledge-graph.json#L1" title=".understand-anything/knowledge-graph.json:1"><span>local graph</span><code>.understand-anything/knowledge-graph.json:1</code></a></div>
+        </div>
+      </section>
+    </main>
+  
+  <footer class="site-footer">
+    <p>Generated 2026-06-02. Source proof uses local repo links; graph data was used only as navigation.</p>
+    <p>Report root: <code>D:\Project\codexx-wiki\sss-codex\asi03-identity-privilege-report</code></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>05 · Multi-Agent 与 memory/context 隔离</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] }, svg: { fontCache: "global" } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="../assets/report.js"></script>
+</head>
+<body>
+  
+    <nav class="topnav">
+      <a class="brand" href="../index.html">ASI03 Codex</a>
+      <div class="navlinks">
+        <a class="" href="../chapters/01-identity.html">01</a><a class="" href="../chapters/02-permission-sandbox.html">02</a><a class="" href="../chapters/03-approval-guardian.html">03</a><a class="" href="../chapters/04-mcp-connectors.html">04</a><a class="active" href="../chapters/05-multi-agent-memory.html">05</a><a class="" href="../chapters/06-gaps.html">06</a>
+      </div>
+    </nav>
+  
+  
+    <main>
+      <header class="chapter-hero">
+        <p class="eyebrow">Chapter 05</p>
+        <h1>Multi-Agent 与 memory/context 隔离</h1>
+        <p class="lede">InterAgentCommunication envelope、subagent lineage、audit telemetry、memory pollution gating 与 compaction/reconstruction。</p>
+        <div class="formula">\(lineage=(parentThreadId, depth, agentPath, agentRole)\)</div>
+      </header>
+      <section class="band intro-band">
+        <div class="intro-copy">
+          <h2>Risk Frame</h2>
+          <p>多 agent 系统中的 confused deputy 问题像低权限员工把话转给高权限主管。Codex 记录 author/recipient/path 和 lineage，能追踪代理链；语义层面的“这个请求是否真的代表原用户意图”仍需要审查层判断。</p>
+        </div>
+        <div class="chain-layout">
+          
+    <section class="chain-block">
+      <h3>Attack Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>低权限 agent 构造内部请求</p></li><li><span>02</span><p>高权限 agent 看到内部消息并执行</p></li><li><span>03</span><p>历史、memory 或 forked context 保留旧权限暗示</p></li>
+      </ol>
+    </section>
+  
+          
+    <section class="chain-block">
+      <h3>Codex Defense Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>InterAgentCommunication 携带 author/recipient path</p></li><li><span>02</span><p>SubAgentSource 记录 parent/depth/path/role</p></li><li><span>03</span><p>memory pollution 与 memory mode 控制未来记忆入口</p></li><li><span>04</span><p>rollback/compaction 以结构化 context 重建</p></li>
+      </ol>
+    </section>
+  
+        </div>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Pseudocode</p>
+          <h2>Control Logic</h2>
+        </div>
+        <pre class="pseudo"><code>message = { author, recipient, other_recipients, payload }
+source = ThreadSpawn(parent, depth, path, role)
+if external_context &amp;&amp; disable_on_external_context: mark_polluted(thread)</code></pre>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Reviewed Claims</p>
+          <h2>Source Evidence Cards</h2>
+        </div>
+        <div class="claim-stack">
+          
+    <article class="claim-card" id="G-01">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">G-01 · Cross-Agent Trust Exploitation</p>
+          <h3>InterAgentCommunication 包含 author、recipient、other_recipients；followup root wakeup 被阻止，queued send_message 可用。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>compromised low-privilege agent 通过 send_message 或 followup_task 要求高权限 agent 代办。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>message tool 解析目标 agent path，注册 root tree，并把 author/recipient envelope 交给 AgentControl。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>内部消息带路径 envelope，审计时可区分发起者与接收者。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>自然语言层面的 confused-deputy intent filter 未在源码证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>{ author: AgentPath, recipient: AgentPath, other_recipients, payload }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs#L78" title="codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:78"><span>send message</span><code>codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:78</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs#L104" title="codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:104"><span>followup</span><code>codex-rs/core/src/tools/handlers/multi_agents_v2/message_tool.rs:104</code></a><a class="source-chip" href="../../codex-rs/protocol/src/protocol.rs#L664" title="codex-rs/protocol/src/protocol.rs:664"><span>InterAgentCommunication</span><code>codex-rs/protocol/src/protocol.rs:664</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_spec.rs#L167" title="codex-rs/core/src/tools/handlers/multi_agents_spec.rs:167"><span>tool spec</span><code>codex-rs/core/src/tools/handlers/multi_agents_spec.rs:167</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_tests.rs#L1116" title="codex-rs/core/src/tools/handlers/multi_agents_tests.rs:1116"><span>message tests</span><code>codex-rs/core/src/tools/handlers/multi_agents_tests.rs:1116</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_tests.rs#L1339" title="codex-rs/core/src/tools/handlers/multi_agents_tests.rs:1339"><span>followup tests</span><code>codex-rs/core/src/tools/handlers/multi_agents_tests.rs:1339</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="G-02">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">G-02 · Subagent Privilege Inheritance</p>
+          <h3>spawn config 从 parent effective config 复制，并刷新当前 turn 的 approval policy、permission profile、sandbox、cwd、shell policy。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>子 agent 继承父 agent 当前 runtime 权限，再继续生成更深层 agent。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>full-history fork 拒绝 role/model/reasoning override；runtime overrides 集中在 multi_agents_common。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>继承是集中路径，可审查；它并非散落在每个 tool handler 中。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>每个 subagent 独立 app identity 未在当前本地证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>config.permissions.approval_policy = turn.approval_policy; config.set_permission_profile(turn.permission_profile())</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_common.rs#L200" title="codex-rs/core/src/tools/handlers/multi_agents_common.rs:200"><span>spawn config</span><code>codex-rs/core/src/tools/handlers/multi_agents_common.rs:200</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_common.rs#L225" title="codex-rs/core/src/tools/handlers/multi_agents_common.rs:225"><span>layer role</span><code>codex-rs/core/src/tools/handlers/multi_agents_common.rs:225</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_common.rs#L258" title="codex-rs/core/src/tools/handlers/multi_agents_common.rs:258"><span>runtime overrides</span><code>codex-rs/core/src/tools/handlers/multi_agents_common.rs:258</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs#L89" title="codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:89"><span>spawn handler</span><code>codex-rs/core/src/tools/handlers/multi_agents_v2/spawn.rs:89</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/multi_agents_tests.rs#L298" title="codex-rs/core/src/tools/handlers/multi_agents_tests.rs:298"><span>fork override tests</span><code>codex-rs/core/src/tools/handlers/multi_agents_tests.rs:298</code></a><a class="source-chip" href="../../codex-rs/core/src/exec_policy_tests.rs#L143" title="codex-rs/core/src/exec_policy_tests.rs:143"><span>exec policy inheritance</span><code>codex-rs/core/src/exec_policy_tests.rs:143</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="G-03">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">G-03 · Delegated / Transitive Permission Detection</p>
+          <h3>SubAgentSource::ThreadSpawn 记录 parent_thread_id、depth、agent_path、nickname、role；analytics 与 rollout-trace 记录 lineage/edges。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>child delegates to grandchild，incident reviewer 难以复原代理链。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>analytics 从 SubAgentSource 提取 parent_thread_id；rollout-trace reducer 生成 spawn/send/close/result interaction edges。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>系统能把代理链还原成树，而非只看到孤立 tool call。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>自动 delegated privilege violation alert rule 未在当前本地 repo 证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>ThreadSpawn { parent_thread_id, depth, agent_path, agent_nickname, agent_role }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/protocol/src/protocol.rs#L2483" title="codex-rs/protocol/src/protocol.rs:2483"><span>SubAgentSource</span><code>codex-rs/protocol/src/protocol.rs:2483</code></a><a class="source-chip" href="../../codex-rs/analytics/src/events.rs#L1053" title="codex-rs/analytics/src/events.rs:1053"><span>subagent analytics</span><code>codex-rs/analytics/src/events.rs:1053</code></a><a class="source-chip" href="../../codex-rs/core/src/agent/control.rs#L1067" title="codex-rs/core/src/agent/control.rs:1067"><span>spawn lineage</span><code>codex-rs/core/src/agent/control.rs:1067</code></a><a class="source-chip" href="../../codex-rs/rollout-trace/src/reducer/tool/agents.rs#L56" title="codex-rs/rollout-trace/src/reducer/tool/agents.rs:56"><span>interaction edges</span><code>codex-rs/rollout-trace/src/reducer/tool/agents.rs:56</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/agent/control_tests.rs#L2003" title="codex-rs/core/src/agent/control_tests.rs:2003"><span>lineage test</span><code>codex-rs/core/src/agent/control_tests.rs:2003</code></a><a class="source-chip" href="../../codex-rs/rollout-trace/src/reducer/tool/agents_tests.rs#L123" title="codex-rs/rollout-trace/src/reducer/tool/agents_tests.rs:123"><span>trace test</span><code>codex-rs/rollout-trace/src/reducer/tool/agents_tests.rs:123</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="G-04">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">G-04 · Memory-Based Privilege Retention</p>
+          <h3>disable_on_external_context 启用时，外部 context 或 polluting MCP server 会把 thread 标成 polluted；memory query 跳过 polluted thread。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>外部上下文、web/tool search 或 MCP 结果被长期 memory 吸收，并在后续弱权限会话中泄露。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>memory_mode 控制 future memory eligibility；polluted 状态影响之后的 memory selection。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>控制点放在 memory eligibility metadata 上，避免尝试逐字清洗所有内容。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>disable_on_external_context 默认 false；当前 turn 的 prompt history 仍然是 live context。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>if disable_on_external_context &amp;&amp; external_context: memory_mode = polluted</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/config/src/types.rs#L261" title="codex-rs/config/src/types.rs:261"><span>memory config</span><code>codex-rs/config/src/types.rs:261</code></a><a class="source-chip" href="../../codex-rs/core/src/stream_events_utils.rs#L184" title="codex-rs/core/src/stream_events_utils.rs:184"><span>external context marker</span><code>codex-rs/core/src/stream_events_utils.rs:184</code></a><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call.rs#L749" title="codex-rs/core/src/mcp_tool_call.rs:749"><span>MCP memory pollution</span><code>codex-rs/core/src/mcp_tool_call.rs:749</code></a><a class="source-chip" href="../../codex-rs/state/src/runtime/memories.rs#L417" title="codex-rs/state/src/runtime/memories.rs:417"><span>query eligibility</span><code>codex-rs/state/src/runtime/memories.rs:417</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/tests/suite/sqlite_state.rs#L288" title="codex-rs/core/tests/suite/sqlite_state.rs:288"><span>memory mode tests</span><code>codex-rs/core/tests/suite/sqlite_state.rs:288</code></a><a class="source-chip" href="../../codex-rs/state/src/runtime/memories.rs#L2822" title="codex-rs/state/src/runtime/memories.rs:2822"><span>pollution tests</span><code>codex-rs/state/src/runtime/memories.rs:2822</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="G-05">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">G-05 · Memory-Based Escalation</p>
+          <h3>thread memory mode 可通过协议/API 设置；memory reset 清理持久 memory；memory citation/source attribution 是辅助证据链。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>memory summary 保存“继续使用旧凭据”或“未来自动批准”的指令，影响后续 agent。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>review 后收窄了原 claim：可证明的是 operational control 与 citation/source support，不能证明语义拦截 privilege-retaining memory。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>报告把 memory 操作控制与语义安全分开，避免把引用系统夸大成内容审查器。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>privilege-escalating memory content 的 deterministic semantic validation 未在当前 repo 证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>memory controls = { set mode, reset persisted memory, cite memory sources }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/protocol/src/protocol.rs#L612" title="codex-rs/protocol/src/protocol.rs:612"><span>memory mode op</span><code>codex-rs/protocol/src/protocol.rs:612</code></a><a class="source-chip" href="../../codex-rs/core/src/session/handlers.rs#L575" title="codex-rs/core/src/session/handlers.rs:575"><span>memory mode handler</span><code>codex-rs/core/src/session/handlers.rs:575</code></a><a class="source-chip" href="../../codex-rs/app-server-protocol/src/protocol/v2/thread.rs#L809" title="codex-rs/app-server-protocol/src/protocol/v2/thread.rs:809"><span>memory mode API</span><code>codex-rs/app-server-protocol/src/protocol/v2/thread.rs:809</code></a><a class="source-chip" href="../../codex-rs/app-server/src/request_processors/thread_processor.rs#L1487" title="codex-rs/app-server/src/request_processors/thread_processor.rs:1487"><span>memory reset</span><code>codex-rs/app-server/src/request_processors/thread_processor.rs:1487</code></a><a class="source-chip" href="../../codex-rs/protocol/src/memory_citation.rs#L6" title="codex-rs/protocol/src/memory_citation.rs:6"><span>citation type</span><code>codex-rs/protocol/src/memory_citation.rs:6</code></a><a class="source-chip" href="../../codex-rs/memories/read/src/citations.rs#L6" title="codex-rs/memories/read/src/citations.rs:6"><span>citation extraction</span><code>codex-rs/memories/read/src/citations.rs:6</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/app-server/tests/suite/v2/thread_memory_mode_set.rs#L48" title="codex-rs/app-server/tests/suite/v2/thread_memory_mode_set.rs:48"><span>memory mode tests</span><code>codex-rs/app-server/tests/suite/v2/thread_memory_mode_set.rs:48</code></a><a class="source-chip" href="../../codex-rs/app-server/tests/suite/v2/memory_reset.rs#L23" title="codex-rs/app-server/tests/suite/v2/memory_reset.rs:23"><span>memory reset tests</span><code>codex-rs/app-server/tests/suite/v2/memory_reset.rs:23</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: medium-high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="G-06">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">G-06 · Conversation History Leakage / Contamination</p>
+          <h3>prompt 使用 ContextManager::for_prompt 的 normalized history；resume/fork 有意重建 rollout history；rollback/compaction 以 TurnContextItem baseline 重建。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>fork、resume、extension tool 或 compaction 把旧 user/tool/developer context 带到错误 turn。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>new session 为空；resumed/forked session 复原历史属于显式设计；remote compaction 会过滤旧 developer/context scaffold 并 reinject current context。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>历史重建走结构化 state，降低 stale summary 单独掌控上下文的风险。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>per-message subject/purpose privacy partitioning 与 summary semantic correctness 未在本地源码证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>ContextManager::for_prompt(history) + TurnContextItem baseline reinjection</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/context_manager/history.rs#L115" title="codex-rs/core/src/context_manager/history.rs:115"><span>prompt history</span><code>codex-rs/core/src/context_manager/history.rs:115</code></a><a class="source-chip" href="../../codex-rs/core/src/session/rollout_reconstruction.rs#L234" title="codex-rs/core/src/session/rollout_reconstruction.rs:234"><span>rollout replay</span><code>codex-rs/core/src/session/rollout_reconstruction.rs:234</code></a><a class="source-chip" href="../../codex-rs/core/src/compact.rs#L259" title="codex-rs/core/src/compact.rs:259"><span>replacement history</span><code>codex-rs/core/src/compact.rs:259</code></a><a class="source-chip" href="../../codex-rs/core/src/compact_remote.rs#L251" title="codex-rs/core/src/compact_remote.rs:251"><span>remote compaction filtering</span><code>codex-rs/core/src/compact_remote.rs:251</code></a><a class="source-chip" href="../../codex-rs/core/src/compact_remote_v2.rs#L351" title="codex-rs/core/src/compact_remote_v2.rs:351"><span>v2 filtering</span><code>codex-rs/core/src/compact_remote_v2.rs:351</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/session/rollout_reconstruction_tests.rs#L912" title="codex-rs/core/src/session/rollout_reconstruction_tests.rs:912"><span>reconstruction tests</span><code>codex-rs/core/src/session/rollout_reconstruction_tests.rs:912</code></a><a class="source-chip" href="../../codex-rs/core/src/compact_tests.rs#L243" title="codex-rs/core/src/compact_tests.rs:243"><span>compaction tests</span><code>codex-rs/core/src/compact_tests.rs:243</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+        </div>
+      </section>
+    </main>
+  
+  <footer class="site-footer">
+    <p>Generated 2026-06-02. Source proof uses local repo links; graph data was used only as navigation.</p>
+    <p>Report root: <code>D:\Project\codexx-wiki\sss-codex\asi03-identity-privilege-report</code></p>
+  </footer>
+</body>
+</html>

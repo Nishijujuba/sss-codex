@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGENTS.md 全文中文翻译</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary: #fbfbfd;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f5f5f7;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --accent: #0066cc;
+      --accent-hover: #0077ed;
+      --accent-soft: #e8f2ff;
+      --border: #d2d2d7;
+      --code-bg: #f5f5f7;
+      --success-bg: #edf8f0;
+      --success: #1f7a3a;
+      --radius-lg: 1.5rem;
+      --radius-md: 1rem;
+      --radius-sm: 0.75rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #000000;
+        --bg-secondary: #1d1d1f;
+        --bg-tertiary: #101010;
+        --text-primary: #f5f5f7;
+        --text-secondary: #a1a1a6;
+        --text-tertiary: #86868b;
+        --accent: #2997ff;
+        --accent-hover: #4dabff;
+        --accent-soft: #102438;
+        --border: #38383a;
+        --code-bg: #101010;
+        --success-bg: #102315;
+        --success: #5bd177;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+    }
+
+    body {
+      min-width: 320px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 17px;
+      line-height: 1.68;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    code, pre {
+      font-family: "SF Mono", "Cascadia Code", Consolas, Menlo, Monaco, monospace;
+    }
+
+    code {
+      border-radius: 0.35rem;
+      background: var(--code-bg);
+      padding: 0.1rem 0.35rem;
+      font-size: 0.9em;
+    }
+
+    pre {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--code-bg);
+      padding: 1rem 1.1rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      white-space: pre;
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
+    }
+
+    p {
+      max-width: 72ch;
+      margin-bottom: 1.1rem;
+    }
+
+    ul, ol {
+      margin: 0.75rem 0 1.25rem 1.4rem;
+      max-width: 76ch;
+    }
+
+    li {
+      margin-bottom: 0.55rem;
+      padding-left: 0.15rem;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--border);
+      background: rgba(251, 251, 253, 0.86);
+      backdrop-filter: blur(22px) saturate(1.5);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .nav {
+        background: rgba(0, 0, 0, 0.86);
+      }
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 1.25rem;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.85rem 2rem;
+      overflow-x: auto;
+    }
+
+    .nav a {
+      flex: 0 0 auto;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 520;
+      white-space: nowrap;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .hero {
+      padding: clamp(5rem, 10vh, 8rem) 0 clamp(3rem, 6vh, 5rem);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 520;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 100px;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.7rem;
+      font-size: 0.86rem;
+      font-weight: 560;
+      white-space: nowrap;
+    }
+
+    .tag.accent {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    h1 {
+      max-width: 940px;
+      margin-bottom: 1.3rem;
+      font-size: clamp(2.55rem, 6.2vw, 5.2rem);
+      font-weight: 720;
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .hero-lede {
+      max-width: 760px;
+      color: var(--text-secondary);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.7;
+    }
+
+    .content {
+      max-width: 820px;
+      margin: 0 auto;
+      padding-bottom: 6rem;
+    }
+
+    h2 {
+      margin: 3.5rem 0 1.1rem;
+      font-size: clamp(1.65rem, 3vw, 2.35rem);
+      font-weight: 680;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 2.5rem 0 1rem;
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      font-weight: 650;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+
+    h4 {
+      margin: 1.8rem 0 0.65rem;
+      font-size: 1.08rem;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .callout {
+      border-left: 4px solid var(--success);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      background: var(--success-bg);
+      padding: 1.2rem 1.4rem;
+      margin: 1.5rem 0;
+    }
+
+    .chapter {
+      border-top: 1px solid var(--border);
+      padding-top: 2.3rem;
+      margin-top: 2.6rem;
+    }
+
+    .chapter:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .chapter-title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title h2,
+    .chapter-title h3 {
+      margin: 0;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 4rem;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .page,
+      .nav-inner {
+        padding-right: 1.25rem;
+        padding-left: 1.25rem;
+      }
+    }
+
+    @media print {
+      .nav {
+        display: none;
+      }
+
+      body {
+        background: #fff;
+        color: #000;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="页面导航">
+    <div class="nav-inner">
+      <a href="AGENTS.zh-CN.html">返回总览页</a>
+      <a href="#rust">Rust/codex-rs</a>
+      <a href="#core">codex-core</a>
+      <a href="#tui">TUI</a>
+      <a href="#tests">Tests</a>
+      <a href="#api">App-server API</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <header class="hero">
+      <div class="hero-kicker">
+        <span class="tag accent">全文翻译</span>
+        <span>AGENTS.md</span>
+      </div>
+      <h1>AGENTS.md 全文中文翻译</h1>
+      <p class="hero-lede">该页面专门承载译文正文，不使用滚动 reveal 动画。代码片段、命令、路径、crate 名、配置字段和文件名保持原样，方便逐条核对。</p>
+    </header>
+
+    <section class="content" aria-label="全文中文翻译">
+      <div class="callout">
+        <p><strong>阅读提示：</strong>这是一份项目级操作规约。读者应把它当作工程执行清单：先判断变更范围，再匹配风格、schema、锁文件、快照和测试要求。</p>
+      </div>
+
+      <article id="rust" class="chapter">
+        <div class="chapter-title">
+          <span class="tag accent">主章节</span>
+          <h2>Rust/codex-rs</h2>
+        </div>
+        <p>在 Rust 代码所在的 <code>codex-rs</code> 文件夹中：</p>
+        <ul>
+          <li>crate 名称都以 <code>codex-</code> 为前缀。例如，<code>core</code> 文件夹的 crate 名称是 <code>codex-core</code>。</li>
+          <li>使用 <code>format!</code> 时，如果变量可以直接内联到 <code>{}</code> 中，就应当内联。</li>
+          <li>如果仓库依赖某些命令，例如 <code>just</code>、<code>rg</code> 或 <code>cargo-insta</code>，而这些命令尚未安装，应先安装它们，再运行这里的指令。</li>
+          <li>绝对不要新增或修改任何与 <code>CODEX_SANDBOX_NETWORK_DISABLED_ENV_VAR</code> 或 <code>CODEX_SANDBOX_ENV_VAR</code> 相关的代码。</li>
+          <li>代理运行在沙箱里，每次使用 shell 工具时都会设置 <code>CODEX_SANDBOX_NETWORK_DISABLED=1</code>。任何现有代码若使用 <code>CODEX_SANDBOX_NETWORK_DISABLED_ENV_VAR</code>，作者通常已经考虑了这个事实。它常用于让作者知道在当前沙箱限制下无法运行的测试提前退出。</li>
+          <li>类似地，当通过 Seatbelt（<code>/usr/bin/sandbox-exec</code>）启动进程时，子进程会设置 <code>CODEX_SANDBOX=seatbelt</code>。若集成测试需要自己运行 Seatbelt，这类测试无法再运行在 Seatbelt 之下，因此检查 <code>CODEX_SANDBOX=seatbelt</code> 并按需提前退出也是合理做法。</li>
+          <li>始终按照 Clippy 的 <code>collapsible_if</code> 建议折叠可合并的 <code>if</code> 语句。</li>
+          <li>始终按照 Clippy 的 <code>uninlined_format_args</code> 建议，在可能时内联 <code>format!</code> 参数。</li>
+          <li>在可能时，使用方法引用替代闭包，遵循 <code>redundant_closure_for_method_calls</code>。</li>
+          <li>避免布尔值或含糊的 <code>Option</code> 参数，因为它们会迫使调用方写出 <code>foo(false)</code> 或 <code>bar(None)</code> 这类难读调用。优先使用枚举、具名方法、newtype 或其他惯用 Rust API 形状，让调用点自解释。</li>
+          <li>如果无法调整 API，又必须在 Rust 中写小型的位置字面量调用点，则遵循 <code>argument_comment_lint</code> 约定。</li>
+          <li>传入 <code>None</code>、布尔值和数字字面量等不透明位置参数时，在参数前添加精确的 <code>/*param_name*/</code> 注释。</li>
+          <li>字符串或字符字面量默认不需要此类注释，除非注释确实带来额外清晰度。</li>
+          <li>注释中的参数名必须与被调用函数签名中的参数名完全一致。</li>
+          <li>可以运行 <code>just argument-comment-lint</code> 来在本地执行该检查。它由 Bazel 驱动，首次运行可能较慢；Bazel 预热后，增量运行通常应低于 15 秒。多数情况下，更合适的做法是更新 PR，让 CI 负责检查，或者在提交 PR 后异步运行该检查。CI 会检查三个平台，本地运行只覆盖当前平台。</li>
+          <li>在可能时，让 <code>match</code> 语句保持穷尽性，并避免通配符分支。</li>
+          <li>新增 trait 应包含文档注释，说明该 trait 的角色，以及实现方应该如何使用它。</li>
+          <li>不鼓励在 Rust trait 中使用 <code>#[async_trait]</code> 和 <code>#[allow(async_fn_in_trait)]</code>。</li>
+          <li>优先使用原生 RPITIT trait 方法，并在返回的 future 上显式声明 <code>Send</code> 约束，就像 <code>3c7f013f9735</code> / <code>#16630</code> 中的做法。</li>
+        </ul>
+        <pre><code>fn foo(&self, ...) -> impl std::future::Future&lt;Output = T&gt; + Send;</code></pre>
+        <ul>
+          <li>实现仍然可以使用 <code>async fn foo(&self, ...) -> T</code>，前提是它满足上述契约。</li>
+          <li>不要把 <code>#[allow(async_fn_in_trait)]</code> 当成绕过显式 future 契约写法的捷径。</li>
+          <li>写测试时，优先比较整个对象的相等性，减少逐字段断言。</li>
+          <li>不要把通用产品文档或面向用户的文档添加到 <code>docs/</code> 文件夹。官方 Codex 文档存放在其他地方。例外是 app-server API 文档，这一点在下方 app-server 指南中另有说明。</li>
+          <li>优先使用私有模块，并显式导出 public crate API。</li>
+          <li>如果修改 <code>ConfigToml</code> 或其嵌套配置类型，运行 <code>just write-config-schema</code> 更新 <code>codex-rs/core/config.schema.json</code>。</li>
+          <li>处理 MCP 工具调用时，优先使用 <code>codex-rs/codex-mcp/src/mcp_connection_manager.rs</code> 管理工具和工具调用的变更。目标是缩小修改范围，并复用现有抽象，减少把代码穿透多层函数调用的情况。</li>
+          <li>如果修改 Rust 依赖（<code>Cargo.toml</code> 或 <code>Cargo.lock</code>），从仓库根目录运行 <code>just bazel-lock-update</code> 刷新 <code>MODULE.bazel.lock</code>，并把该锁文件更新纳入同一变更。</li>
+          <li>依赖变更后，从仓库根目录运行 <code>just bazel-lock-check</code>，这样本地就能提前发现锁文件漂移。</li>
+          <li>Bazel 不会自动把源树文件暴露给编译期 Rust 文件读取。如果新增 <code>include_str!</code>、<code>include_bytes!</code>、<code>sqlx::migrate!</code> 或类似的编译期文件/目录读取，就要更新对应 crate 的 <code>BUILD.bazel</code>（<code>compile_data</code>、<code>build_script_data</code> 或 test data）。否则 Cargo 可能通过，Bazel 仍会失败。</li>
+          <li>不要创建只被引用一次的小型 helper 方法。</li>
+          <li>避免大型模块。</li>
+          <li>优先新增模块承载新功能，减少继续扩张现有模块。</li>
+          <li>Rust 模块目标控制在 500 行以内，测试代码除外。</li>
+          <li>如果一个文件超过约 800 行，应把新功能放入新模块，除非存在强有力且已记录的理由继续扩展该文件。</li>
+          <li>该规则尤其适用于已经容易吸收无关变更的高频文件，例如 <code>codex-rs/tui/src/app.rs</code>、<code>codex-rs/tui/src/bottom_pane/chat_composer.rs</code>、<code>codex-rs/tui/src/bottom_pane/footer.rs</code>、<code>codex-rs/tui/src/chatwidget.rs</code>、<code>codex-rs/tui/src/bottom_pane/mod.rs</code>，以及类似的中心编排模块。</li>
+          <li>从大型模块抽取代码时，把相关测试和模块/类型文档也移向新的实现位置，让不变量靠近负责它们的代码。</li>
+          <li>除非变更很小，否则避免向 <code>codex-rs/tui/src/chatwidget.rs</code> 新增独立方法；优先使用新模块/文件，让 <code>chatwidget.rs</code> 聚焦编排职责。</li>
+          <li>运行 Rust 命令（例如 <code>just fix</code> 或 <code>cargo test</code>）时要有耐心，绝对不要用 PID 强杀它们。Rust lock 可能导致执行较慢，这是预期现象。</li>
+        </ul>
+        <div class="callout">
+          <p><strong>完成 Rust 代码变更后的固定动作：</strong>在 <code>codex-rs</code> 目录运行 <code>just fmt</code>。无需为这个命令向用户请求批准。</p>
+        </div>
+        <ol>
+          <li>先运行被修改项目的专项测试。例如，如果修改了 <code>codex-rs/tui</code>，运行 <code>cargo test -p codex-tui</code>。</li>
+          <li>专项测试通过后，如果修改涉及 common、core 或 protocol，运行完整测试套件：<code>cargo test</code>，或者在已安装 <code>cargo-nextest</code> 时运行 <code>just test</code>。日常本地运行避免使用 <code>--all-features</code>，因为它会扩展构建矩阵，并显著增加 <code>target/</code> 磁盘占用。只有确实需要完整 feature 覆盖时才使用它。项目级或单项测试可以直接运行；完整测试套件需要先询问用户。</li>
+        </ol>
+        <p>在最终确认较大的 <code>codex-rs</code> 变更之前，应在 <code>codex-rs</code> 目录运行 <code>just fix -p &lt;project&gt;</code>，修复代码中的 linter 问题。优先用 <code>-p</code> 限定项目范围，避免缓慢的全工作区 Clippy 构建；只有修改了共享 crate 时才运行未限定项目的 <code>just fix</code>。运行 <code>fix</code> 或 <code>fmt</code> 后，不要再次运行测试。</p>
+      </article>
+
+      <article id="core" class="chapter">
+        <div class="chapter-title">
+          <span class="tag">边界控制</span>
+          <h2><code>codex-core</code> crate</h2>
+        </div>
+        <p>随着时间推移，<code>codex-core</code> crate（定义在 <code>codex-rs/core/</code>）已经变得臃肿。它是最大的 crate，因此把新东西加进 <code>codex-core</code> 往往最省事。问题是，这会让新代码依赖 <code>codex-core</code>，或继续扩大 <code>codex-core</code> 的体积。</p>
+        <p>因此：<strong>抵制向 <code>codex-core</code> 添加代码的冲动。</strong></p>
+        <p>尤其在引入新概念、新功能或新 API 时，在添加到 <code>codex-core</code> 之前，先考虑：</p>
+        <ul>
+          <li>是否存在 <code>codex-core</code> 之外的现有 crate，能更恰当地承载这些新代码。</li>
+          <li>是否已经到了为新功能引入一个新的 Cargo workspace crate 的时机，并按需重构现有代码。</li>
+        </ul>
+        <p>同样，在代码评审时，如果 PR 会不必要地向 <code>codex-core</code> 添加代码，不要犹豫，应明确推动修正。</p>
+      </article>
+
+      <article id="tui" class="chapter">
+        <div class="chapter-title">
+          <span class="tag">TUI</span>
+          <h2>TUI 风格与代码约定</h2>
+        </div>
+        <h3>TUI 风格约定</h3>
+        <p>参见 <code>codex-rs/tui/styles.md</code>。</p>
+
+        <h3>TUI 代码约定</h3>
+        <p>使用 ratatui 的 <code>Stylize</code> trait 提供的简洁样式 helper。</p>
+        <ul>
+          <li>基础 span：使用 <code>"text".into()</code>。</li>
+          <li>带样式 span：使用 <code>"text".red()</code>、<code>"text".green()</code>、<code>"text".magenta()</code>、<code>"text".dim()</code> 等。</li>
+          <li>优先使用这些 helper，减少直接构造 <code>Span::styled</code> 和 <code>Style</code>。</li>
+          <li>示例：patch 摘要中的文件行，期望写法如下。</li>
+        </ul>
+        <pre><code>vec!["  └ ".into(), "M".red(), " ".dim(), "tui/src/app.rs".dim()]</code></pre>
+
+        <h3>TUI Styling（ratatui）</h3>
+        <ul>
+          <li>优先使用 <code>Stylize</code> helper：<code>"text".dim()</code>、<code>.bold()</code>、<code>.cyan()</code>、<code>.italic()</code>、<code>.underlined()</code>，减少手写 <code>Style</code>。</li>
+          <li>优先使用简单转换：span 用 <code>"text".into()</code>，line 用 <code>vec![...].into()</code>。当类型推断含糊时，例如 <code>Paragraph::new</code> 或 <code>Cell::from</code>，使用 <code>Line::from(spans)</code> 或 <code>Span::from(text)</code>。</li>
+          <li>运行时计算得到的样式可以使用 <code>Span::styled</code>；<code>Span::from(text).set_style(style)</code> 也可以接受。</li>
+          <li>避免硬编码白色：不要使用 <code>.white()</code>；优先使用默认前景色。</li>
+          <li>组合样式时，通过链式调用提高可读性，例如 <code>url.cyan().underlined()</code>。</li>
+          <li>单个元素优先使用 <code>"text".into()</code>；只有在目标类型不明显，或者 <code>.into()</code> 会要求额外类型标注时，才使用 <code>Line::from(text)</code> 或 <code>Span::from(text)</code>。</li>
+          <li>构造行时，如果目标类型明显且无需额外类型标注，使用 <code>vec![...].into()</code>；否则使用 <code>Line::from(vec![...])</code>。</li>
+          <li>避免无意义改写：没有明确可读性或功能收益时，不要在等价形式之间来回重构，例如 <code>Span::styled</code> 与 <code>set_style</code>，或 <code>Line::from</code> 与 <code>.into()</code>。遵循文件局部约定，也不要仅为满足 <code>.into()</code> 而引入类型标注。</li>
+          <li>保持紧凑：优先选择 rustfmt 后仍能保持单行的形式。如果只有 <code>Line::from(vec![...])</code> 或 <code>vec![...].into()</code> 其中一种能避免换行，就选择它；如果两者都换行，选择换行更少的形式。</li>
+        </ul>
+
+        <h3>文本换行</h3>
+        <ul>
+          <li>始终使用 <code>textwrap::wrap</code> 包装纯字符串。</li>
+          <li>如果有 ratatui <code>Line</code> 需要换行，使用 <code>tui/src/wrapping.rs</code> 中的 helper，例如 <code>word_wrap_lines</code> 或 <code>word_wrap_line</code>。</li>
+          <li>如果需要缩进换行后的行，并且可以使用 <code>RtOptions</code> 中的 <code>initial_indent</code> / <code>subsequent_indent</code> 选项，就使用这些选项，减少手写逻辑。</li>
+          <li>如果有一组行需要统一添加前缀，且首行和后续行可选地使用不同前缀，使用 <code>line_utils</code> 中的 <code>prefix_lines</code> helper。</li>
+        </ul>
+      </article>
+
+      <article id="tests" class="chapter">
+        <div class="chapter-title">
+          <span class="tag">测试</span>
+          <h2>Tests</h2>
+        </div>
+        <h3>快照测试</h3>
+        <p>这个仓库使用快照测试（通过 <code>insta</code>），尤其在 <code>codex-rs/tui</code> 中，用来验证渲染输出。</p>
+        <p><strong>要求：</strong>任何影响用户可见 UI 的变更，包括新增 UI，都必须包含相应的 <code>insta</code> 快照覆盖。若已有快照覆盖相关行为，则更新现有快照；若没有，则新增快照测试。应在 PR 中审查并接受快照更新，这样 UI 影响便于评审，未来差异也保持可视。</p>
+        <p>当 UI 或文本输出的变化是有意的，按以下步骤更新快照：</p>
+        <ol>
+          <li>运行测试生成更新后的快照：<code>cargo test -p codex-tui</code>。</li>
+          <li>检查待处理快照：<code>cargo insta pending-snapshots -p codex-tui</code>。</li>
+          <li>直接阅读仓库中生成的 <code>*.snap.new</code> 文件，或预览指定文件：<code>cargo insta show -p codex-tui path/to/file.snap.new</code>。</li>
+          <li>只有在打算接受该 crate 的全部新快照时，运行 <code>cargo insta accept -p codex-tui</code>。</li>
+        </ol>
+        <p>如果没有安装该工具：</p>
+        <pre><code>cargo install --locked cargo-insta</code></pre>
+
+        <h3>测试断言</h3>
+        <ul>
+          <li>测试应使用 <code>pretty_assertions::assert_eq</code>，以获得更清晰的差异输出。如果测试模块尚未导入它，就在顶部导入。</li>
+          <li>尽可能优先做深度相等比较。对整个对象使用 <code>assert_eq!()</code>，减少逐字段断言。</li>
+          <li>避免在测试中修改进程环境；优先从上层传入环境派生的标志或依赖。</li>
+        </ul>
+
+        <h3>在测试中启动工作区二进制（Cargo 与 Bazel）</h3>
+        <ul>
+          <li>当测试需要启动一方仓库内二进制时，优先使用 <code>codex_utils_cargo_bin::cargo_bin("...")</code>，减少使用 <code>assert_cmd::Command::cargo_bin(...)</code> 或 <code>escargot</code>。</li>
+          <li>在 Bazel 下，二进制和资源可能位于 runfiles 中；使用 <code>codex_utils_cargo_bin::cargo_bin</code> 可以解析出绝对路径，即使发生 <code>chdir</code> 后仍保持稳定。</li>
+          <li>在 Bazel 下定位 fixture 文件或测试资源时，避免使用 <code>env!("CARGO_MANIFEST_DIR")</code>。优先使用 <code>codex_utils_cargo_bin::find_resource!</code>，让路径在 Cargo 和 Bazel runfiles 下都能正确解析。</li>
+        </ul>
+
+        <h3>核心集成测试</h3>
+        <ul>
+          <li>编写端到端 Codex 测试时，优先使用 <code>core_test_support::responses</code> 中的工具。</li>
+          <li>所有 <code>mount_sse*</code> helper 都会返回 <code>ResponseMock</code>；保留它，以便断言发往 <code>/responses</code> 的 POST 请求体。</li>
+          <li>当测试只应发出一个 POST 时，使用 <code>ResponseMock::single_request()</code>；需要检查每个捕获到的 <code>ResponsesRequest</code> 时，使用 <code>ResponseMock::requests()</code>。</li>
+          <li><code>ResponsesRequest</code> 提供 <code>body_json</code>、<code>input</code>、<code>function_call_output</code>、<code>custom_tool_call_output</code>、<code>call_output</code>、<code>header</code>、<code>path</code>、<code>query_param</code> 等 helper，让断言能够面向结构化 payload，而非手工挖 JSON。</li>
+          <li>使用提供的 <code>ev_*</code> 构造器和 <code>sse(...)</code> 构建 SSE payload。</li>
+          <li>优先使用 <code>wait_for_event</code>，减少使用 <code>wait_for_event_with_timeout</code>。</li>
+          <li>优先使用 <code>mount_sse_once</code>，减少使用 <code>mount_sse_once_match</code> 或 <code>mount_sse_sequence</code>。</li>
+        </ul>
+        <p>典型模式如下：</p>
+        <pre><code>let mock = responses::mount_sse_once(&amp;server, responses::sse(vec![
+    responses::ev_response_created("resp-1"),
+    responses::ev_function_call(call_id, "shell", &amp;serde_json::to_string(&amp;args)?),
+    responses::ev_completed("resp-1"),
+])).await;
+
+codex.submit(Op::UserTurn { ... }).await?;
+
+// Assert request body if needed.
+let request = mock.single_request();
+// assert using request.function_call_output(call_id) or request.json_body() or other helpers.</code></pre>
+      </article>
+
+      <article id="api" class="chapter">
+        <div class="chapter-title">
+          <span class="tag">API</span>
+          <h2>App-server API 开发最佳实践</h2>
+        </div>
+        <p>这些指南适用于 <code>codex-rs</code> 中的 app-server protocol 工作，尤其是：</p>
+        <ul>
+          <li><code>app-server-protocol/src/protocol/common.rs</code></li>
+          <li><code>app-server-protocol/src/protocol/v2.rs</code></li>
+          <li><code>app-server/README.md</code></li>
+        </ul>
+
+        <h3>核心规则</h3>
+        <ul>
+          <li>所有活跃 API 开发都应发生在 app-server v2 中。不要向 v1 添加新的 API 表面。</li>
+          <li>遵循 payload 命名一致性：请求 payload 使用 <code>*Params</code>，响应使用 <code>*Response</code>，通知使用 <code>*Notification</code>。</li>
+          <li>RPC 方法暴露为 <code>&lt;resource&gt;/&lt;method&gt;</code>，并保持 <code>&lt;resource&gt;</code> 为单数，例如 <code>thread/read</code>、<code>app/list</code>。</li>
+          <li>除 tagged union 或显式兼容性要求需要定向 rename 外，线上的字段始终使用 camelCase，并通过 <code>#[serde(rename_all = "camelCase")]</code> 表达。</li>
+          <li>例外：config RPC payload 应使用 snake_case，以匹配 <code>config.toml</code> key。可参考 <code>app-server-protocol/src/protocol/v2.rs</code> 中的 config read/write/list API。</li>
+          <li>v2 请求、响应、通知类型始终设置 <code>#[ts(export_to = "v2/")]</code>，让生成的 TypeScript 落入正确 namespace。</li>
+          <li>不要在 v2 API payload 字段上使用 <code>#[serde(skip_serializing_if = "Option::is_none")]</code>。</li>
+          <li>例外：client-to-server 请求如果刻意没有 params，可以使用：<code>params: #[ts(type = "undefined")] #[serde(skip_serializing_if = "Option::is_none")] Option&lt;()&gt;</code>。</li>
+          <li>保持 Rust 与 TypeScript 的 wire rename 一致。如果字段或 variant 使用 <code>#[serde(rename = "...")]</code>，就添加匹配的 <code>#[ts(rename = "...")]</code>。</li>
+          <li>对于可辨识联合类型，在两个序列化器中都使用显式 tag：<code>#[serde(tag = "type", ...)]</code> 和 <code>#[ts(tag = "type", ...)]</code>。</li>
+          <li>API 边界优先使用普通 <code>String</code> ID；如需 UUID 解析或转换，在内部处理。</li>
+          <li>时间戳应为整数 Unix 秒（<code>i64</code>），命名为 <code>*_at</code>，例如 <code>created_at</code>、<code>updated_at</code>、<code>resets_at</code>。</li>
+          <li>实验性 API 表面使用 <code>#[experimental("method/or/field")]</code>。需要字段级 gate 时派生 <code>ExperimentalApi</code>；如果只有方法中的部分字段是实验性的，在 <code>common.rs</code> 中使用 <code>inspect_params: true</code>。</li>
+        </ul>
+
+        <h3>Client-to-server 请求 payload（<code>*Params</code>）</h3>
+        <ul>
+          <li>每个可选字段都必须标注 <code>#[ts(optional = nullable)]</code>。不要在 client-to-server 请求 payload（<code>*Params</code>）之外使用 <code>#[ts(optional = nullable)]</code>。</li>
+          <li>可选集合字段，例如 <code>Vec</code>、<code>HashMap</code>，必须使用 <code>Option&lt;...&gt;</code> 加 <code>#[ts(optional = nullable)]</code>。不要用 <code>#[serde(default)]</code> 表达可选集合，也不要在 v2 payload 字段上使用 <code>skip_serializing_if</code>。</li>
+          <li>如果希望省略布尔字段时含义为 <code>false</code>，使用 <code>#[serde(default, skip_serializing_if = "std::ops::Not::not")] pub field: bool</code>，减少使用 <code>Option&lt;bool&gt;</code>。</li>
+          <li>新增 list 方法时，默认实现游标分页：请求字段为 <code>pub cursor: Option&lt;String&gt;</code> 和 <code>pub limit: Option&lt;u32&gt;</code>；响应字段为 <code>pub data: Vec&lt;...&gt;</code> 和 <code>pub next_cursor: Option&lt;String&gt;</code>。</li>
+        </ul>
+
+        <h3>开发流程</h3>
+        <ul>
+          <li>当 API 行为变化时，更新 app-server 文档/示例，至少更新 <code>app-server/README.md</code>。</li>
+          <li>API shape 变化时，重新生成 schema fixture：<code>just write-app-server-schema</code>。</li>
+          <li>如果影响实验性 API fixture，也运行 <code>just write-app-server-schema --experimental</code>。</li>
+          <li>使用 <code>cargo test -p codex-app-server-protocol</code> 验证。</li>
+          <li>避免编写只断言 <code>common.rs</code> 中单个请求字段实验性标记的样板测试；优先依靠 schema 生成/测试和行为覆盖。</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <p>生成依据：<code>AGENTS.md</code>。该页面为独立译文阅读页，入口来自 <code>AGENTS.zh-CN.html</code>。</p>
+    </footer>
+  </main>
+</body>
+</html>

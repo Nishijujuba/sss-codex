@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>06 · 缺口与证据边界</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] }, svg: { fontCache: "global" } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="../assets/report.js"></script>
+</head>
+<body>
+  
+    <nav class="topnav">
+      <a class="brand" href="../index.html">ASI03 Codex</a>
+      <div class="navlinks">
+        <a class="" href="../chapters/01-identity.html">01</a><a class="" href="../chapters/02-permission-sandbox.html">02</a><a class="" href="../chapters/03-approval-guardian.html">03</a><a class="" href="../chapters/04-mcp-connectors.html">04</a><a class="" href="../chapters/05-multi-agent-memory.html">05</a><a class="active" href="../chapters/06-gaps.html">06</a>
+      </div>
+    </nav>
+  
+  
+    <main>
+      <header class="chapter-hero">
+        <p class="eyebrow">Chapter 06</p>
+        <h1>缺口与证据边界</h1>
+        <p class="lede">把源码能证明的控制与源码无法证明的愿景分开，避免把产品外部能力写成已实现机制。</p>
+        <div class="formula">\(claim_{accepted}\Rightarrow source\;evidence\quad;\quad no\;evidence\Rightarrow unsupported\_gap\)</div>
+      </header>
+      <section class="band intro-band">
+        <div class="intro-copy">
+          <h2>Risk Frame</h2>
+          <p>安全报告最容易犯的错是把“架构上应该有”写成“源码中已经有”。本页只收录审查后仍然属于 unsupported_gap 的项目，作为后续安全评审清单。</p>
+        </div>
+        <div class="chain-layout">
+          
+    <section class="chain-block">
+      <h3>Attack Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>外部 IAM、OAuth token、设备码、企业策略中心进入系统边界</p></li><li><span>02</span><p>本地源码只能看到请求、事件、schema 或 metadata</p></li><li><span>03</span><p>缺少源码证据时必须标成 unsupported_gap</p></li>
+      </ol>
+    </section>
+  
+          
+    <section class="chain-block">
+      <h3>Codex Defense Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>把缺口单独列页</p></li><li><span>02</span><p>每条 gap 绑定已检查边界文件</p></li><li><span>03</span><p>总览矩阵保持 pass 与 unsupported_gap 双状态</p></li>
+      </ol>
+    </section>
+  
+        </div>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Pseudocode</p>
+          <h2>Control Logic</h2>
+        </div>
+        <pre class="pseudo"><code>if source_supports(claim): status = pass
+else: status = unsupported_gap
+never promote unsupported_gap into implemented control</code></pre>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Reviewed Claims</p>
+          <h2>Source Evidence Cards</h2>
+        </div>
+        <div class="claim-stack">
+          
+    <article class="claim-card" id="U-01">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">U-01 · OAuth Signed Intent Binding</p>
+          <h3>当前源码能证明 AgentAssertion 的 runtime/task/timestamp 绑定，未证明 OAuth token 的 signed intent 绑定。</h3>
+        </div>
+        <span class="status unsupported_gap">unsupported_gap</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>OAuth/API token 被跨 subject、resource、purpose 或 session 复用。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>checked files expose runtime/task/account headers and assertions；没有 resource/purpose/duration intent payload。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>运行时 task 绑定是有证据的；OAuth intent policy 是外部缺口。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>需要后端/IAM/OAuth issuance evidence 才能升级为 pass。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>present: runtime_id/task_id/timestamp; absent locally: resource/purpose/duration</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L80" title="codex-rs/agent-identity/src/lib.rs:80"><span>assertion fields</span><code>codex-rs/agent-identity/src/lib.rs:80</code></a><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L358" title="codex-rs/agent-identity/src/lib.rs:358"><span>signed payload</span><code>codex-rs/agent-identity/src/lib.rs:358</code></a><a class="source-chip" href="../../codex-rs/model-provider/src/auth.rs#L29" title="codex-rs/model-provider/src/auth.rs:29"><span>account header</span><code>codex-rs/model-provider/src/auth.rs:29</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L416" title="codex-rs/agent-identity/src/lib.rs:416"><span>assertion test</span><code>codex-rs/agent-identity/src/lib.rs:416</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: unsupported_gap</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="U-02">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">U-02 · Time-Bound Tokens / TTL</p>
+          <h3>PermissionGrantScope 只有 Turn 与 Session；schema 中未出现 expiry/duration 字段。</h3>
+        </div>
+        <span class="status unsupported_gap">unsupported_gap</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>session grant 或 maintenance approval 在窗口结束后继续生效。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>current implementation records grants by turn or session state, with no clock-based revocation field in reviewed schema.</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>scope 有显式 schema，时间边界没有。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>需要 expires_at、duration 或 policy scheduler 才能覆盖 ASI03 的 time-bound mitigation。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>scope: Turn | Session</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/protocol/src/request_permissions.rs#L12" title="codex-rs/protocol/src/request_permissions.rs:12"><span>Turn/Session</span><code>codex-rs/protocol/src/request_permissions.rs:12</code></a><a class="source-chip" href="../../codex-rs/app-server-protocol/schema/typescript/v2/PermissionGrantScope.ts#L5" title="codex-rs/app-server-protocol/schema/typescript/v2/PermissionGrantScope.ts:5"><span>schema enum</span><code>codex-rs/app-server-protocol/schema/typescript/v2/PermissionGrantScope.ts:5</code></a><a class="source-chip" href="../../codex-rs/app-server-protocol/schema/typescript/v2/PermissionsRequestApprovalResponse.ts#L7" title="codex-rs/app-server-protocol/schema/typescript/v2/PermissionsRequestApprovalResponse.ts:7"><span>approval response</span><code>codex-rs/app-server-protocol/schema/typescript/v2/PermissionsRequestApprovalResponse.ts:7</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/session/tests.rs#L5108" title="codex-rs/core/src/session/tests.rs:5108"><span>session grant test</span><code>codex-rs/core/src/session/tests.rs:5108</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: unsupported_gap</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="U-03">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">U-03 · Per-Subagent App Identity</p>
+          <h3>源码能证明 lineage 与 OS sandbox identity 分离；未证明每个 subagent 拥有独立 app credential。</h3>
+        </div>
+        <span class="status unsupported_gap">unsupported_gap</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>多个 subagent 通过共享 app/session services 复用同一外部身份。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>ThreadSpawn 记录 parent/depth/path/role；delegation service sharing 与 app identity separation 没有对应 per-agent token field。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>审计 identity 和执行 identity 有部分分离，app credential isolation 仍是缺口。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>需要 per-subagent credential issuance 或 on-behalf-of chain 证据。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>lineage exists; per-subagent app credential field absent in reviewed surface</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/codex_delegate.rs#L77" title="codex-rs/core/src/codex_delegate.rs:77"><span>shared services</span><code>codex-rs/core/src/codex_delegate.rs:77</code></a><a class="source-chip" href="../../codex-rs/protocol/src/protocol.rs#L2483" title="codex-rs/protocol/src/protocol.rs:2483"><span>SubAgentSource</span><code>codex-rs/protocol/src/protocol.rs:2483</code></a><a class="source-chip" href="../../codex-rs/windows-sandbox-rs/src/identity.rs#L109" title="codex-rs/windows-sandbox-rs/src/identity.rs:109"><span>OS sandbox users</span><code>codex-rs/windows-sandbox-rs/src/identity.rs:109</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/codex_delegate_tests.rs#L183" title="codex-rs/core/src/codex_delegate_tests.rs:183"><span>delegate test</span><code>codex-rs/core/src/codex_delegate_tests.rs:183</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: unsupported_gap</span>
+        <span>confidence: medium-high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="U-04">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">U-04 · Automatic Delegated-Privilege Alerts</p>
+          <h3>analytics 与 rollout-trace 记录 lineage 和 approvals；没有本地证据显示 automatic violation detector。</h3>
+        </div>
+        <span class="status unsupported_gap">unsupported_gap</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>低权限 agent 通过 delegation chain 获得高权限 scope，系统只记录事件却不自动报警。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>event metadata 可作为检测输入；blocking/alert rule 未在 reviewed source 中出现。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>可观测性是检测前提，检测规则是另一个实现层。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>需要 policy/analytics alert engine 证据才能覆盖 ASI03 mitigation 8/9。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>telemetry present; automatic alert rule unsupported by current repo evidence</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/analytics/src/events.rs#L787" title="codex-rs/analytics/src/events.rs:787"><span>approval telemetry</span><code>codex-rs/analytics/src/events.rs:787</code></a><a class="source-chip" href="../../codex-rs/analytics/src/events.rs#L1053" title="codex-rs/analytics/src/events.rs:1053"><span>subagent source helper</span><code>codex-rs/analytics/src/events.rs:1053</code></a><a class="source-chip" href="../../codex-rs/rollout-trace/src/reducer/tool/agents.rs#L56" title="codex-rs/rollout-trace/src/reducer/tool/agents.rs:56"><span>edge reducer</span><code>codex-rs/rollout-trace/src/reducer/tool/agents.rs:56</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/rollout-trace/src/reducer/tool/agents_tests.rs#L285" title="codex-rs/rollout-trace/src/reducer/tool/agents_tests.rs:285"><span>edge tests</span><code>codex-rs/rollout-trace/src/reducer/tool/agents_tests.rs:285</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: unsupported_gap</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="U-05">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">U-05 · Device-Code-Specific Monitoring</p>
+          <h3>app-server MCP OAuth login 返回 authorization_url 并发 completion notification；device-code-specific detection 未出现。</h3>
+        </div>
+        <span class="status unsupported_gap">unsupported_gap</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>browsing/helper agent 完成 device-code flow，把 victim tenant 绑定到 attacker scopes。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>OAuth flow 是显式 URL login path；scope anomaly、device-code relay、cross-agent completion detection 没有本地证据。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>显式流程降低静默授权风险，无法替代设备码钓鱼检测。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>需要 OAuth/device-code policy、scope anomaly monitoring 或 browser-agent coordination evidence。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>authorization_url is explicit; device-code phishing detector absent locally</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/app-server/src/request_processors/mcp_processor.rs#L112" title="codex-rs/app-server/src/request_processors/mcp_processor.rs:112"><span>OAuth login</span><code>codex-rs/app-server/src/request_processors/mcp_processor.rs:112</code></a><a class="source-chip" href="../../codex-rs/app-server/src/request_processors/mcp_processor.rs#L156" title="codex-rs/app-server/src/request_processors/mcp_processor.rs:156"><span>completion notification</span><code>codex-rs/app-server/src/request_processors/mcp_processor.rs:156</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/mcp/auth.rs#L54" title="codex-rs/codex-mcp/src/mcp/auth.rs:54"><span>MCP auth</span><code>codex-rs/codex-mcp/src/mcp/auth.rs:54</code></a><a class="source-chip" href="../../codex-rs/app-server-protocol/src/protocol/v2/mcp.rs#L196" title="codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:196"><span>OAuth protocol</span><code>codex-rs/app-server-protocol/src/protocol/v2/mcp.rs:196</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/connection_manager_tests.rs#L1020" title="codex-rs/codex-mcp/src/connection_manager_tests.rs:1020"><span>auth required test</span><code>codex-rs/codex-mcp/src/connection_manager_tests.rs:1020</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: unsupported_gap</span>
+        <span>confidence: medium</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="U-06">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">U-06 · External IAM / Agentic Identity Platforms</p>
+          <h3>当前 repo 证据覆盖 Codex local protocol/core/auth paths；Microsoft Entra、AWS Bedrock、Salesforce、Workday、Vertex 等外部平台能力没有本地源码证明。</h3>
+        </div>
+        <span class="status unsupported_gap">unsupported_gap</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>企业 IAM 平台、mTLS、agent lifecycle controls 被报告误写成 Codex 本地已实现能力。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>本报告只基于 current local repo 与 graph navigation，不把产品生态愿景升级成实现结论。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>证据边界清楚，审查者能看见哪里需要外部材料。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>需要外部 IAM docs、backend token issuance logs 或 enterprise policy config 才能扩展结论。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>external IAM platform controls are outside current local repo evidence</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/agent-identity/src/lib.rs#L64" title="codex-rs/agent-identity/src/lib.rs:64"><span>local JWT claims</span><code>codex-rs/agent-identity/src/lib.rs:64</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/connection_manager.rs#L171" title="codex-rs/codex-mcp/src/connection_manager.rs:171"><span>local MCP manager</span><code>codex-rs/codex-mcp/src/connection_manager.rs:171</code></a><a class="source-chip" href="../../codex-rs/protocol/src/protocol.rs#L2483" title="codex-rs/protocol/src/protocol.rs:2483"><span>local subagent source</span><code>codex-rs/protocol/src/protocol.rs:2483</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <p class="muted">No direct test artifact recorded for this claim.</p>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: unsupported_gap</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+        </div>
+      </section>
+    </main>
+  
+  <footer class="site-footer">
+    <p>Generated 2026-06-02. Source proof uses local repo links; graph data was used only as navigation.</p>
+    <p>Report root: <code>D:\Project\codexx-wiki\sss-codex\asi03-identity-privilege-report</code></p>
+  </footer>
+</body>
+</html>

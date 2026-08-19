@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>02 · 权限继承与 sandbox 边界</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] }, svg: { fontCache: "global" } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="../assets/report.js"></script>
+</head>
+<body>
+  
+    <nav class="topnav">
+      <a class="brand" href="../index.html">ASI03 Codex</a>
+      <div class="navlinks">
+        <a class="" href="../chapters/01-identity.html">01</a><a class="active" href="../chapters/02-permission-sandbox.html">02</a><a class="" href="../chapters/03-approval-guardian.html">03</a><a class="" href="../chapters/04-mcp-connectors.html">04</a><a class="" href="../chapters/05-multi-agent-memory.html">05</a><a class="" href="../chapters/06-gaps.html">06</a>
+      </div>
+    </nav>
+  
+  
+    <main>
+      <header class="chapter-hero">
+        <p class="eyebrow">Chapter 02</p>
+        <h1>权限继承与 sandbox 边界</h1>
+        <p class="lede">PermissionProfile 约束、turn/session grant、workspace-write 的真实语义，以及显式 unsandboxed escalation。</p>
+        <div class="formula">\(P_{effective}=P_{requested}\cap P_{granted}\cap P_{constraints}\)</div>
+      </header>
+      <section class="band intro-band">
+        <div class="intro-copy">
+          <h2>Risk Frame</h2>
+          <p>权限继承的危险在于“借来的钥匙”被当作长期钥匙。Codex 的本地证据显示权限会经过 profile 约束和交集计算，sandbox 与 escalation 也有明确状态边界；时间窗口和默认广读边界仍需要实话实说。</p>
+        </div>
+        <div class="chain-layout">
+          
+    <section class="chain-block">
+      <h3>Attack Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>父 agent 或 session 拥有较宽权限</p></li><li><span>02</span><p>子任务请求写入、网络或 unsandboxed 执行</p></li><li><span>03</span><p>权限在 session 内积累并扩大 blast radius</p></li>
+      </ol>
+    </section>
+  
+          
+    <section class="chain-block">
+      <h3>Codex Defense Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>PermissionProfile 约束候选权限</p></li><li><span>02</span><p>request_permissions 只记录请求与批准交集</p></li><li><span>03</span><p>sandbox first attempt 与 unsandboxed retry 分离</p></li>
+      </ol>
+    </section>
+  
+        </div>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Pseudocode</p>
+          <h2>Control Logic</h2>
+        </div>
+        <pre class="pseudo"><code>requested = parse_request_permissions(args)
+granted = intersect(requested, approval_response)
+attempt = sandboxed_first(); retry = none_unless_approved()</code></pre>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Reviewed Claims</p>
+          <h2>Source Evidence Cards</h2>
+        </div>
+        <div class="claim-stack">
+          
+    <article class="claim-card" id="P-01">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">P-01 · Un-scoped Privilege Inheritance</p>
+          <h3>PermissionProfile 约束候选权限，request_permissions 记录 requested 与 approved 的交集。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>父级 profile 或 session grant 过宽，worker 获得超出任务范围的写入或网络能力。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>session 将 response.permissions 与 requested_permissions 做 intersect，再按 Turn 或 Session 写入 state。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>最小权限在这里是集合交集，数学上比自然语言承诺更可靠。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>Session grant 仍可累积；TTL 与 scheduled rollback 未在源码证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>permissions = intersect_permission_profiles(requested, response.permissions)</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/config/resolved_permission_profile.rs#L241" title="codex-rs/core/src/config/resolved_permission_profile.rs:241"><span>profile constraints</span><code>codex-rs/core/src/config/resolved_permission_profile.rs:241</code></a><a class="source-chip" href="../../codex-rs/core/src/session/mod.rs#L2392" title="codex-rs/core/src/session/mod.rs:2392"><span>grant processing</span><code>codex-rs/core/src/session/mod.rs:2392</code></a><a class="source-chip" href="../../codex-rs/protocol/src/permissions.rs#L813" title="codex-rs/protocol/src/permissions.rs:813"><span>granular request flag</span><code>codex-rs/protocol/src/permissions.rs:813</code></a><a class="source-chip" href="../../codex-rs/protocol/src/permissions.rs#L2791" title="codex-rs/protocol/src/permissions.rs:2791"><span>permission math</span><code>codex-rs/protocol/src/permissions.rs:2791</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/protocol/src/permissions.rs#L3015" title="codex-rs/protocol/src/permissions.rs:3015"><span>permission intersection tests</span><code>codex-rs/protocol/src/permissions.rs:3015</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="P-02">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">P-02 · Task-Scoped / Time-Bound Permissions</p>
+          <h3>schema 与协议只暴露 Turn 与 Session 两种 scope；strict auto review 对 session scope 会被降成 turn grant。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>某次维护或采购任务授权在任务语境消失后仍然可用。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>Turn 是当前源码能证明的最小生命周期单位；Session grant 记录在 session state。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>生命周期显式落在 schema 中，审查者能看到授权是 turn 级还是 session 级。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>没有 expires_at、duration、maintenance window 或 schedule rollback 字段。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>enum PermissionGrantScope { Turn, Session }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/protocol/src/request_permissions.rs#L12" title="codex-rs/protocol/src/request_permissions.rs:12"><span>grant scope enum</span><code>codex-rs/protocol/src/request_permissions.rs:12</code></a><a class="source-chip" href="../../codex-rs/protocol/src/request_permissions.rs#L57" title="codex-rs/protocol/src/request_permissions.rs:57"><span>strict auto review</span><code>codex-rs/protocol/src/request_permissions.rs:57</code></a><a class="source-chip" href="../../codex-rs/app-server-protocol/schema/typescript/v2/PermissionGrantScope.ts#L5" title="codex-rs/app-server-protocol/schema/typescript/v2/PermissionGrantScope.ts:5"><span>schema scope</span><code>codex-rs/app-server-protocol/schema/typescript/v2/PermissionGrantScope.ts:5</code></a><a class="source-chip" href="../../codex-rs/core/src/session/mod.rs#L2397" title="codex-rs/core/src/session/mod.rs:2397"><span>session strict downgrade</span><code>codex-rs/core/src/session/mod.rs:2397</code></a><a class="source-chip" href="../../codex-rs/core/src/session/mod.rs#L2421" title="codex-rs/core/src/session/mod.rs:2421"><span>record grant</span><code>codex-rs/core/src/session/mod.rs:2421</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/app-server-protocol/src/protocol/v2/tests.rs#L596" title="codex-rs/app-server-protocol/src/protocol/v2/tests.rs:596"><span>schema test</span><code>codex-rs/app-server-protocol/src/protocol/v2/tests.rs:596</code></a><a class="source-chip" href="../../codex-rs/core/src/session/tests.rs#L5002" title="codex-rs/core/src/session/tests.rs:5002"><span>grant scope test</span><code>codex-rs/core/src/session/tests.rs:5002</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="P-03">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">P-03 · Sandbox Boundary</p>
+          <h3>orchestrator 明确区分 first sandbox attempt 与 approved retry；retry 使用 SandboxType::None。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>agent 从 sandboxed attempt 滑入真实 host execution，绕过写入或网络限制。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>sandbox manager 按平台能力选择 sandbox；失败或请求 escalation 后必须经过 approval path，再以不同 attempt state 运行。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>边界是执行状态，不靠 shell 文本猜测。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>平台 sandbox 不可用时可降到 SandboxType::None；显式批准的 unsandboxed 运行是真实风险。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>retry_attempt = SandboxAttempt { sandbox: SandboxType::None, ... }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/tools/sandboxing.rs#L246" title="codex-rs/core/src/tools/sandboxing.rs:246"><span>approval requirement</span><code>codex-rs/core/src/tools/sandboxing.rs:246</code></a><a class="source-chip" href="../../codex-rs/sandboxing/src/manager.rs#L139" title="codex-rs/sandboxing/src/manager.rs:139"><span>sandbox selection</span><code>codex-rs/sandboxing/src/manager.rs:139</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/orchestrator.rs#L217" title="codex-rs/core/src/tools/orchestrator.rs:217"><span>first attempt</span><code>codex-rs/core/src/tools/orchestrator.rs:217</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/orchestrator.rs#L357" title="codex-rs/core/src/tools/orchestrator.rs:357"><span>unsandboxed retry</span><code>codex-rs/core/src/tools/orchestrator.rs:357</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/tools/sandboxing_tests.rs#L110" title="codex-rs/core/src/tools/sandboxing_tests.rs:110"><span>sandbox tests</span><code>codex-rs/core/src/tools/sandboxing_tests.rs:110</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/sandboxing_tests.rs#L140" title="codex-rs/core/src/tools/sandboxing_tests.rs:140"><span>approval tests</span><code>codex-rs/core/src/tools/sandboxing_tests.rs:140</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="P-04">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">P-04 · Cross-Repository Data Exfiltration</p>
+          <h3>workspace-write 默认限制写入 roots，并默认限制网络；deny-read entry 可额外封锁路径。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>workspace command 读取其他 repo，再通过 stdout、tool result 或网络泄露。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>workspace-write 是写边界，默认仍有 root read。cross-repo read isolation 只有在配置 deny-read 或更窄 profile 时成立。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>报告把写边界与读边界分开，避免把 workspace-write 说成全读隔离。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>stdout/model output 的语义 DLP 未在当前本地源码证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>root read + scoped writable roots + optional deny-read entries</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/protocol/src/permissions.rs#L230" title="codex-rs/protocol/src/permissions.rs:230"><span>deny read entries</span><code>codex-rs/protocol/src/permissions.rs:230</code></a><a class="source-chip" href="../../codex-rs/protocol/src/permissions.rs#L524" title="codex-rs/protocol/src/permissions.rs:524"><span>workspace write roots</span><code>codex-rs/protocol/src/permissions.rs:524</code></a><a class="source-chip" href="../../codex-rs/protocol/src/models.rs#L391" title="codex-rs/protocol/src/models.rs:391"><span>default policy</span><code>codex-rs/protocol/src/models.rs:391</code></a><a class="source-chip" href="../../codex-rs/core/src/spawn.rs#L78" title="codex-rs/core/src/spawn.rs:78"><span>network disabled env</span><code>codex-rs/core/src/spawn.rs:78</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/tests/suite/windows_sandbox.rs#L199" title="codex-rs/core/tests/suite/windows_sandbox.rs:199"><span>deny-read test</span><code>codex-rs/core/tests/suite/windows_sandbox.rs:199</code></a><a class="source-chip" href="../../codex-rs/protocol/src/permissions.rs#L3015" title="codex-rs/protocol/src/permissions.rs:3015"><span>policy tests</span><code>codex-rs/protocol/src/permissions.rs:3015</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="P-05">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">P-05 · Windows Sandbox Enforcement</p>
+          <h3>Windows sandbox 拒绝不可执行的 full-disk/unmanaged profile，restricted-token deny-read path fail closed。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>backend 无法表达 requested filesystem semantics，却继续运行。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>policy resolution 发现直接策略不可执行时返回错误；elevated backend materializes ACL allow/deny rules。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>不可执行 policy 被当成错误，而非悄悄弱化。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>WFP network setup failure 的完整影响需要另一个专门评审。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>unsupported direct policies return errors before execution</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/windows-sandbox-rs/src/resolved_permissions.rs#L44" title="codex-rs/windows-sandbox-rs/src/resolved_permissions.rs:44"><span>resolved profile</span><code>codex-rs/windows-sandbox-rs/src/resolved_permissions.rs:44</code></a><a class="source-chip" href="../../codex-rs/windows-sandbox-rs/src/resolved_permissions.rs#L69" title="codex-rs/windows-sandbox-rs/src/resolved_permissions.rs:69"><span>reject unsupported</span><code>codex-rs/windows-sandbox-rs/src/resolved_permissions.rs:69</code></a><a class="source-chip" href="../../codex-rs/protocol/src/permissions.rs#L1102" title="codex-rs/protocol/src/permissions.rs:1102"><span>legacy bridge</span><code>codex-rs/protocol/src/permissions.rs:1102</code></a><a class="source-chip" href="../../codex-rs/windows-sandbox-rs/src/spawn_prep.rs#L287" title="codex-rs/windows-sandbox-rs/src/spawn_prep.rs:287"><span>spawn prep</span><code>codex-rs/windows-sandbox-rs/src/spawn_prep.rs:287</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/tests/suite/windows_sandbox.rs#L118" title="codex-rs/core/tests/suite/windows_sandbox.rs:118"><span>policy rejection</span><code>codex-rs/core/tests/suite/windows_sandbox.rs:118</code></a><a class="source-chip" href="../../codex-rs/core/tests/suite/windows_sandbox.rs#L199" title="codex-rs/core/tests/suite/windows_sandbox.rs:199"><span>deny-read fail closed</span><code>codex-rs/core/tests/suite/windows_sandbox.rs:199</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: medium</span>
+      </footer>
+    </article>
+  
+        </div>
+      </section>
+    </main>
+  
+  <footer class="site-footer">
+    <p>Generated 2026-06-02. Source proof uses local repo links; graph data was used only as navigation.</p>
+    <p>Report root: <code>D:\Project\codexx-wiki\sss-codex\asi03-identity-privilege-report</code></p>
+  </footer>
+</body>
+</html>

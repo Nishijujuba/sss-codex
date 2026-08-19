@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GPT-5.6 Sol Ultra 长程 Agent 的术语、层级、状态载体与证据边界速查。" />
+    <title>Sol Ultra 长程系统地图</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/course.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <nav class="topline" aria-label="课程导航">
+        <a href="../lessons/0001-long-context-long-horizon-recovery.html">← 返回第一课</a>
+        <span>REFERENCE · 2026-07-15</span>
+      </nav>
+
+      <span class="eyebrow">Quick reference</span>
+      <h1>Sol Ultra 长程系统地图</h1>
+      <p class="lede">
+        长程 Agent 的稳定表现来自模型、编排、运行时状态、项目事实与验证闭环。此页用于快速归类一项主张，并检查证据强度与版本边界。
+      </p>
+      <p class="snapshot">
+        <span class="badge unknown">U 执行面关系</span>
+        产品 Ultra、Responses Multi-agent beta 与本地 Codex V2 是否共享内部实现仍属未知。下方分层图是通用工程分析框架，不代表 OpenAI 公布的产品内部架构。
+      </p>
+
+      <section aria-labelledby="terms">
+        <h2 id="terms">一眼分清核心术语</h2>
+        <div class="term-grid">
+          <article class="term-card">
+            <h3>长上下文 · long context</h3>
+            <p>一次推理可见的信息容量。它扩大可读范围，无法单独提供跨 turn 目标、外部副作用或重启恢复。</p>
+          </article>
+          <article class="term-card">
+            <h3>长程执行 · long horizon</h3>
+            <p>任务跨多轮工具调用和新证据持续推进。核心问题包括下一步选择、错误修正、预算和停止条件。</p>
+          </article>
+          <article class="term-card">
+            <h3>可恢复性 · recoverability</h3>
+            <p>可恢复执行能力：上下文切换、中断或重启后，可由持久目标、事件、checkpoint 和 Artifact 重建可继续工作的状态。</p>
+          </article>
+          <article class="term-card">
+            <h3>Memory · 跨任务经验</h3>
+            <p>未来任务可复用的偏好、经验或程序性知识。它与当前 run 的 compaction、Goal 和 rollout 具有不同生命周期。</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="layers">
+        <h2 id="layers">四组层级</h2>
+        <div class="layer-grid">
+          <article class="layer-card">
+            <span class="index">MODEL</span>
+            <h3>Sol + reasoning effort</h3>
+            <p><span class="badge fact">F1 产品事实</span><code>gpt-5.6-sol</code> 是模型；<code>max</code> 是更高的推理时计算。两者影响分解、判断、工具选择与修订质量。</p>
+          </article>
+          <article class="layer-card">
+            <span class="index">ORCHESTRATION</span>
+            <h3>Ultra + Multi-agent</h3>
+            <p><span class="badge fact">F1 产品事实</span>Ultra 是产品/Harness 设置。官方说明其默认协调四个 Agent；公开 API 的 Multi-agent beta 提供 root/subagent 编排。</p>
+          </article>
+          <article class="layer-card">
+            <span class="index">DURABILITY</span>
+            <h3>Goal + rollout + compaction</h3>
+            <p><span class="badge fact">F1 官方能力</span>Goal 与 compaction 提供线程目标和上下文连续性。</p>
+            <p><span class="badge fact">F2 · 26f5998e</span>报告快照中的 rollout 提供追加事件轨迹。</p>
+            <p><span class="badge inference">I1 工程原则</span>项目文件、Git、issue 和测试保存跨线程可审计事实。</p>
+          </article>
+        </div>
+        <div class="callout">
+          <h3>验证与权限包围全部层级</h3>
+          <p>测试、grader、review、批准边界、预算和停止条件共同决定系统何时继续、何时完成、何时暂停。</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="state">
+        <h2 id="state">状态载体速查</h2>
+        <div class="term-grid">
+          <article class="term-card">
+            <h3>项目事实</h3>
+            <p>文件、Git、issue、测试输出和版本化报告。适合跨线程、跨进程和人工审计。</p>
+          </article>
+          <article class="term-card">
+            <h3>rollout</h3>
+            <p>追加式会话事件主干。用于 resume、fork、重放和审计；具体 durability 需绑定实现版本核验。</p>
+          </article>
+          <article class="term-card">
+            <h3>compaction</h3>
+            <p>缩小活跃上下文并携带继续所需状态。摘要或 opaque item 具有信息损失与不可审计边界。</p>
+          </article>
+          <article class="term-card">
+            <h3>Goal</h3>
+            <p>线程级完成契约，保存 objective、生命周期、预算和 usage。细粒度计划与证据仍需其他载体。</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="evidence">
+        <h2 id="evidence">证据标签</h2>
+        <div class="source-grid">
+          <article class="source-card">
+            <h3><span class="badge fact">F1</span> 官方公开事实</h3>
+            <p>OpenAI 正式模型页、API 文档、发布页或 System Card 直接支持。</p>
+          </article>
+          <article class="source-card">
+            <h3><span class="badge fact">F2</span> 源码直接事实</h3>
+            <p>特定 commit 的实现、schema、测试或 prompt 直接支持，必须同时记录版本。</p>
+          </article>
+          <article class="source-card">
+            <h3><span class="badge inference">I1</span> 强工程推断</h3>
+            <p>多条事实共同支持的最佳解释，仍缺少隔离变量或内部披露。</p>
+          </article>
+          <article class="source-card">
+            <h3><span class="badge unknown">U</span> 当前未知</h3>
+            <p>公开材料与当前可核验源码都无法建立的机制或因果贡献。</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="claims">
+        <h2 id="claims">三条高价值判断</h2>
+        <div class="callout warning">
+          <ul>
+            <li><span class="badge fact">F1</span>1.05M context 证明输入容量；跨重启 durability 需要独立证据。</li>
+            <li><span class="badge fact">F1</span>Ultra 公开分数是 bundle 的配置级点估计；<span class="badge unknown">U</span>各组件因果贡献缺少公开消融。</li>
+            <li><span class="badge unknown">U</span>通用“到任意 token 上限自动写状态 Markdown”机制没有得到官方资料与报告快照支持。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">首要来源</h2>
+        <div class="source-grid">
+          <article class="source-card">
+            <a href="https://openai.com/index/gpt-5-6/">GPT-5.6 发布页</a>
+            <p>Sol、Ultra、四 Agent 和公开评测。</p>
+          </article>
+          <article class="source-card">
+            <a href="https://developers.openai.com/api/docs/guides/responses-multi-agent">Responses Multi-agent</a>
+            <p>root/subagent、独立上下文与并发边界。</p>
+          </article>
+          <article class="source-card">
+            <a href="https://developers.openai.com/api/docs/guides/compaction">Compaction</a>
+            <p>长对话压缩与继续执行的官方语义。</p>
+          </article>
+          <article class="source-card">
+            <a href="https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex">Using Goals in Codex</a>
+            <p>持久目标、预算、续跑与证据化完成。</p>
+          </article>
+        </div>
+        <p class="snapshot">
+          本地综合依据：<a href="../../gpt-5-6-sol-ultra-long-horizon-agent-research-20260711/final-v4-gpt-5-6-sol-ultra-long-horizon-agent-research-20260712.md">final-v4 研究报告</a>。该报告的官方网页快照截至 2026-07-12，源码基线为 <code>26f5998e</code>。当前 HEAD <code>e623315e</code> 已前进 82 个提交。
+        </p>
+      </section>
+
+      <footer>
+        此参考页服务于快速检索。机制细节应回到官方资料、特定 commit 的源码和测试重新核验。
+      </footer>
+    </main>
+  </body>
+</html>

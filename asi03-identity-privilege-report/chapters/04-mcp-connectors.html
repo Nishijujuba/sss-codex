@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>04 · MCP / Connector 身份与 auth elicitation</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script>
+    window.MathJax = { tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] }, svg: { fontCache: "global" } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <script defer src="../assets/report.js"></script>
+</head>
+<body>
+  
+    <nav class="topnav">
+      <a class="brand" href="../index.html">ASI03 Codex</a>
+      <div class="navlinks">
+        <a class="" href="../chapters/01-identity.html">01</a><a class="" href="../chapters/02-permission-sandbox.html">02</a><a class="" href="../chapters/03-approval-guardian.html">03</a><a class="active" href="../chapters/04-mcp-connectors.html">04</a><a class="" href="../chapters/05-multi-agent-memory.html">05</a><a class="" href="../chapters/06-gaps.html">06</a>
+      </div>
+    </nav>
+  
+  
+    <main>
+      <header class="chapter-hero">
+        <p class="eyebrow">Chapter 04</p>
+        <h1>MCP / Connector 身份与 auth elicitation</h1>
+        <p class="lede">Codex Apps reserved namespace、MCP tool 列表清洗、raw routing key、cache scoping 与显式 auth URL 请求。</p>
+        <div class="formula">\(routeKey=(serverName, rawToolName)\neq modelVisibleName\)</div>
+      </header>
+      <section class="band intro-band">
+        <div class="intro-copy">
+          <h2>Risk Frame</h2>
+          <p>MCP 工具名像店面招牌，真正执行需要仓库 SKU。Codex 的控制点在于把 model-visible 名称与 raw server/tool 路由键分离，并把 Codex Apps 连接器身份限定到 host-owned server。</p>
+        </div>
+        <div class="chain-layout">
+          
+    <section class="chain-block">
+      <h3>Attack Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>恶意 MCP 伪装成内置工具或 connector</p></li><li><span>02</span><p>模型基于描述或名称误选工具</p></li><li><span>03</span><p>server 借 auth elicitation 诱导用户重新授权</p></li>
+      </ol>
+    </section>
+  
+          
+    <section class="chain-block">
+      <h3>Codex Defense Chain</h3>
+      <ol class="chain">
+        <li><span>01</span><p>connector metadata 只在 Codex Apps 保留</p></li><li><span>02</span><p>tool/list 过滤并规范化名称</p></li><li><span>03</span><p>tool/call 使用 raw server/tool 并再次检查 filter</p></li><li><span>04</span><p>auth elicitation 经过 policy 与 user-visible URL</p></li>
+      </ol>
+    </section>
+  
+        </div>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Pseudocode</p>
+          <h2>Control Logic</h2>
+        </div>
+        <pre class="pseudo"><code>visible = normalize(server, tool)
+raw = ToolInfo.server_name + ToolInfo.tool.name
+call_tool(raw.server, raw.tool, args, meta)</code></pre>
+      </section>
+      <section class="band">
+        <div class="section-heading">
+          <p class="eyebrow">Reviewed Claims</p>
+          <h2>Source Evidence Cards</h2>
+        </div>
+        <div class="claim-stack">
+          
+    <article class="claim-card" id="M-01">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">M-01 · Connector Identity Smuggling</p>
+          <h3>Codex Apps server 保留 connector metadata；其他 MCP server 的已知 connector meta keys 会被剥离。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>custom MCP server 伪造 connector metadata，试图获得 ChatGPT connector 的信任级别。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>sanitize_tool_connector_metadata 根据 is_codex_apps_server 分支处理；custom server 进入 strip_untrusted_connector_meta。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>connector 身份像受保护徽章，只能由保留 issuer 发放。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>未来新增 connector-like key 如果不在 strip 列表中，仍可能作为普通 metadata 留下。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>if is_codex_apps_server { preserve } else { strip_untrusted_connector_meta(tool) }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/rmcp_client.rs#L77" title="codex-rs/codex-mcp/src/rmcp_client.rs:77"><span>untrusted keys</span><code>codex-rs/codex-mcp/src/rmcp_client.rs:77</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/rmcp_client.rs#L396" title="codex-rs/codex-mcp/src/rmcp_client.rs:396"><span>sanitize metadata</span><code>codex-rs/codex-mcp/src/rmcp_client.rs:396</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/rmcp_client.rs#L411" title="codex-rs/codex-mcp/src/rmcp_client.rs:411"><span>strip custom metadata</span><code>codex-rs/codex-mcp/src/rmcp_client.rs:411</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/rmcp_client.rs#L678" title="codex-rs/codex-mcp/src/rmcp_client.rs:678"><span>custom metadata stripped</span><code>codex-rs/codex-mcp/src/rmcp_client.rs:678</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/rmcp_client.rs#L715" title="codex-rs/codex-mcp/src/rmcp_client.rs:715"><span>apps metadata preserved</span><code>codex-rs/codex-mcp/src/rmcp_client.rs:715</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="M-02">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">M-02 · Host-Owned Connector Boundary</p>
+          <h3>Codex 根据 apps_enabled 与 ChatGPT backend auth 插入或移除 Codex Apps server，并仅对 host-owned server 启用相关 auth elicitation。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>恶意配置或 stale config 试图冒充 reserved codex_apps server。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>connection manager 保存 server metadata；is_host_owned_codex_apps_server gates Codex Apps-specific behavior。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>reserved namespace 避免把任意配置项当作官方连接器。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>backend 侧 account identity 语义不在当前本地 repo 证据中。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>is_host_owned_codex_apps_server(server_name)</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/mcp/mod.rs#L214" title="codex-rs/codex-mcp/src/mcp/mod.rs:214"><span>insert apps server</span><code>codex-rs/codex-mcp/src/mcp/mod.rs:214</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/mcp/mod.rs#L230" title="codex-rs/codex-mcp/src/mcp/mod.rs:230"><span>remove apps server</span><code>codex-rs/codex-mcp/src/mcp/mod.rs:230</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/connection_manager.rs#L146" title="codex-rs/codex-mcp/src/connection_manager.rs:146"><span>host-owned check</span><code>codex-rs/codex-mcp/src/connection_manager.rs:146</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/mcp/mod_tests.rs#L222" title="codex-rs/codex-mcp/src/mcp/mod_tests.rs:222"><span>apps enabled test</span><code>codex-rs/codex-mcp/src/mcp/mod_tests.rs:222</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/mcp/mod_tests.rs#L304" title="codex-rs/codex-mcp/src/mcp/mod_tests.rs:304"><span>host owned test</span><code>codex-rs/codex-mcp/src/mcp/mod_tests.rs:304</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="M-03">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">M-03 · Tool Name Confusion</p>
+          <h3>ToolInfo 保留 raw server/tool；model-visible callable namespace/name 会 sanitize、dedupe 和 hash。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>MCP tool 使用 builtin-like 名称或 collision-prone 名称，混淆 model、hook 或路由。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>Responses API 看到规范化名称；call_tool 仍用存储的 raw server_name 与 raw tool.name。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>展示名和执行 identity 分离，像标签与库存编号分离。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>恶意 tool description/schema 仍作为 model-visible content 暴露。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>call_tool(server_name, tool.name, arguments, meta)</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/tools.rs#L28" title="codex-rs/codex-mcp/src/tools.rs:28"><span>ToolInfo fields</span><code>codex-rs/codex-mcp/src/tools.rs:28</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/tools.rs#L139" title="codex-rs/codex-mcp/src/tools.rs:139"><span>normalization</span><code>codex-rs/codex-mcp/src/tools.rs:139</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/mcp.rs#L64" title="codex-rs/core/src/tools/handlers/mcp.rs:64"><span>handler call</span><code>codex-rs/core/src/tools/handlers/mcp.rs:64</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/connection_manager.rs#L590" title="codex-rs/codex-mcp/src/connection_manager.rs:590"><span>raw call_tool</span><code>codex-rs/codex-mcp/src/connection_manager.rs:590</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/mcp.rs#L335" title="codex-rs/core/src/tools/handlers/mcp.rs:335"><span>builtin-like test</span><code>codex-rs/core/src/tools/handlers/mcp.rs:335</code></a><a class="source-chip" href="../../codex-rs/core/src/tools/handlers/mcp.rs#L362" title="codex-rs/core/src/tools/handlers/mcp.rs:362"><span>rewrite test</span><code>codex-rs/core/src/tools/handlers/mcp.rs:362</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="M-04">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">M-04 · Connector Token / Tool Cache Reuse</p>
+          <h3>Codex Apps tool cache key 包含 account_id、chatgpt_user_id、workspace flag；invalid schema/JSON 被忽略，disallowed connector IDs 被过滤。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>一个 ChatGPT 用户或 workspace 复用另一个用户的 connector tool inventory。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>cache path 是用户 key 的 hash；load 时验证 schema version，write 时应用 connector allow-list。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>缓存像每个用户自己的通讯录，避免全局共享 connector inventory。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>connector token material、backend revocation、scope binding 未在当前本地 repo 证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>cache_key = { account_id, chatgpt_user_id, is_workspace_account }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/codex_apps.rs#L26" title="codex-rs/codex-mcp/src/codex_apps.rs:26"><span>cache key</span><code>codex-rs/codex-mcp/src/codex_apps.rs:26</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/codex_apps.rs#L47" title="codex-rs/codex-mcp/src/codex_apps.rs:47"><span>cache path</span><code>codex-rs/codex-mcp/src/codex_apps.rs:47</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/codex_apps.rs#L182" title="codex-rs/codex-mcp/src/codex_apps.rs:182"><span>load cache</span><code>codex-rs/codex-mcp/src/codex_apps.rs:182</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/codex_apps.rs#L223" title="codex-rs/codex-mcp/src/codex_apps.rs:223"><span>filter connectors</span><code>codex-rs/codex-mcp/src/codex_apps.rs:223</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/connection_manager_tests.rs#L556" title="codex-rs/codex-mcp/src/connection_manager_tests.rs:556"><span>cache tests</span><code>codex-rs/codex-mcp/src/connection_manager_tests.rs:556</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/connection_manager_tests.rs#L659" title="codex-rs/codex-mcp/src/connection_manager_tests.rs:659"><span>filter tests</span><code>codex-rs/codex-mcp/src/connection_manager_tests.rs:659</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="M-05">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">M-05 · MCP Auth Elicitation / Device-Code Phishing</p>
+          <h3>Codex Apps auth failure 只有在 host-owned、feature enabled、policy allowed、connector id 匹配 trusted metadata 时才转成 elicitation。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>connector 或 MCP server 返回 auth failure，引导用户点击授权 URL 或完成设备码式流程。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>generic MCP elicitation 也受 approval policy 和 granular mcp_elicitations 控制；accepted auth 后刷新 Codex Apps tools 并要求 retry。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>auth 变成显式用户可见 URL request，避免静默扩权。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>device-code-specific phishing detection 和 scope anomaly monitoring 未在本地 repo 证据中出现。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>if !Feature::AuthElicitation || AskForApproval::Never { return result }</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/auth_elicitation.rs#L63" title="codex-rs/codex-mcp/src/auth_elicitation.rs:63"><span>parse auth failure</span><code>codex-rs/codex-mcp/src/auth_elicitation.rs:63</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/auth_elicitation.rs#L89" title="codex-rs/codex-mcp/src/auth_elicitation.rs:89"><span>connector match</span><code>codex-rs/codex-mcp/src/auth_elicitation.rs:89</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/auth_elicitation.rs#L140" title="codex-rs/codex-mcp/src/auth_elicitation.rs:140"><span>elicitation payload</span><code>codex-rs/codex-mcp/src/auth_elicitation.rs:140</code></a><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call.rs#L616" title="codex-rs/core/src/mcp_tool_call.rs:616"><span>feature/policy gate</span><code>codex-rs/core/src/mcp_tool_call.rs:616</code></a><a class="source-chip" href="../../codex-rs/codex-mcp/src/elicitation.rs#L121" title="codex-rs/codex-mcp/src/elicitation.rs:121"><span>generic elicitation</span><code>codex-rs/codex-mcp/src/elicitation.rs:121</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/codex-mcp/src/auth_elicitation.rs#L251" title="codex-rs/codex-mcp/src/auth_elicitation.rs:251"><span>trusted auth failure</span><code>codex-rs/codex-mcp/src/auth_elicitation.rs:251</code></a><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call_tests.rs#L1283" title="codex-rs/core/src/mcp_tool_call_tests.rs:1283"><span>auth elicitation tests</span><code>codex-rs/core/src/mcp_tool_call_tests.rs:1283</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: medium-high</span>
+      </footer>
+    </article>
+  
+    <article class="claim-card" id="M-06">
+      <div class="claim-top">
+        <div>
+          <p class="eyebrow">M-06 · MCP Call Metadata Boundary</p>
+          <h3>Codex 注入 turn metadata、Codex Apps call id、plugin id、threadId；server 支持能力时注入 sandbox state。</h3>
+        </div>
+        <span class="status pass">pass</span>
+      </div>
+      <div class="claim-grid">
+        <div>
+          <h4>Attack Path</h4>
+          <p>MCP server 缺少 thread、turn、plugin 或 sandbox context，形成跨 agent 信任混淆。</p>
+        </div>
+        <div>
+          <h4>Implementation Logic</h4>
+          <p>core call path 覆盖 _meta.threadId；sandbox state 只在 server advertises capability 时发送。</p>
+        </div>
+        <div>
+          <h4>Design Highlight</h4>
+          <p>cooperating server 可把请求来源当作 tamper-evident metadata 处理。</p>
+        </div>
+        <div>
+          <h4>Residual Risk</h4>
+          <p>MCP server 可以忽略 metadata；强制执行仍依赖 Codex-side approval/sandbox。</p>
+        </div>
+      </div>
+      <div class="snippet"><code>_meta.threadId = conversation_id; _meta.sandboxState = supported ? state : absent</code></div>
+      <div class="evidence-columns">
+        <div>
+          <h4>Source Evidence</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call.rs#L701" title="codex-rs/core/src/mcp_tool_call.rs:701"><span>sandbox state meta</span><code>codex-rs/core/src/mcp_tool_call.rs:701</code></a><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call.rs#L1036" title="codex-rs/core/src/mcp_tool_call.rs:1036"><span>build request meta</span><code>codex-rs/core/src/mcp_tool_call.rs:1036</code></a><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call.rs#L1057" title="codex-rs/core/src/mcp_tool_call.rs:1057"><span>Codex Apps call id</span><code>codex-rs/core/src/mcp_tool_call.rs:1057</code></a><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call.rs#L1080" title="codex-rs/core/src/mcp_tool_call.rs:1080"><span>thread id meta</span><code>codex-rs/core/src/mcp_tool_call.rs:1080</code></a></div>
+        </div>
+        <div>
+          <h4>Tests / Schema</h4>
+          <div class="source-list"><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call_tests.rs#L1024" title="codex-rs/core/src/mcp_tool_call_tests.rs:1024"><span>thread id tests</span><code>codex-rs/core/src/mcp_tool_call_tests.rs:1024</code></a><a class="source-chip" href="../../codex-rs/core/src/mcp_tool_call_tests.rs#L1466" title="codex-rs/core/src/mcp_tool_call_tests.rs:1466"><span>sandbox state tests</span><code>codex-rs/core/src/mcp_tool_call_tests.rs:1466</code></a></div>
+        </div>
+      </div>
+      <footer class="claim-footer">
+        <span>review: pass</span>
+        <span>confidence: high</span>
+      </footer>
+    </article>
+  
+        </div>
+      </section>
+    </main>
+  
+  <footer class="site-footer">
+    <p>Generated 2026-06-02. Source proof uses local repo links; graph data was used only as navigation.</p>
+    <p>Report root: <code>D:\Project\codexx-wiki\sss-codex\asi03-identity-privilege-report</code></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="第一课：区分长上下文、长程执行与可恢复性，并建立 GPT-5.6 Sol Ultra 的分层心智模型。" />
+    <title>第一课：长上下文、长程执行与可恢复性</title>
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/course.css" />
+    <script src="../assets/quiz.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <nav class="topline" aria-label="课程导航">
+        <a href="../README.md">Codex Source Learning</a>
+        <a href="../reference/sol-ultra-long-horizon-map.html">打开系统地图 →</a>
+      </nav>
+
+      <span class="eyebrow">Lesson 0001 · 10–15 min</span>
+      <h1>长上下文 ≠ 长程任务</h1>
+      <p class="lede">
+        本课建立一个可立即使用的判断框架：看到“Sol Ultra 更擅长长任务”时，学习者能够判断贡献来自信息容量、模型决策、多 Agent 编排、持久状态，还是验证与停止机制。
+      </p>
+
+      <div class="meta-grid" aria-label="本课目标">
+        <div class="meta-card"><strong>3</strong><span>个必须分开的概念</span></div>
+        <div class="meta-card"><strong>4</strong><span>道即时反馈题</span></div>
+        <div class="meta-card"><strong>1</strong><span>个可复用系统模型</span></div>
+      </div>
+
+      <section aria-labelledby="answer">
+        <h2 id="answer">先给结论</h2>
+        <div class="equation">
+          <span class="badge">教学模型</span>长程成功依赖五个环节：语义决策质量、编排宽度、可恢复状态、外部事实与证据化完成。
+        </div>
+        <p><span class="badge fact">F1 产品事实</span>Sol 提供模型能力，<code>max</code> 增加推理时计算，Ultra 默认协调四个 Agent。</p>
+        <p><span class="badge fact">F2 · 26f5998e 快照</span>本地报告基线中的 Codex 具有 Goal、rollout 与 compaction 等持久运行时机制。</p>
+        <p><span class="badge inference">I1 条件化解释</span>在已观察到的 Codex 工作流里，产品能力、本地运行时、项目 Artifact 与验证闭环共同形成最合理的系统解释。</p>
+        <p><span class="badge unknown">U 执行面关系</span>产品 Ultra、Responses Multi-agent beta 与本地 Codex V2 是否共享内部实现仍属未知；这套分层是工程分析框架。</p>
+        <p><span class="badge unknown">U 组件贡献</span>公开资料没有组件级消融，最终提升无法精确分配给模型权重、额外 token、并行 Agent、上下文隔离、重试或根 Agent 综合。</p>
+      </section>
+
+      <section aria-labelledby="three-concepts">
+        <h2 id="three-concepts">三个概念，三个问题</h2>
+        <div class="concept-grid">
+          <article class="concept-card">
+            <span class="index">01 · CAPACITY</span>
+            <h3>长上下文</h3>
+            <p><span class="badge fact">F1</span>回答“这一次推理能看见多少信息”。<a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol">Sol API 模型页</a>当前列出 1,050,000 token context window。</p>
+          </article>
+          <article class="concept-card">
+            <span class="index">02 · ACTION</span>
+            <h3>长程执行</h3>
+            <p><span class="badge">课程定义</span>回答“多轮工具调用中，系统能否持续选择正确下一步，并根据新证据修改计划”。</p>
+          </article>
+          <article class="concept-card">
+            <span class="index">03 · RECOVERY</span>
+            <h3>可恢复性</h3>
+            <p><span class="badge">课程定义</span>即可恢复执行能力，回答“窗口切换、中断或重启后，目标、事实和恢复点能否重建为可继续工作的状态”。</p>
+          </article>
+        </div>
+
+        <div class="callout warning">
+          <h3>关键误区</h3>
+          <p>
+            <span class="badge fact">F1</span>1.05M context 只直接证明容量。<span class="badge unknown">证据边界</span>跨 turn objective、工具副作用、并发冲突、预算状态、重启恢复和完成证据都需要运行时与外部状态提供支持。
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="layers">
+        <h2 id="layers">把 Sol、max、Ultra 放回正确层级</h2>
+        <div class="layer-grid">
+          <article class="layer-card">
+            <span class="index">MODEL + COMPUTE</span>
+            <h3>Sol 与 max</h3>
+            <p><span class="badge fact">F1 产品事实</span><code>gpt-5.6-sol</code> 是模型；<code>max</code> 是最高公开 reasoning effort。二者主要提高决策质量与探索深度。</p>
+          </article>
+          <article class="layer-card">
+            <span class="index">ORCHESTRATION</span>
+            <h3>Ultra</h3>
+            <p><span class="badge fact">F1 产品事实</span>Ultra 是产品/Harness 设置。<a href="https://openai.com/index/gpt-5-6/">OpenAI 发布页</a>说明其默认协调四个 Agent，以更多 token 换取更强结果和更短结果时间。</p>
+          </article>
+          <article class="layer-card">
+            <span class="index">DURABLE RUNTIME</span>
+            <h3>Codex 状态骨架</h3>
+            <p><span class="badge fact">F1 官方能力</span><a href="https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex">Goal</a> 保存线程目标和生命周期；<a href="https://developers.openai.com/api/docs/guides/compaction">compaction</a> 缩小活跃上下文。</p>
+            <p><span class="badge fact">F2 · 26f5998e</span>报告快照中的 rollout 保存追加事件。</p>
+            <p><span class="badge inference">I1 工程原则</span>项目 Artifact 保存跨线程可审计事实。</p>
+          </article>
+        </div>
+        <div class="callout">
+          <h3>一句话诊断法</h3>
+          <p>先问“问题发生在哪一层”，再问“该层的状态由谁持有”，最后问“完成由什么证据确认”。</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="practice">
+        <h2 id="practice">即时检索练习</h2>
+        <p>每题三个选项均为四个汉字。先判断，再读取反馈；格式不会泄露答案。</p>
+
+        <article
+          class="quiz"
+          data-quiz
+          data-correct="长上下文"
+          data-correct-feedback="这是单次推理的信息容量。"
+          data-incorrect-feedback="场景只说明一次请求可容纳的信息量。"
+        >
+          <p class="scenario">场景 1：一次请求可以容纳约 105 万 token 的上下文。</p>
+          <div class="quiz-options">
+            <button type="button" data-answer="长程执行" aria-pressed="false">长程执行</button>
+            <button type="button" data-answer="可恢复性" aria-pressed="false">可恢复性</button>
+            <button type="button" data-answer="长上下文" aria-pressed="false">长上下文</button>
+          </div>
+          <p class="quiz-feedback" data-feedback aria-live="polite">尚未作答。</p>
+        </article>
+
+        <article
+          class="quiz"
+          data-quiz
+          data-correct="长程执行"
+          data-correct-feedback="系统依据最新测试结果选择下一步并继续推进。"
+          data-incorrect-feedback="场景强调跨多轮动作的计划修订与持续推进。"
+        >
+          <p class="scenario">场景 2：基准测试失败后，Agent 调整方案、再次修改并复测。</p>
+          <div class="quiz-options">
+            <button type="button" data-answer="可恢复性" aria-pressed="false">可恢复性</button>
+            <button type="button" data-answer="长上下文" aria-pressed="false">长上下文</button>
+            <button type="button" data-answer="长程执行" aria-pressed="false">长程执行</button>
+          </div>
+          <p class="quiz-feedback" data-feedback aria-live="polite">尚未作答。</p>
+        </article>
+
+        <article
+          class="quiz"
+          data-quiz
+          data-correct="可恢复性"
+          data-correct-feedback="compaction item 把继续所需状态带入新窗口。"
+          data-incorrect-feedback="场景的核心是窗口切换后的状态连续性。"
+        >
+          <p class="scenario">场景 3：上下文越过阈值后，compaction 携带关键状态进入新窗口。</p>
+          <div class="quiz-options">
+            <button type="button" data-answer="长上下文" aria-pressed="false">长上下文</button>
+            <button type="button" data-answer="长程执行" aria-pressed="false">长程执行</button>
+            <button type="button" data-answer="可恢复性" aria-pressed="false">可恢复性</button>
+          </div>
+          <p class="quiz-feedback" data-feedback aria-live="polite">尚未作答。</p>
+        </article>
+
+        <article
+          class="quiz"
+          data-quiz
+          data-correct="并行编排"
+          data-correct-feedback="独立 worker context 与 root synthesis 属于编排层。"
+          data-incorrect-feedback="场景强调多个 Agent 的任务拆分、隔离与汇总。"
+        >
+          <p class="scenario">场景 4：三个 subagent 分别查源码、官方资料和评测，root 最后综合。</p>
+          <div class="quiz-options">
+            <button type="button" data-answer="状态持久" aria-pressed="false">状态持久</button>
+            <button type="button" data-answer="并行编排" aria-pressed="false">并行编排</button>
+            <button type="button" data-answer="验证闭环" aria-pressed="false">验证闭环</button>
+          </div>
+          <p class="quiz-feedback" data-feedback aria-live="polite">尚未作答。</p>
+        </article>
+
+        <div class="quiz-summary">
+          <span data-quiz-summary aria-live="polite">已完成 0/4；先作答，再读取反馈。</span>
+          <button class="reset-button" type="button" data-quiz-reset>重新检索</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="retrieval">
+        <h2 id="retrieval">90 秒无提示复述</h2>
+        <ol>
+          <li>分别说明 Sol、<code>max</code>、Ultra、Goal/rollout 属于哪个层级。</li>
+          <li>用一句话解释：为什么 1.05M context 无法证明跨中断 durability？</li>
+          <li>列出一个应当写入项目 Artifact、无法只依赖 compaction 的事实。</li>
+        </ol>
+        <p>
+          学习者可在对话中提交三条答案。教师将按“层级归因、状态权威源、证据边界”给出反馈；通过后再写入第一条相关学习记录。
+        </p>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">主阅读与证据</h2>
+        <div class="source-grid">
+          <article class="source-card">
+            <a href="https://openai.com/index/gpt-5-6/">主阅读：GPT-5.6 发布页</a>
+            <p>重点阅读 Efficient by default 段落：Sol、max、Ultra、四 Agent 与配置级评测。</p>
+          </article>
+          <article class="source-card">
+            <a href="https://developers.openai.com/api/docs/guides/responses-multi-agent">校准：Responses Multi-agent</a>
+            <p>重点核对独立上下文、root synthesis、适用任务和共享可变状态风险。</p>
+          </article>
+          <article class="source-card">
+            <a href="https://developers.openai.com/api/docs/guides/compaction">校准：Compaction</a>
+            <p>重点核对 compact threshold、不透明 item 和后续窗口连续性。</p>
+          </article>
+          <article class="source-card">
+            <a href="https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex">校准：Using Goals in Codex</a>
+            <p>重点核对线程级目标、预算、续跑条件与证据化完成。</p>
+          </article>
+        </div>
+        <p class="snapshot">
+          本课官方页面已于 2026-07-15 复核。本地综合报告是 <a href="../../gpt-5-6-sol-ultra-long-horizon-agent-research-20260711/final-v4-gpt-5-6-sol-ultra-long-horizon-agent-research-20260712.md">final-v4</a>，其网页快照截至 2026-07-12，源码基线为 <code>26f5998e</code>。当前 HEAD <code>e623315e</code> 已前进 82 个提交；后续源码课会逐项核验 delta。
+        </p>
+      </section>
+
+      <section class="next-step" aria-labelledby="next">
+        <h2 id="next">下一课预告</h2>
+        <p>
+          第二课将拆开 Ultra 的多 Agent 编排：任务可分性、独立上下文、有界并发、共享写集合、root synthesis，以及并行何时会降低质量。
+        </p>
+        <p>
+          任何概念不清楚时，可直接向教师提出追问。复习时优先打开 <a href="../reference/sol-ultra-long-horizon-map.html">Sol Ultra 长程系统地图</a>。
+        </p>
+      </section>
+
+      <footer>
+        课程使命：形成可从官方资料与特定 commit 源码复核的长程 Agent 心智模型。此课不声称掌握未公开的 Sol 训练配方或 Ultra 私有调度器。
+      </footer>
+    </main>
+  </body>
+</html>
