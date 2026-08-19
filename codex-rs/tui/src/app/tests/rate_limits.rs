@@ -56,11 +56,11 @@ async fn deliver_rolling_rate_limit_snapshot(
 ) {
     app.handle_app_server_event(
         app_server,
-        codex_app_server_client::AppServerEvent::ServerNotification(
+        codex_app_server_client::AppServerEvent::ServerNotification(Box::new(
             ServerNotification::AccountRateLimitsUpdated(AccountRateLimitsUpdatedNotification {
                 rate_limits: snapshot,
             }),
-        ),
+        )),
     )
     .await;
 }
@@ -196,8 +196,7 @@ async fn stale_rate_limit_reads_preserve_newer_workspace_hard_stop_for_every_ori
                         credits: None,
                     }),
                 );
-                app.chat_widget
-                    .set_composer_text("/usage".to_string(), Vec::new(), Vec::new());
+                app.chat_widget.insert_str("/usage");
                 app.chat_widget
                     .handle_key_event(KeyEvent::new(KeyCode::Esc, KeyModifiers::NONE));
                 app.chat_widget

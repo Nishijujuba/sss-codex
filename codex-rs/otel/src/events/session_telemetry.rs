@@ -43,6 +43,7 @@ use codex_protocol::protocol::AskForApproval;
 use codex_protocol::protocol::ReviewDecision;
 use codex_protocol::protocol::SandboxPolicy;
 use codex_protocol::protocol::SessionSource;
+use codex_protocol::protocol::TokenUsage;
 use codex_protocol::user_input::UserInput;
 use eventsource_stream::Event as StreamEvent;
 use eventsource_stream::EventStreamError as StreamError;
@@ -259,6 +260,25 @@ impl SessionTelemetry {
         );
     }
 
+    pub fn record_turn_cost(
+        &self,
+        turn_id: &str,
+        estimated_usd: &str,
+        interrupted: bool,
+        speed: Option<&str>,
+        reasoning_effort: Option<&str>,
+    ) {
+        log_event!(
+            self,
+            event.name = "codex.turn_cost",
+            turn.id = turn_id,
+            usage.estimated_usd = estimated_usd,
+            turn.interrupted = interrupted,
+            speed = speed,
+            reasoning_effort = reasoning_effort,
+        );
+    }
+
     /// Records the moment a plugin or connector install elicitation is dispatched.
     pub fn record_plugin_install_elicitation_sent(
         &self,
@@ -372,8 +392,8 @@ impl SessionTelemetry {
         &'a self,
         tags: &'a [(&'a str, &'a str)],
     ) -> MetricsResult<Vec<(&'a str, &'a str)>> {
-        let mut merged = self.metadata_tag_refs()?;
-        merged.extend(tags.iter().copied());
+        let mut merged = tags.to_vec();
+        merged.extend(self.metadata_tag_refs()?);
         Ok(merged)
     }
 
@@ -452,6 +472,10 @@ impl SessionTelemetry {
                 handle_responses_span.record(
                     "gen_ai.usage.cache_read.input_tokens",
                     token_usage.cached_input(),
+                );
+                handle_responses_span.record(
+                    "gen_ai.usage.cache_write.input_tokens",
+                    token_usage.cache_write_input_tokens,
                 );
                 handle_responses_span
                     .record("gen_ai.usage.output_tokens", token_usage.output_tokens);
@@ -918,25 +942,18 @@ impl SessionTelemetry {
         );
     }
 
-    pub fn sse_event_completed(
-        &self,
-        input_token_count: i64,
-        output_token_count: i64,
-        cached_token_count: Option<i64>,
-        reasoning_token_count: Option<i64>,
-        tool_token_count: i64,
-        ttft_ms: Option<i64>,
-    ) {
+    pub fn sse_event_completed(&self, usage: &TokenUsage, ttft_ms: Option<i64>) {
         log_and_trace_event!(
             self,
             common: {
                 event.name = "codex.sse_event",
                 event.kind = %"response.completed",
-                input_token_count = %input_token_count,
-                output_token_count = %output_token_count,
-                cached_token_count = cached_token_count,
-                reasoning_token_count = reasoning_token_count,
-                tool_token_count = %tool_token_count,
+                input_token_count = %usage.input_tokens,
+                output_token_count = %usage.output_tokens,
+                cached_token_count = usage.cached_input_tokens,
+                cache_write_token_count = usage.cache_write_input_tokens,
+                reasoning_token_count = usage.reasoning_output_tokens,
+                tool_token_count = %usage.total_tokens,
                 ttft_ms = ttft_ms,
                 service_tier = self.metadata.service_tier.as_deref(),
                 model_reasoning_effort = self.metadata.model_reasoning_effort.as_deref(),
@@ -994,16 +1011,25 @@ impl SessionTelemetry {
         tool_name: &str,
         call_id: &str,
         decision: &ReviewDecision,
-        source: ToolDecisionSource,
+        source: Option<ToolDecisionSource>,
     ) {
-        log_event!(
-            self,
-            event.name = "codex.tool_decision",
-            tool_name = %tool_name,
-            call_id = %call_id,
-            decision = %decision.clone().to_string().to_lowercase(),
-            source = %source.to_string(),
-        );
+        match source {
+            Some(source) => log_event!(
+                self,
+                event.name = "codex.tool_decision",
+                tool_name = %tool_name,
+                call_id = %call_id,
+                decision = %decision.to_opaque_string(),
+                source = %source.to_string(),
+            ),
+            None => log_event!(
+                self,
+                event.name = "codex.tool_decision",
+                tool_name = %tool_name,
+                call_id = %call_id,
+                decision = %decision.to_opaque_string(),
+            ),
+        }
     }
 
     pub fn sandbox_outcome(

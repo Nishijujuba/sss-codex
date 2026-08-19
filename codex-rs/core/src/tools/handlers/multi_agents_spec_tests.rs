@@ -14,6 +14,7 @@ fn model_preset(id: &str, show_in_picker: bool) -> ModelPreset {
         model: format!("{id}-model"),
         display_name: format!("{id} display"),
         description: format!("{id} description"),
+        model_specialty: None,
         default_reasoning_effort: ReasoningEffort::Medium,
         supported_reasoning_efforts: vec![ReasoningEffortPreset {
             effort: ReasoningEffort::Medium,
@@ -39,15 +40,19 @@ fn model_preset(id: &str, show_in_picker: bool) -> ModelPreset {
 
 #[test]
 fn spawn_agent_tool_v2_requires_task_name_and_lists_visible_models() {
-    let mut incompatible = model_preset("incompatible", /*show_in_picker*/ true);
-    incompatible.multi_agent_version = Some(MultiAgentVersion::V1);
+    let mut legacy = model_preset("legacy", /*show_in_picker*/ true);
+    legacy.multi_agent_version = Some(MultiAgentVersion::V1);
+    let mut disabled = model_preset("disabled", /*show_in_picker*/ true);
+    disabled.multi_agent_version = Some(MultiAgentVersion::Disabled);
     let tool = create_spawn_agent_tool_v2(SpawnAgentToolOptions {
         available_models: vec![
             model_preset("visible", /*show_in_picker*/ true),
             model_preset("hidden", /*show_in_picker*/ false),
-            incompatible,
+            legacy,
+            disabled,
         ],
         agent_type_description: "role help".to_string(),
+        expose_agent_type: true,
         hide_agent_type_model_reasoning: false,
         expose_spawn_agent_model_overrides: true,
         multi_agent_version: MultiAgentVersion::V2,
@@ -82,8 +87,11 @@ fn spawn_agent_tool_v2_requires_task_name_and_lists_visible_models() {
     assert!(description.contains(
         "- `visible-model`: visible description Reasoning efforts: medium (default). Service tiers: priority."
     ));
+    assert!(description.contains(
+        "- `legacy-model`: legacy description Reasoning efforts: medium (default). Service tiers: priority."
+    ));
     assert!(!description.contains("hidden-model"));
-    assert!(!description.contains("incompatible-model"));
+    assert!(!description.contains("disabled-model"));
     assert!(properties.contains_key("task_name"));
     assert!(properties.contains_key("message"));
     assert_eq!(
@@ -95,10 +103,6 @@ fn spawn_agent_tool_v2_requires_task_name_and_lists_visible_models() {
     assert!(properties.contains_key("fork_turns"));
     assert!(!properties.contains_key("items"));
     assert!(!properties.contains_key("fork_context"));
-    assert_eq!(
-        properties.get("agent_type"),
-        Some(&JsonSchema::string(Some("role help".to_string())))
-    );
     assert_eq!(
         properties
             .get("model")
@@ -132,6 +136,7 @@ fn spawn_agent_tool_v1_keeps_legacy_fork_context_field() {
     let tool = create_spawn_agent_tool_v1(SpawnAgentToolOptions {
         available_models: Vec::new(),
         agent_type_description: "role help".to_string(),
+        expose_agent_type: true,
         hide_agent_type_model_reasoning: false,
         expose_spawn_agent_model_overrides: true,
         multi_agent_version: MultiAgentVersion::V1,
@@ -158,6 +163,12 @@ fn spawn_agent_tool_v1_keeps_legacy_fork_context_field() {
 
     assert!(properties.contains_key("fork_context"));
     assert!(!properties.contains_key("fork_turns"));
+    assert_eq!(
+        properties.get("agent_type"),
+        Some(&JsonSchema::string(Some(format!(
+            "{SPAWN_AGENT_TYPE_OVERRIDE_DESCRIPTION_V1}\nrole help"
+        ))))
+    );
     assert_eq!(
         properties
             .get("message")
@@ -190,6 +201,7 @@ fn spawn_agent_tool_caps_visible_model_summaries() {
             model_preset("sixth", /*show_in_picker*/ true),
         ],
         agent_type_description: "role help".to_string(),
+        expose_agent_type: true,
         hide_agent_type_model_reasoning: false,
         expose_spawn_agent_model_overrides: true,
         multi_agent_version: MultiAgentVersion::V2,
@@ -235,6 +247,7 @@ fn spawn_agent_tool_keeps_model_controls_when_spawn_metadata_is_hidden() {
     let tool = create_spawn_agent_tool_v2(SpawnAgentToolOptions {
         available_models: vec![model_preset("visible", /*show_in_picker*/ true)],
         agent_type_description: "role help".to_string(),
+        expose_agent_type: false,
         hide_agent_type_model_reasoning: true,
         expose_spawn_agent_model_overrides: true,
         multi_agent_version: MultiAgentVersion::V2,
@@ -267,6 +280,7 @@ fn spawn_agent_tool_hides_model_controls_without_override_exposure() {
     let tool = create_spawn_agent_tool_v2(SpawnAgentToolOptions {
         available_models: vec![model_preset("visible", /*show_in_picker*/ true)],
         agent_type_description: "role help".to_string(),
+        expose_agent_type: false,
         hide_agent_type_model_reasoning: true,
         expose_spawn_agent_model_overrides: false,
         multi_agent_version: MultiAgentVersion::V2,
@@ -412,7 +426,9 @@ fn wait_agent_tool_v2_uses_timeout_only_summary_output() {
     assert_eq!(parameters.required.as_ref(), None);
     assert_eq!(
         output_schema.expect("wait output schema")["properties"]["message"]["description"],
-        json!("Brief wait summary without the agent's final content.")
+        json!(
+            "Brief wait summary without the agent's final content, including any timeout adjustment."
+        )
     );
 }
 

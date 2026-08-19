@@ -1,4 +1,6 @@
 use super::*;
+use codex_core::exec_env::inject_apply_patch_env;
+use codex_protocol::shell_environment::is_non_inheritable_env_var;
 
 #[derive(Clone)]
 pub(crate) struct CommandExecRequestProcessor {
@@ -163,6 +165,8 @@ impl CommandExecRequestProcessor {
                 }
             }
         }
+        env.retain(|name, _| !is_non_inheritable_env_var(name));
+        inject_apply_patch_env(&mut env, &self.config.features);
         let timeout_ms = match timeout_ms {
             Some(timeout_ms) => match u64::try_from(timeout_ms) {
                 Ok(timeout_ms) => Some(timeout_ms),
@@ -204,7 +208,6 @@ impl CommandExecRequestProcessor {
             network_proxy_permission_profile,
             managed_network_requirements_enabled,
             windows_sandbox_workspace_roots,
-            windows_sandbox_level,
         ) = if let Some(permission_profile) = permission_profile {
             let overrides = ConfigOverrides {
                 cwd: Some(cwd.to_path_buf()),
@@ -233,7 +236,6 @@ impl CommandExecRequestProcessor {
                 config.permissions.permission_profile().clone(),
                 config.managed_network_requirements_enabled(),
                 config.effective_workspace_roots(),
-                WindowsSandboxLevel::from_config(&config),
             )
         } else if let Some(policy) = sandbox_policy.map(|policy| policy.to_core()) {
             self.config
@@ -260,7 +262,6 @@ impl CommandExecRequestProcessor {
                 self.config.permissions.permission_profile().clone(),
                 self.config.managed_network_requirements_enabled(),
                 self.config.effective_workspace_roots(),
-                windows_sandbox_level,
             )
         } else {
             (
@@ -269,13 +270,9 @@ impl CommandExecRequestProcessor {
                 self.config.permissions.permission_profile().clone(),
                 self.config.managed_network_requirements_enabled(),
                 self.config.effective_workspace_roots(),
-                windows_sandbox_level,
             )
         };
-        let started_network_proxy = match network_proxy_spec
-            .as_ref()
-            .filter(|spec| !cfg!(target_os = "windows") || spec.enabled())
-        {
+        let started_network_proxy = match network_proxy_spec.as_ref() {
             Some(spec) => match spec
                 .start_proxy(
                     &network_proxy_permission_profile,
